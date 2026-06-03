@@ -1,6 +1,6 @@
 # WP1 — Sensor Simulator
 
-## Status: PHASE 3 COMPLETE — 42/42 tests passing, 81% coverage
+## Status: PHASE 4 COMPLETE — Contract C1 validator green, 6/6 payloads passed
 
 ## Role in the architecture
 WP1 is the bottom of the stack. It simulates a PLC/OPC-UA sensor layer publishing real-time readings for a transformer drying oven. Downstream consumers (WP2, WP5) treat this as if it were a real SIMATIC historian subscribing to real OPC-UA nodes.
@@ -119,4 +119,23 @@ Implemented all of WP1 from scratch. Key decisions made this session:
 
 **Test results:** 42/42 passing, 81% coverage. main.py excluded (runtime entry point).
 
-**Next session:** Phase 4 — interface validation. Start Mosquitto (`docker-compose up mosquitto`), start WP1, subscribe to `factory/regensburg/oven-01/#`, trigger a cycle via POST /control/start, capture a payload, run `contracts/validators/validate_c1_mqtt.py` against it.
+---
+
+**Session 2 — 2026-06-03 — Phase 4 seam check complete**
+
+**Environment notes (Windows dev, no Docker):**
+- Mosquitto installed via `winget install EclipseFoundation.Mosquitto` — runs as Windows Service on port 1883 automatically.
+- Port 8000 is in Windows excluded port range (held by System/PID 4). Run WP1 control API on port 8080: `$env:CONTROL_API_PORT = "8080"`.
+- Start WP1: from `wp1-sensor-sim/`, set env vars then `python -m src.main`.
+- Subscribe: `mosquitto_sub -h localhost -t "factory/regensburg/oven-01/#" -C 6 -v` (mosquitto CLI added to PATH at `C:\Program Files\mosquitto`).
+
+**Seam check results — 2026-06-03:**
+- Validator fix: `contracts/validators/validate_c1_mqtt.py` ISO_RE updated to accept millisecond timestamps (`(\.\d+)?`) — C1 contract example uses `.521Z`, publisher always emits ms.
+- Added `contracts/validators/run_phase4_check.py` — reads `mosquitto_sub -v` captured output, validates all payloads, prints PASS/FAIL summary.
+- Added `mosquitto/mosquitto-local.conf` — minimal config for native Windows dev (no Docker volume paths).
+- **Result: 6/6 PASS.** All 3 sensor types (temperature, vacuum, moisture) × 2 publish intervals validated against C1. Topics, UUID v4 reading_ids, timestamp format, units, quality, order_id all correct.
+- Control API `GET /control/status` confirmed correct: state=drying, order_id=ORD-2026-00001, sensor values physically plausible.
+
+**Phase 4 gate: PASSED. WP1 is ready to merge to main.**
+
+**Next:** Start WP2 (SIMATIC mock, needs WP1 MQTT stream — now satisfied). WP1 branch `wp1/sensor-sim-base` → merge to `main`.
