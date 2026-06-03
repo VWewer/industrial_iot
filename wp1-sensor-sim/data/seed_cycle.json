@@ -1,0 +1,5200 @@
+{
+  "description": "Pre-recorded drying cycle for WP1 replay mode \u2014 MAT-0001 Power Transformer 100MVA",
+  "order_id": "ORD-2026-00042",
+  "plant": "regensburg",
+  "oven_id": "oven-01",
+  "cycle_parameters": {
+    "target_temperature_degC": 120.0,
+    "target_vacuum_mbar": 5.0,
+    "target_moisture_ppm": 300.0,
+    "standard_cycle_minutes": 480.0,
+    "warming_duration_minutes": 60.0
+  },
+  "total_readings": 324,
+  "readings": [
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000000",
+      "timestamp_opc": "2026-06-03T06:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 24.928,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": null,
+      "_meta": {
+        "simulated_minute": 0.0,
+        "cycle_state": "idle"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000001",
+      "timestamp_opc": "2026-06-03T06:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.991,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": null,
+      "_meta": {
+        "simulated_minute": 0.0,
+        "cycle_state": "idle"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000002",
+      "timestamp_opc": "2026-06-03T06:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4998.887,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": null,
+      "_meta": {
+        "simulated_minute": 0.0,
+        "cycle_state": "idle"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000003",
+      "timestamp_opc": "2026-06-03T06:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 46.365,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 5.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000004",
+      "timestamp_opc": "2026-06-03T06:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.994,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 5.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000005",
+      "timestamp_opc": "2026-06-03T06:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4985.026,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 5.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000006",
+      "timestamp_opc": "2026-06-03T06:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 62.546,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 10.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000007",
+      "timestamp_opc": "2026-06-03T06:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.987,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 10.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000008",
+      "timestamp_opc": "2026-06-03T06:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4997.83,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 10.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000009",
+      "timestamp_opc": "2026-06-03T06:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 75.183,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 15.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000000a",
+      "timestamp_opc": "2026-06-03T06:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1013.012,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 15.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000000b",
+      "timestamp_opc": "2026-06-03T06:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5011.636,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 15.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000000c",
+      "timestamp_opc": "2026-06-03T06:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 85.38,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 20.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000000d",
+      "timestamp_opc": "2026-06-03T06:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1013.006,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 20.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000000e",
+      "timestamp_opc": "2026-06-03T06:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4992.617,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 20.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000000f",
+      "timestamp_opc": "2026-06-03T06:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 92.275,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 25.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000010",
+      "timestamp_opc": "2026-06-03T06:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1013.012,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 25.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000011",
+      "timestamp_opc": "2026-06-03T06:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5013.111,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 25.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000012",
+      "timestamp_opc": "2026-06-03T06:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 98.823,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 30.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000013",
+      "timestamp_opc": "2026-06-03T06:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.995,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 30.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000014",
+      "timestamp_opc": "2026-06-03T06:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5005.318,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 30.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000015",
+      "timestamp_opc": "2026-06-03T06:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 102.765,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 35.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000016",
+      "timestamp_opc": "2026-06-03T06:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.984,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 35.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000017",
+      "timestamp_opc": "2026-06-03T06:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5004.904,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 35.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000018",
+      "timestamp_opc": "2026-06-03T06:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 107.58,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 40.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000019",
+      "timestamp_opc": "2026-06-03T06:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.988,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 40.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000001a",
+      "timestamp_opc": "2026-06-03T06:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5003.766,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 40.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000001b",
+      "timestamp_opc": "2026-06-03T06:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 110.111,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 45.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000001c",
+      "timestamp_opc": "2026-06-03T06:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1013.039,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 45.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000001d",
+      "timestamp_opc": "2026-06-03T06:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4988.868,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 45.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000001e",
+      "timestamp_opc": "2026-06-03T06:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 112.486,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 50.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000001f",
+      "timestamp_opc": "2026-06-03T06:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.924,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 50.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000020",
+      "timestamp_opc": "2026-06-03T06:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4973.801,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 50.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000021",
+      "timestamp_opc": "2026-06-03T06:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 113.623,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 55.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000022",
+      "timestamp_opc": "2026-06-03T06:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.954,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 55.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000023",
+      "timestamp_opc": "2026-06-03T06:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T06:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5008.76,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 55.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000024",
+      "timestamp_opc": "2026-06-03T07:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 115.602,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 60.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000025",
+      "timestamp_opc": "2026-06-03T07:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 1012.939,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 60.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000026",
+      "timestamp_opc": "2026-06-03T07:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 5008.474,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 60.0,
+        "cycle_state": "warming"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000027",
+      "timestamp_opc": "2026-06-03T07:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.499,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 65.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000028",
+      "timestamp_opc": "2026-06-03T07:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 616.379,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 65.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000029",
+      "timestamp_opc": "2026-06-03T07:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4852.656,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 65.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000002a",
+      "timestamp_opc": "2026-06-03T07:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.057,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 70.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000002b",
+      "timestamp_opc": "2026-06-03T07:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 375.863,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 70.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000002c",
+      "timestamp_opc": "2026-06-03T07:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4721.744,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 70.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000002d",
+      "timestamp_opc": "2026-06-03T07:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.175,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 75.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000002e",
+      "timestamp_opc": "2026-06-03T07:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 229.948,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 75.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000002f",
+      "timestamp_opc": "2026-06-03T07:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4583.96,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 75.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000030",
+      "timestamp_opc": "2026-06-03T07:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.687,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 80.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000031",
+      "timestamp_opc": "2026-06-03T07:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 141.382,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 80.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000032",
+      "timestamp_opc": "2026-06-03T07:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4442.224,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 80.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000033",
+      "timestamp_opc": "2026-06-03T07:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.25,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 85.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000034",
+      "timestamp_opc": "2026-06-03T07:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 87.729,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 85.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000035",
+      "timestamp_opc": "2026-06-03T07:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4341.849,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 85.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000036",
+      "timestamp_opc": "2026-06-03T07:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.59,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 90.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000037",
+      "timestamp_opc": "2026-06-03T07:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 55.13,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 90.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000038",
+      "timestamp_opc": "2026-06-03T07:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4201.453,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 90.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000039",
+      "timestamp_opc": "2026-06-03T07:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.711,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 95.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000003a",
+      "timestamp_opc": "2026-06-03T07:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 35.464,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 95.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000003b",
+      "timestamp_opc": "2026-06-03T07:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 4081.006,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 95.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000003c",
+      "timestamp_opc": "2026-06-03T07:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.713,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 100.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000003d",
+      "timestamp_opc": "2026-06-03T07:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 23.457,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 100.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000003e",
+      "timestamp_opc": "2026-06-03T07:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3940.796,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 100.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000003f",
+      "timestamp_opc": "2026-06-03T07:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.734,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 105.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000040",
+      "timestamp_opc": "2026-06-03T07:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 16.246,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 105.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000041",
+      "timestamp_opc": "2026-06-03T07:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3826.363,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 105.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000042",
+      "timestamp_opc": "2026-06-03T07:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.017,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 110.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000043",
+      "timestamp_opc": "2026-06-03T07:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 11.805,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 110.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000044",
+      "timestamp_opc": "2026-06-03T07:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3726.717,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 110.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000045",
+      "timestamp_opc": "2026-06-03T07:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.362,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 115.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000046",
+      "timestamp_opc": "2026-06-03T07:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 9.149,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 115.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000047",
+      "timestamp_opc": "2026-06-03T07:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T07:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3645.365,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 115.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000048",
+      "timestamp_opc": "2026-06-03T08:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.31,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 120.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000049",
+      "timestamp_opc": "2026-06-03T08:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 7.468,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 120.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000004a",
+      "timestamp_opc": "2026-06-03T08:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3511.921,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 120.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000004b",
+      "timestamp_opc": "2026-06-03T08:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.584,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 125.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000004c",
+      "timestamp_opc": "2026-06-03T08:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 6.563,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 125.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000004d",
+      "timestamp_opc": "2026-06-03T08:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3410.28,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 125.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000004e",
+      "timestamp_opc": "2026-06-03T08:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.965,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 130.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000004f",
+      "timestamp_opc": "2026-06-03T08:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.957,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 130.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000050",
+      "timestamp_opc": "2026-06-03T08:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3310.058,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 130.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000051",
+      "timestamp_opc": "2026-06-03T08:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.853,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 135.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000052",
+      "timestamp_opc": "2026-06-03T08:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.465,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 135.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000053",
+      "timestamp_opc": "2026-06-03T08:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3210.66,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 135.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000054",
+      "timestamp_opc": "2026-06-03T08:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.716,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 140.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000055",
+      "timestamp_opc": "2026-06-03T08:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.359,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 140.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000056",
+      "timestamp_opc": "2026-06-03T08:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3140.38,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 140.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000057",
+      "timestamp_opc": "2026-06-03T08:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.991,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 145.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000058",
+      "timestamp_opc": "2026-06-03T08:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.218,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 145.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000059",
+      "timestamp_opc": "2026-06-03T08:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 3039.772,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 145.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000005a",
+      "timestamp_opc": "2026-06-03T08:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.542,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 150.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000005b",
+      "timestamp_opc": "2026-06-03T08:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.169,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 150.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000005c",
+      "timestamp_opc": "2026-06-03T08:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2953.086,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 150.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000005d",
+      "timestamp_opc": "2026-06-03T08:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.495,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 155.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000005e",
+      "timestamp_opc": "2026-06-03T08:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.121,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 155.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000005f",
+      "timestamp_opc": "2026-06-03T08:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2868.95,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 155.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000060",
+      "timestamp_opc": "2026-06-03T08:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.613,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 160.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000061",
+      "timestamp_opc": "2026-06-03T08:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.044,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 160.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000062",
+      "timestamp_opc": "2026-06-03T08:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2801.922,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 160.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000063",
+      "timestamp_opc": "2026-06-03T08:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.821,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 165.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000064",
+      "timestamp_opc": "2026-06-03T08:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.107,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 165.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000065",
+      "timestamp_opc": "2026-06-03T08:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2703.184,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 165.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000066",
+      "timestamp_opc": "2026-06-03T08:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.742,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 170.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000067",
+      "timestamp_opc": "2026-06-03T08:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.96,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 170.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000068",
+      "timestamp_opc": "2026-06-03T08:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2622.485,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 170.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000069",
+      "timestamp_opc": "2026-06-03T08:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.712,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 175.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000006a",
+      "timestamp_opc": "2026-06-03T08:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.051,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 175.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000006b",
+      "timestamp_opc": "2026-06-03T08:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T08:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2555.1,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 175.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000006c",
+      "timestamp_opc": "2026-06-03T09:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 118.812,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 180.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000006d",
+      "timestamp_opc": "2026-06-03T09:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.042,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 180.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000006e",
+      "timestamp_opc": "2026-06-03T09:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2480.175,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 180.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000006f",
+      "timestamp_opc": "2026-06-03T09:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.725,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 185.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000070",
+      "timestamp_opc": "2026-06-03T09:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.972,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 185.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000071",
+      "timestamp_opc": "2026-06-03T09:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2403.123,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 185.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000072",
+      "timestamp_opc": "2026-06-03T09:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.862,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 190.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000073",
+      "timestamp_opc": "2026-06-03T09:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.95,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 190.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000074",
+      "timestamp_opc": "2026-06-03T09:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2329.463,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 190.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000075",
+      "timestamp_opc": "2026-06-03T09:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.681,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 195.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000076",
+      "timestamp_opc": "2026-06-03T09:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.979,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 195.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000077",
+      "timestamp_opc": "2026-06-03T09:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2262.697,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 195.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000078",
+      "timestamp_opc": "2026-06-03T09:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.049,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 200.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000079",
+      "timestamp_opc": "2026-06-03T09:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.939,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 200.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000007a",
+      "timestamp_opc": "2026-06-03T09:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2203.085,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 200.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000007b",
+      "timestamp_opc": "2026-06-03T09:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.395,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 205.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000007c",
+      "timestamp_opc": "2026-06-03T09:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.045,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 205.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000007d",
+      "timestamp_opc": "2026-06-03T09:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2137.353,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 205.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000007e",
+      "timestamp_opc": "2026-06-03T09:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 121.142,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 210.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000007f",
+      "timestamp_opc": "2026-06-03T09:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.014,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 210.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000080",
+      "timestamp_opc": "2026-06-03T09:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2089.25,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 210.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000081",
+      "timestamp_opc": "2026-06-03T09:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.348,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 215.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000082",
+      "timestamp_opc": "2026-06-03T09:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.994,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 215.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000083",
+      "timestamp_opc": "2026-06-03T09:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 2018.879,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 215.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000084",
+      "timestamp_opc": "2026-06-03T09:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.873,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 220.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000085",
+      "timestamp_opc": "2026-06-03T09:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.916,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 220.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000086",
+      "timestamp_opc": "2026-06-03T09:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1967.34,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 220.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000087",
+      "timestamp_opc": "2026-06-03T09:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.296,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 225.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000088",
+      "timestamp_opc": "2026-06-03T09:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.077,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 225.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000089",
+      "timestamp_opc": "2026-06-03T09:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1908.025,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 225.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000008a",
+      "timestamp_opc": "2026-06-03T09:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.026,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 230.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000008b",
+      "timestamp_opc": "2026-06-03T09:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.974,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 230.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000008c",
+      "timestamp_opc": "2026-06-03T09:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1833.519,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 230.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000008d",
+      "timestamp_opc": "2026-06-03T09:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.098,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 235.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000008e",
+      "timestamp_opc": "2026-06-03T09:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.99,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 235.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000008f",
+      "timestamp_opc": "2026-06-03T09:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T09:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1812.889,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 235.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000090",
+      "timestamp_opc": "2026-06-03T10:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.694,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 240.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000091",
+      "timestamp_opc": "2026-06-03T10:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.016,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 240.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000092",
+      "timestamp_opc": "2026-06-03T10:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1725.222,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 240.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000093",
+      "timestamp_opc": "2026-06-03T10:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.802,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 245.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000094",
+      "timestamp_opc": "2026-06-03T10:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.013,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 245.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000095",
+      "timestamp_opc": "2026-06-03T10:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1698.872,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 245.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000096",
+      "timestamp_opc": "2026-06-03T10:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.724,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 250.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000097",
+      "timestamp_opc": "2026-06-03T10:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.998,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 250.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000098",
+      "timestamp_opc": "2026-06-03T10:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1630.632,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 250.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000099",
+      "timestamp_opc": "2026-06-03T10:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.229,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 255.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000009a",
+      "timestamp_opc": "2026-06-03T10:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.026,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 255.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000009b",
+      "timestamp_opc": "2026-06-03T10:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1599.304,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 255.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000009c",
+      "timestamp_opc": "2026-06-03T10:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.65,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 260.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000009d",
+      "timestamp_opc": "2026-06-03T10:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.057,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 260.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000009e",
+      "timestamp_opc": "2026-06-03T10:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1549.219,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 260.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000009f",
+      "timestamp_opc": "2026-06-03T10:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.35,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 265.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a0",
+      "timestamp_opc": "2026-06-03T10:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.064,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 265.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a1",
+      "timestamp_opc": "2026-06-03T10:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1509.715,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 265.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a2",
+      "timestamp_opc": "2026-06-03T10:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.143,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 270.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a3",
+      "timestamp_opc": "2026-06-03T10:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.108,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 270.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a4",
+      "timestamp_opc": "2026-06-03T10:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1462.633,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 270.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a5",
+      "timestamp_opc": "2026-06-03T10:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.852,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 275.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a6",
+      "timestamp_opc": "2026-06-03T10:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.006,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 275.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a7",
+      "timestamp_opc": "2026-06-03T10:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1432.852,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 275.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a8",
+      "timestamp_opc": "2026-06-03T10:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.059,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 280.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000a9",
+      "timestamp_opc": "2026-06-03T10:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.026,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 280.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000aa",
+      "timestamp_opc": "2026-06-03T10:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1389.027,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 280.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ab",
+      "timestamp_opc": "2026-06-03T10:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.744,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 285.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ac",
+      "timestamp_opc": "2026-06-03T10:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.914,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 285.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ad",
+      "timestamp_opc": "2026-06-03T10:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1340.293,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 285.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ae",
+      "timestamp_opc": "2026-06-03T10:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.115,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 290.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000af",
+      "timestamp_opc": "2026-06-03T10:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.97,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 290.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b0",
+      "timestamp_opc": "2026-06-03T10:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1307.387,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 290.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b1",
+      "timestamp_opc": "2026-06-03T10:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.304,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 295.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b2",
+      "timestamp_opc": "2026-06-03T10:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.95,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 295.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b3",
+      "timestamp_opc": "2026-06-03T10:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T10:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1266.351,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 295.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b4",
+      "timestamp_opc": "2026-06-03T11:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.902,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 300.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b5",
+      "timestamp_opc": "2026-06-03T11:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.926,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 300.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b6",
+      "timestamp_opc": "2026-06-03T11:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1229.274,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 300.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b7",
+      "timestamp_opc": "2026-06-03T11:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.977,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 305.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b8",
+      "timestamp_opc": "2026-06-03T11:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.963,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 305.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000b9",
+      "timestamp_opc": "2026-06-03T11:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1194.602,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 305.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ba",
+      "timestamp_opc": "2026-06-03T11:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.244,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 310.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000bb",
+      "timestamp_opc": "2026-06-03T11:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.971,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 310.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000bc",
+      "timestamp_opc": "2026-06-03T11:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1159.026,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 310.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000bd",
+      "timestamp_opc": "2026-06-03T11:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.508,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 315.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000be",
+      "timestamp_opc": "2026-06-03T11:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.964,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 315.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000bf",
+      "timestamp_opc": "2026-06-03T11:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1125.473,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 315.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c0",
+      "timestamp_opc": "2026-06-03T11:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.001,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 320.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c1",
+      "timestamp_opc": "2026-06-03T11:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.113,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 320.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c2",
+      "timestamp_opc": "2026-06-03T11:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1070.646,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 320.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c3",
+      "timestamp_opc": "2026-06-03T11:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.348,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 325.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c4",
+      "timestamp_opc": "2026-06-03T11:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.985,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 325.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c5",
+      "timestamp_opc": "2026-06-03T11:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1056.808,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 325.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c6",
+      "timestamp_opc": "2026-06-03T11:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.951,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 330.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c7",
+      "timestamp_opc": "2026-06-03T11:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.0,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 330.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c8",
+      "timestamp_opc": "2026-06-03T11:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 1049.669,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 330.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000c9",
+      "timestamp_opc": "2026-06-03T11:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.779,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 335.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ca",
+      "timestamp_opc": "2026-06-03T11:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.018,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 335.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000cb",
+      "timestamp_opc": "2026-06-03T11:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 992.682,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 335.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000cc",
+      "timestamp_opc": "2026-06-03T11:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.655,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 340.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000cd",
+      "timestamp_opc": "2026-06-03T11:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.003,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 340.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ce",
+      "timestamp_opc": "2026-06-03T11:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 965.954,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 340.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000cf",
+      "timestamp_opc": "2026-06-03T11:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.101,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 345.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d0",
+      "timestamp_opc": "2026-06-03T11:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.895,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 345.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d1",
+      "timestamp_opc": "2026-06-03T11:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 960.825,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 345.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d2",
+      "timestamp_opc": "2026-06-03T11:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.917,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 350.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d3",
+      "timestamp_opc": "2026-06-03T11:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.087,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 350.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d4",
+      "timestamp_opc": "2026-06-03T11:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 903.558,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 350.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d5",
+      "timestamp_opc": "2026-06-03T11:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.146,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 355.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d6",
+      "timestamp_opc": "2026-06-03T11:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.158,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 355.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d7",
+      "timestamp_opc": "2026-06-03T11:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T11:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 878.545,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 355.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d8",
+      "timestamp_opc": "2026-06-03T12:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.252,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 360.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000d9",
+      "timestamp_opc": "2026-06-03T12:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.973,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 360.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000da",
+      "timestamp_opc": "2026-06-03T12:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 866.342,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 360.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000db",
+      "timestamp_opc": "2026-06-03T12:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.347,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 365.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000dc",
+      "timestamp_opc": "2026-06-03T12:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.065,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 365.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000dd",
+      "timestamp_opc": "2026-06-03T12:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 834.163,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 365.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000de",
+      "timestamp_opc": "2026-06-03T12:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.199,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 370.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000df",
+      "timestamp_opc": "2026-06-03T12:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.978,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 370.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e0",
+      "timestamp_opc": "2026-06-03T12:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 824.97,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 370.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e1",
+      "timestamp_opc": "2026-06-03T12:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.233,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 375.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e2",
+      "timestamp_opc": "2026-06-03T12:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.902,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 375.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e3",
+      "timestamp_opc": "2026-06-03T12:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 788.749,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 375.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e4",
+      "timestamp_opc": "2026-06-03T12:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.699,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 380.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e5",
+      "timestamp_opc": "2026-06-03T12:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.106,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 380.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e6",
+      "timestamp_opc": "2026-06-03T12:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 771.926,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 380.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e7",
+      "timestamp_opc": "2026-06-03T12:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.155,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 385.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e8",
+      "timestamp_opc": "2026-06-03T12:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.938,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 385.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000e9",
+      "timestamp_opc": "2026-06-03T12:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 735.745,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 385.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ea",
+      "timestamp_opc": "2026-06-03T12:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.023,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 390.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000eb",
+      "timestamp_opc": "2026-06-03T12:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.025,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 390.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ec",
+      "timestamp_opc": "2026-06-03T12:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 728.487,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 390.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ed",
+      "timestamp_opc": "2026-06-03T12:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.761,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 395.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ee",
+      "timestamp_opc": "2026-06-03T12:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.942,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 395.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ef",
+      "timestamp_opc": "2026-06-03T12:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 694.035,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 395.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f0",
+      "timestamp_opc": "2026-06-03T12:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.422,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 400.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f1",
+      "timestamp_opc": "2026-06-03T12:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.032,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 400.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f2",
+      "timestamp_opc": "2026-06-03T12:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 658.421,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 400.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f3",
+      "timestamp_opc": "2026-06-03T12:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.833,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 405.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f4",
+      "timestamp_opc": "2026-06-03T12:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.022,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 405.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f5",
+      "timestamp_opc": "2026-06-03T12:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 677.08,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 405.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f6",
+      "timestamp_opc": "2026-06-03T12:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.036,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 410.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f7",
+      "timestamp_opc": "2026-06-03T12:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.05,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 410.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f8",
+      "timestamp_opc": "2026-06-03T12:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 638.755,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 410.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000f9",
+      "timestamp_opc": "2026-06-03T12:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.628,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 415.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000fa",
+      "timestamp_opc": "2026-06-03T12:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.966,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 415.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000fb",
+      "timestamp_opc": "2026-06-03T12:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T12:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 639.455,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 415.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000fc",
+      "timestamp_opc": "2026-06-03T13:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.497,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 420.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000fd",
+      "timestamp_opc": "2026-06-03T13:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.024,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 420.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000fe",
+      "timestamp_opc": "2026-06-03T13:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 639.457,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 420.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-0000000000ff",
+      "timestamp_opc": "2026-06-03T13:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.984,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 425.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000100",
+      "timestamp_opc": "2026-06-03T13:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.031,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 425.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000101",
+      "timestamp_opc": "2026-06-03T13:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 591.724,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 425.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000102",
+      "timestamp_opc": "2026-06-03T13:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.889,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 430.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000103",
+      "timestamp_opc": "2026-06-03T13:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.116,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 430.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000104",
+      "timestamp_opc": "2026-06-03T13:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 586.713,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 430.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000105",
+      "timestamp_opc": "2026-06-03T13:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.3,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 435.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000106",
+      "timestamp_opc": "2026-06-03T13:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.98,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 435.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000107",
+      "timestamp_opc": "2026-06-03T13:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 559.421,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 435.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000108",
+      "timestamp_opc": "2026-06-03T13:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.392,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 440.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000109",
+      "timestamp_opc": "2026-06-03T13:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.933,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 440.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000010a",
+      "timestamp_opc": "2026-06-03T13:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 516.549,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 440.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000010b",
+      "timestamp_opc": "2026-06-03T13:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.047,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 445.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000010c",
+      "timestamp_opc": "2026-06-03T13:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.996,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 445.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000010d",
+      "timestamp_opc": "2026-06-03T13:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 522.503,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 445.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000010e",
+      "timestamp_opc": "2026-06-03T13:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.173,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 450.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000010f",
+      "timestamp_opc": "2026-06-03T13:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.962,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 450.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000110",
+      "timestamp_opc": "2026-06-03T13:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 496.172,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 450.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000111",
+      "timestamp_opc": "2026-06-03T13:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 118.988,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 455.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000112",
+      "timestamp_opc": "2026-06-03T13:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.016,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 455.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000113",
+      "timestamp_opc": "2026-06-03T13:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 497.431,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 455.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000114",
+      "timestamp_opc": "2026-06-03T13:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.496,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 460.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000115",
+      "timestamp_opc": "2026-06-03T13:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.04,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 460.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000116",
+      "timestamp_opc": "2026-06-03T13:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 477.564,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 460.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000117",
+      "timestamp_opc": "2026-06-03T13:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.675,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 465.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000118",
+      "timestamp_opc": "2026-06-03T13:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.993,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 465.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000119",
+      "timestamp_opc": "2026-06-03T13:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 459.015,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 465.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000011a",
+      "timestamp_opc": "2026-06-03T13:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.74,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 470.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000011b",
+      "timestamp_opc": "2026-06-03T13:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.971,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 470.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000011c",
+      "timestamp_opc": "2026-06-03T13:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 430.519,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 470.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000011d",
+      "timestamp_opc": "2026-06-03T13:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.078,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 475.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000011e",
+      "timestamp_opc": "2026-06-03T13:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.012,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 475.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000011f",
+      "timestamp_opc": "2026-06-03T13:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T13:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 435.494,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 475.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000120",
+      "timestamp_opc": "2026-06-03T14:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.643,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 480.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000121",
+      "timestamp_opc": "2026-06-03T14:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.019,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 480.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000122",
+      "timestamp_opc": "2026-06-03T14:00:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:00:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 443.603,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 480.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000123",
+      "timestamp_opc": "2026-06-03T14:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.019,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 485.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000124",
+      "timestamp_opc": "2026-06-03T14:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.975,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 485.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000125",
+      "timestamp_opc": "2026-06-03T14:05:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:05:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 408.204,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 485.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000126",
+      "timestamp_opc": "2026-06-03T14:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.965,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 490.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000127",
+      "timestamp_opc": "2026-06-03T14:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.937,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 490.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000128",
+      "timestamp_opc": "2026-06-03T14:10:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:10:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 400.906,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 490.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000129",
+      "timestamp_opc": "2026-06-03T14:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.031,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 495.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000012a",
+      "timestamp_opc": "2026-06-03T14:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.092,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 495.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000012b",
+      "timestamp_opc": "2026-06-03T14:15:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:15:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 399.978,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 495.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000012c",
+      "timestamp_opc": "2026-06-03T14:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.517,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 500.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000012d",
+      "timestamp_opc": "2026-06-03T14:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.964,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 500.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000012e",
+      "timestamp_opc": "2026-06-03T14:20:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:20:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 385.964,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 500.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000012f",
+      "timestamp_opc": "2026-06-03T14:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.43,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 505.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000130",
+      "timestamp_opc": "2026-06-03T14:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.016,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 505.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000131",
+      "timestamp_opc": "2026-06-03T14:25:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:25:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 372.498,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 505.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000132",
+      "timestamp_opc": "2026-06-03T14:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.617,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 510.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000133",
+      "timestamp_opc": "2026-06-03T14:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.1,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 510.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000134",
+      "timestamp_opc": "2026-06-03T14:30:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:30:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 363.347,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 510.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000135",
+      "timestamp_opc": "2026-06-03T14:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 119.049,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 515.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000136",
+      "timestamp_opc": "2026-06-03T14:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.028,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 515.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000137",
+      "timestamp_opc": "2026-06-03T14:35:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:35:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 343.269,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 515.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000138",
+      "timestamp_opc": "2026-06-03T14:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.001,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 520.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000139",
+      "timestamp_opc": "2026-06-03T14:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.023,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 520.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000013a",
+      "timestamp_opc": "2026-06-03T14:40:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:40:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 341.217,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 520.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000013b",
+      "timestamp_opc": "2026-06-03T14:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 118.98,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 525.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000013c",
+      "timestamp_opc": "2026-06-03T14:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 4.942,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 525.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000013d",
+      "timestamp_opc": "2026-06-03T14:45:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:45:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 335.296,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 525.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000013e",
+      "timestamp_opc": "2026-06-03T14:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 120.651,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 530.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-00000000013f",
+      "timestamp_opc": "2026-06-03T14:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.095,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 530.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000140",
+      "timestamp_opc": "2026-06-03T14:50:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:50:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 336.141,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 530.0,
+        "cycle_state": "drying"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000141",
+      "timestamp_opc": "2026-06-03T14:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "temperature",
+      "value": 118.972,
+      "unit": "degC",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 535.0,
+        "cycle_state": "complete"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000142",
+      "timestamp_opc": "2026-06-03T14:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "vacuum",
+      "value": 5.038,
+      "unit": "mbar",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 535.0,
+        "cycle_state": "complete"
+      }
+    },
+    {
+      "reading_id": "00000000-0000-4000-8000-000000000143",
+      "timestamp_opc": "2026-06-03T14:55:00.000Z",
+      "timestamp_mqtt": "2026-06-03T14:55:00.000Z",
+      "plant": "regensburg",
+      "oven_id": "oven-01",
+      "sensor_type": "moisture",
+      "value": 289.759,
+      "unit": "ppm",
+      "quality": "Good",
+      "order_id": "ORD-2026-00042",
+      "_meta": {
+        "simulated_minute": 535.0,
+        "cycle_state": "complete"
+      }
+    }
+  ]
+}

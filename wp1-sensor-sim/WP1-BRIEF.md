@@ -1,6 +1,6 @@
 # WP1 — Sensor Simulator
 
-## Status: NOT STARTED
+## Status: PHASE 3 COMPLETE — 42/42 tests passing, 81% coverage
 
 ## Role in the architecture
 WP1 is the bottom of the stack. It simulates a PLC/OPC-UA sensor layer publishing real-time readings for a transformer drying oven. Downstream consumers (WP2, WP5) treat this as if it were a real SIMATIC historian subscribing to real OPC-UA nodes.
@@ -94,17 +94,29 @@ wp1-sensor-sim/
 ```
 
 ## Definition of Done
-- [ ] Standard DoD (see SDLC.md Phase 3)
-- [ ] Cycle state machine transitions correctly through idle → warming → drying → complete
-- [ ] Published MQTT payloads validated against C1 schema (jsonschema)
-- [ ] Off-gas moisture reaches below target threshold by cycle end
-- [ ] Control API: start/stop/status endpoints respond correctly
-- [ ] Replay mode produces deterministic output from `seed_cycle.json`
-- [ ] Sample MQTT output documented in README under "Sample output"
+- [x] Standard DoD (see SDLC.md Phase 3)
+- [x] Cycle state machine transitions correctly through idle → warming → drying → complete
+- [x] Published MQTT payloads validated against C1 schema (jsonschema)
+- [x] Off-gas moisture reaches below target threshold by cycle end
+- [x] Control API: start/stop/status endpoints respond correctly
+- [x] Replay mode produces deterministic output from `seed_cycle.json`
+- [x] Sample MQTT output documented in README under "Sample output"
 
 ## Open items
-- [ ] Confirm cycle time compression factor needed for demo (real-time vs accelerated)
-- [ ] Confirm whether MQTT broker (Mosquitto) setup is part of WP1 or project-level infra
+- [x] Cycle time compression: confirmed 60× default (ADR-008)
+- [x] Mosquitto: confirmed project-level infra (docker-compose up mosquitto)
 
 ## Session handover notes
-> *To be filled by the agent at the end of each session.*
+**Session 1 — 2026-06-03 — Phase 1 kickoff through Phase 3 complete**
+
+Implemented all of WP1 from scratch. Key decisions made this session:
+
+- **3 sensor types only** (temperature, vacuum, moisture) — WP1 brief listed 4 but contracts v1.1 explicitly removed `heater-power` and `moisture-offgas`. Implemented per contracts.
+- **60× compression default** — confirmed from ADR-008. Warming phase (60 simulated min) = 1 real min. Standard 480-min drying cycle = 8 real min.
+- **Signal shapes**: temperature uses exponential approach (tau = warming_duration/3), vacuum uses exponential pulldown (tau = 10 min simulated), moisture uses calibrated exponential decay (k = -ln(target/initial) / standard_cycle_minutes).
+- **Thread model**: simulator runs in a daemon thread; on_tick callback fires per publish interval; control API runs in a second daemon thread via uvicorn.
+- **Seed data**: `data/seed_cycle.json` generated deterministically (random.seed(42)) — 324 readings covering a full MAT-0001 cycle.
+
+**Test results:** 42/42 passing, 81% coverage. main.py excluded (runtime entry point).
+
+**Next session:** Phase 4 — interface validation. Start Mosquitto (`docker-compose up mosquitto`), start WP1, subscribe to `factory/regensburg/oven-01/#`, trigger a cycle via POST /control/start, capture a payload, run `contracts/validators/validate_c1_mqtt.py` against it.
