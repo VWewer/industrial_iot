@@ -1,0 +1,201 @@
+# Industrial IoT Demo — docker-compose.yml
+# Starts Mosquitto broker + all WP mock services in one command.
+#
+# Usage:
+#   docker-compose up --build          # start everything
+#   docker-compose up mosquitto wp4    # start infra + one WP
+#   docker-compose logs -f wp1        # tail a single service
+#
+# Prerequisites: each wp{n}/ directory must have a Dockerfile.
+# WP1–WP3 stubs are included so this file is valid before all WPs are built.
+# Remove the `profiles` line from a WP once its Dockerfile exists.
+
+version: "3.9"
+
+networks:
+  iot-demo:
+    driver: bridge
+
+volumes:
+  mosquitto-data:
+  mosquitto-log:
+
+services:
+
+  # ─────────────────────────────────────────────
+  # INFRASTRUCTURE
+  # ─────────────────────────────────────────────
+
+  mosquitto:
+    image: eclipse-mosquitto:2.0
+    container_name: iot-mosquitto
+    ports:
+      - "1883:1883"       # MQTT
+      - "9001:9001"       # WebSockets (optional, for browser clients)
+    volumes:
+      - ./mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf:ro
+      - mosquitto-data:/mosquitto/data
+      - mosquitto-log:/mosquitto/log
+    networks:
+      - iot-demo
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mosquitto_pub", "-h", "localhost", "-t", "healthcheck", "-m", "ping", "-q", "1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # ─────────────────────────────────────────────
+  # WP1 — Sensor Simulator
+  # ─────────────────────────────────────────────
+
+  wp1:
+    build: ./wp1-sensor-sim
+    container_name: iot-wp1-sensor-sim
+    ports:
+      - "8000:8000"       # Control API
+    environment:
+      MQTT_BROKER_HOST: mosquitto
+      MQTT_BROKER_PORT: 1883
+      SENSOR_PUBLISH_INTERVAL_S: 5
+      PLANT_ID: regensburg
+      OVEN_ID: oven-01
+      CYCLE_TIME_COMPRESSION: 60.0
+      CONTROL_API_PORT: 8000
+    networks:
+      - iot-demo
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    profiles:
+      - wp1  # remove this line once wp1-sensor-sim/Dockerfile exists
+
+  # ─────────────────────────────────────────────
+  # WP2 — SIMATIC Mock
+  # ─────────────────────────────────────────────
+
+  wp2:
+    build: ./wp2-simatic-mock
+    container_name: iot-wp2-simatic
+    ports:
+      - "8001:8001"       # C2: /process-state/{oven_id}, C3: /historian
+    environment:
+      MQTT_BROKER_HOST: mosquitto
+      MQTT_BROKER_PORT: 1883
+      SIMATIC_API_PORT: 8001
+      HISTORIAN_MAX_READINGS_PER_CHANNEL: 500
+      PLANT_ID: regensburg
+      OVEN_ID: oven-01
+    networks:
+      - iot-demo
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    profiles:
+      - wp2  # remove this line once wp2-simatic-mock/Dockerfile exists
+
+  # ─────────────────────────────────────────────
+  # WP3 — Mendix Mock
+  # ─────────────────────────────────────────────
+
+  wp3:
+    build: ./wp3-mendix-mock
+    container_name: iot-wp3-mendix
+    ports:
+      - "8002:8002"       # C4: /orders/{order_id}/state, operator UI
+    environment:
+      MENDIX_API_PORT: 8002
+      SAP_API_URL: http://wp4:8003
+      SIMATIC_API_URL: http://wp2:8001
+      WP1_CONTROL_API_URL: http://wp1:8000
+      WP5_WEBHOOK_URL: http://wp5:8005/events
+      PLANT_ID: regensburg
+      OVEN_ID: oven-01
+    networks:
+      - iot-demo
+    depends_on:
+      - wp4
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    profiles:
+      - wp3  # remove this line once wp3-mendix-mock/Dockerfile exists
+
+  # ─────────────────────────────────────────────
+  # WP4 — SAP Mock  (no profile — first WP to build)
+  # ─────────────────────────────────────────────
+
+  wp4:
+    build: ./wp4-sap-mock
+    container_name: iot-wp4-sap
+    ports:
+      - "8003:8003"       # C6: ProductionOrders, C7: Materials, C8: GoodsMovements, C5: OperationConfirmations
+    environment:
+      SAP_API_PORT: 8003
+      PLANT_ID: regensburg
+    networks:
+      - iot-demo
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8003/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  # ─────────────────────────────────────────────
+  # WP5 — Snowflake Data Layer
+  # ─────────────────────────────────────────────
+
+  wp5:
+    build: ./wp5-snowflake-layer
+    container_name: iot-wp5-snowflake
+    ports:
+      - "8005:8005"       # C10: /events webhook
+    environment:
+      MQTT_BROKER_HOST: mosquitto
+      MQTT_BROKER_PORT: 1883
+      SAP_API_URL: http://wp4:8003
+      SAP_PULL_INTERVAL_S: 60
+      WP5_WEBHOOK_PORT: 8005
+      # Snowflake credentials — mount from .env or secrets in production
+      SNOWFLAKE_ACCOUNT: ${SNOWFLAKE_ACCOUNT}
+      SNOWFLAKE_USER: ${SNOWFLAKE_USER}
+      SNOWFLAKE_PASSWORD: ${SNOWFLAKE_PASSWORD}
+      SNOWFLAKE_DATABASE: ${SNOWFLAKE_DATABASE}
+      SNOWFLAKE_SCHEMA: ${SNOWFLAKE_SCHEMA}
+      SNOWFLAKE_WAREHOUSE: ${SNOWFLAKE_WAREHOUSE}
+    networks:
+      - iot-demo
+    depends_on:
+      mosquitto:
+        condition: service_healthy
+      wp4:
+        condition: service_healthy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8005/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+    profiles:
+      - wp5  # remove this line once wp5-snowflake-layer/Dockerfile exists

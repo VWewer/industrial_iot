@@ -1,0 +1,53 @@
+[
+  {
+    "order_id": "ORD-2026-00042",
+    "material_id": "MAT-0001",
+    "plant": "regensburg",
+    "oven_id": "oven-01",
+    "planned_start": "2026-06-03T06:00:00Z",
+    "planned_end": "2026-06-03T14:00:00Z",
+    "standard_cycle_minutes": 480,
+    "status": "RELEASED",
+    "operator_id": null,
+    "actual_start": null,
+    "actual_end": null,
+    "sap_confirmation_number": null,
+    "goods_movement_posted": false,
+    "created_at": "2026-06-02T14:30:00Z",
+    "updated_at": "2026-06-02T14:30:00Z"
+  },
+  {
+    "order_id": "ORD-2026-00041",
+    "material_id": "MAT-0002",
+    "plant": "regensburg",
+    "oven_id": "oven-01",
+    "planned_start": "2026-06-02T06:00:00Z",
+    "planned_end": "2026-06-02T10:00:00Z",
+    "standard_cycle_minutes": 240,
+    "status": "CONFIRMED",
+    "operator_id": "OP-003",
+    "actual_start": "2026-06-02T06:05:00Z",
+    "actual_end": "2026-06-02T09:48:00Z",
+    "sap_confirmation_number": "CONF-2026-00041",
+    "goods_movement_posted": true,
+    "created_at": "2026-06-01T16:00:00Z",
+    "updated_at": "2026-06-02T09:48:00Z"
+  },
+  {
+    "order_id": "ORD-2026-00039",
+    "material_id": "MAT-0003",
+    "plant": "regensburg",
+    "oven_id": "oven-01",
+    "planned_start": "2026-05-30T08:00:00Z",
+    "planned_end": "2026-05-30T10:00:00Z",
+    "standard_cycle_minutes": 120,
+    "status": "ABORTED",
+    "operator_id": "OP-001",
+    "actual_start": "2026-05-30T08:10:00Z",
+    "actual_end": null,
+    "sap_confirmation_number": null,
+    "goods_movement_posted": false,
+    "created_at": "2026-05-29T11:00:00Z",
+    "updated_at": "2026-05-30T09:55:00Z"
+  }
+]

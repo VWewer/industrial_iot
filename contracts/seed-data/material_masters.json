@@ -1,0 +1,50 @@
+[
+  {
+    "material_id": "MAT-0001",
+    "material_description": "Power Transformer 100MVA",
+    "insulation_class": "H",
+    "target_moisture_ppm": 300,
+    "standard_cycle_minutes": 480,
+    "max_cycle_minutes": 600,
+    "target_temperature_degC": 130.0,
+    "target_vacuum_mbar": 5.0,
+    "weight_kg": 8500.0,
+    "updated_at": "2026-01-15T08:00:00Z"
+  },
+  {
+    "material_id": "MAT-0002",
+    "material_description": "Distribution Transformer 1MVA",
+    "insulation_class": "F",
+    "target_moisture_ppm": 500,
+    "standard_cycle_minutes": 240,
+    "max_cycle_minutes": 300,
+    "target_temperature_degC": 120.0,
+    "target_vacuum_mbar": 8.0,
+    "weight_kg": 850.0,
+    "updated_at": "2026-01-15T08:00:00Z"
+  },
+  {
+    "material_id": "MAT-0003",
+    "material_description": "Instrument Transformer CT 36kV",
+    "insulation_class": "B",
+    "target_moisture_ppm": 800,
+    "standard_cycle_minutes": 120,
+    "max_cycle_minutes": 150,
+    "target_temperature_degC": 105.0,
+    "target_vacuum_mbar": 12.0,
+    "weight_kg": 120.0,
+    "updated_at": "2026-01-15T08:00:00Z"
+  },
+  {
+    "material_id": "MAT-0004",
+    "material_description": "Power Transformer 400MVA",
+    "insulation_class": "H",
+    "target_moisture_ppm": 200,
+    "standard_cycle_minutes": 720,
+    "max_cycle_minutes": 900,
+    "target_temperature_degC": 135.0,
+    "target_vacuum_mbar": 3.0,
+    "weight_kg": 24000.0,
+    "updated_at": "2026-01-15T08:00:00Z"
+  }
+]
