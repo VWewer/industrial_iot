@@ -17,7 +17,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 | Work package | P1 Design | P2 Build | P3 Test | Gate | P4 Seam | Notes |
 |---|---|---|---|---|---|---|
 | WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ⏳ when WP3 ready | 43/43 tests passing |
-| WP1 — Sensor sim | 🔵 start now | — | — | | — | No blockers |
+| WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ⏳ P4 next | — | 42/42 tests, 81% cov |
 | WP2 — SIMATIC mock | ⬜ after WP1 P3 | — | — | | — | Needs WP1 MQTT stream |
 | WP3 — Mendix mock | 🔵 start now | — | — | | — | WP4 already available |
 | WP5 — Snowflake | ⬜ after WP1 P3 | — | — | | — | Needs WP1 + WP4 |
@@ -47,24 +47,13 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 ## 0b. Git workflow status
 
-> ⚠️ **Not yet established.** No commits have been pushed to a remote repository. All work to date exists only on the local filesystem. This must be resolved before WP1 kicks off.
+**✅ Established — 2026-06-03**
 
-**What needs to happen (one-time setup):**
+- Remote: `https://github.com/VWewer/industrial_iot`
+- Default branch: `main` (protected — only merge after Phase 4)
+- Current active branch: `wp1/sensor-sim-base`
 
-```bash
-# 1. Initialise repo if not already done
-git init
-git add .
-git commit -m "chore: initial project structure, contracts v1.1, WP4 Phase 3 complete"
-
-# 2. Create remote (GitHub / GitLab — your choice) and push
-git remote add origin https://github.com/YOUR_USERNAME/industrial-iot-demo.git
-git push -u origin main
-
-# 3. Protect main — set branch protection rule: require PR + passing tests before merge
-```
-
-**Ongoing convention (already documented in Section 9 below):**
+**Ongoing convention:**
 
 - `main` is always demo-ready. Only merge after Phase 4 seam check passes.
 - All WP work on `wp{n}/{short-description}` branches.
@@ -79,7 +68,27 @@ e.g. "wp1: implement MQTT publisher with 3 sensor types"
      "contracts: align C5 endpoint to DOMAIN-MODEL §1.6"
 ```
 
-**Status:** Remote not created. No pushes. Resolve before WP1 session.
+---
+
+## 0c. Skills reference
+
+Global skills installed in `~/.claude/skills/` — available in every session.
+
+| Skill | When it activates |
+|---|---|
+| `python-pro` | Writing any Python module — auto-applied |
+| `fastapi-expert` | Any FastAPI WP (WP1–WP4) — auto-applied |
+| `api-designer` | Contract questions, new endpoints — auto-applied |
+| `sql-pro` | WP5 DDL, Gold layer SQL, Snowflake queries — auto-applied |
+| `database-optimizer` | WP5/WP6 query tuning — on request |
+| `test-master` | Phase 3 DoD — agent prompts: *"Run test-master review?"* |
+| `code-reviewer` | Phase 4 seam check — agent prompts: *"Run /review before merge?"* |
+| `devops-engineer` | Dockerfile / docker-compose changes — auto-applied |
+| `monitoring-expert` | Logging review — Phase 3 |
+| `debugging-wizard` | Any test failure — auto-applied before fixing |
+| `architecture-designer` | New ADR, design decisions — on request |
+| `secure-code-guardian` | API endpoints, input handling — Phase 4 |
+| `the-fool` (`/grill-me`) | Phase 1 kickoff, pre-WP7 — agent prompts to use |
 
 ---
 

@@ -71,6 +71,9 @@ Phase 0 is complete when ALL of the following are true:
 5. Surface ambiguities — resolve before writing code (see AI-DEV.md §4)
 6. Confirm exact deliverables for this session
 
+> **Skill prompt — Phase 1:** The agent will ask: *"Want to /grill-me on this design before we start coding?"*  
+> Use `/grill-me` to stress-test scope, contracts, and edge cases before any implementation begins. Especially valuable for WP3, WP5, and WP7.
+
 ### Exit criteria (move to Phase 2)
 - All ambiguities in WP-BRIEF.md Open Items are resolved
 - Agent has confirmed scope and deliverables for the session
@@ -88,6 +91,13 @@ Phase 0 is complete when ALL of the following are true:
 - Follow `CONTRIBUTING.md` throughout — no deferred cleanup
 - Commit in logical increments (see git discipline in `CONTRIBUTING.md`)
 - If a contract needs to change: **stop** — see contract change protocol below
+
+> **Skills active during Phase 2 (automatic):**  
+> `python-pro` — typing, async, dataclass patterns applied throughout  
+> `fastapi-expert` — routing, Pydantic v2, lifespan for all FastAPI WPs (WP1–WP4)  
+> `api-designer` — consulted on any contract or endpoint question  
+> `debugging-wizard` — applied automatically on any test failure before attempting a fix  
+> `devops-engineer` — applied on any Dockerfile or docker-compose change  
 
 ### Contract change protocol
 If implementation reveals a contract needs to change:
@@ -111,6 +121,9 @@ If implementation reveals a contract needs to change:
 
 ## Phase 3 — Definition of Done
 
+> **Skill prompt — Phase 3:** The agent will ask: *"Run test-master review to check coverage gaps before we sign off?"*  
+> `test-master` reviews the test suite for missing cases, integration gaps, and coverage blind spots. `monitoring-expert` checks structured logging discipline. Both are lightweight — 5 minutes, high value.
+
 ### Standard DoD (every WP)
 
 - [ ] All source code in `src/` with correct structure per WP-BRIEF.md
@@ -131,6 +144,12 @@ All DoD checkboxes checked. No exceptions — partial DoD is not done.
 ---
 
 ## Phase 4 — Interface validation (seam check)
+
+> **Skills active during Phase 4 (automatic):**  
+> `code-reviewer` — full checklist review of the WP branch before merge to main  
+> `secure-code-guardian` — security review of any API endpoints or input handling  
+> `sql-pro` + `database-optimizer` — applied on WP5 and WP6 query validation  
+> **Skill prompt:** *"Run /review on the WP branch before merging?"*
 
 **This is the most important phase for integration quality.** A WP that passes its own DoD but fails at the seam is not complete.
 
@@ -162,6 +181,10 @@ All DoD checkboxes checked. No exceptions — partial DoD is not done.
 ---
 
 ## Phase 5 — WP7 integration
+
+> **Skill prompt — Phase 5 entry:** Before WP7 begins, the agent will ask:  
+> *"Want to /grill-me on the integration plan?"* — stress-test the wiring design  
+> *"Run secure-code-guardian review across all API surfaces?"* — one security pass before the unified cockpit exposes everything
 
 WP7 is the integration milestone. **Before WP7 begins, all of the following must be true:**
 

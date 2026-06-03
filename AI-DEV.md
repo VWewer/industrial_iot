@@ -261,42 +261,77 @@ Protocol:
 
 ---
 
-## 8. Reusable Skills
+## 8. Skills
 
-Skills are reusable implementation patterns — pre-written scaffolds that agents use as a starting point rather than inventing from scratch. They encode decisions already made (framework choice, folder structure, error handling pattern) so agents don't re-litigate them.
+Two categories of skills are available: **global skills** (installed in `~/.claude/skills/`, available in every project) and **project skills** (implementation scaffolds specific to this codebase). Both are used throughout the SDLC.
 
-### Available skills (to be created as implementation progresses)
+---
 
-**`skills/fastapi-mock-service/`**
-Pattern for WP2, WP3, WP4. Covers: FastAPI app structure, Pydantic models, uvicorn entrypoint, error handling, health endpoint, `.env` loading, logging setup.
+### 8a. Global skills — installed
 
-**`skills/mqtt-publisher/`**
-Pattern for WP1. Covers: paho-mqtt client setup, topic structure, payload serialisation, reconnection logic, publish loop with configurable interval.
+These skills are installed globally and activate automatically when relevant context is present. They can also be invoked explicitly. The agent will prompt you at appropriate workflow points; you can also invoke any of them directly at any time.
 
-**`skills/mqtt-subscriber/`**
-Pattern for WP2 (historian) and WP5 (Bronze ingestion). Covers: paho-mqtt subscriber, topic filter, message handler, error handling on malformed payloads.
+| Skill | Invoke | When the agent uses it |
+|---|---|---|
+| **python-pro** | mention "python" patterns | Whenever writing or reviewing Python modules — typing, async, dataclasses |
+| **fastapi-expert** | mention "FastAPI" | WP1 control API, WP2, WP3, WP4 — routing, Pydantic v2, lifespan, async |
+| **api-designer** | mention "contract" or "endpoint" | Contract change reviews, new endpoint design |
+| **sql-pro** | mention "SQL" or "Snowflake" | WP5 DDL, Gold layer transforms, window functions |
+| **database-optimizer** | mention "query" or "index" | WP5/WP6 Snowflake query tuning |
+| **test-master** | mention "test strategy" | At Phase 3 DoD — coverage gaps, integration test patterns |
+| **code-reviewer** | `/review` or Phase 4 seam check | Before merging any WP branch to main |
+| **devops-engineer** | mention "Docker" or "CI" | Dockerfile reviews, docker-compose changes |
+| **monitoring-expert** | mention "logging" or "observability" | Logging discipline, structured logging patterns |
+| **debugging-wizard** | any test failure | Systematic root-cause analysis when tests fail or services misbehave |
+| **architecture-designer** | mention "ADR" or design question | Any structural decision — new ADR, approach selection |
+| **secure-code-guardian** | any auth or input handling | Security review on API endpoints, input validation |
+| **the-fool** | `/grill-me` | Stress-test any plan or design decision before committing to it |
 
-**`skills/snowflake-ingestion/`**
-Pattern for WP5 Bronze ingestion to real Snowflake. Covers: `snowflake-connector-python` setup, staging area write, Snowpipe trigger, error handling.
+**Special skills already installed:**
+- `/grill-me` — relentless structured interview to stress-test a plan (use before WP kickoffs)
 
-**`skills/streamlit-page/`**
-Pattern for WP6 and WP7 pages. Covers: page structure, DuckDB/Snowflake query function, Plotly chart builder, sidebar filter pattern, auto-refresh with `st.rerun()`.
+---
 
-### How to use a skill
+### 8b. Skill workflow map — when the agent prompts you
 
-Provide the skill file to the agent at session open alongside the WP brief:
+The agent will suggest or automatically apply a skill at these trigger points:
 
-```
-Also provided: skills/fastapi-mock-service/SKILL.md
-This WP follows the FastAPI mock service pattern. Implement using this scaffold.
-Do not deviate from the folder structure or error handling patterns in the skill.
-```
+| SDLC moment | Agent action |
+|---|---|
+| **Phase 1 kickoff** (any WP) | Prompt: *"Want to /grill-me on the design before we code?"* |
+| **Phase 2 — writing Python modules** | Auto-apply `python-pro` + `fastapi-expert` standards |
+| **Phase 2 — contract question** | Auto-apply `api-designer` — surface trade-offs before deciding |
+| **Phase 2 — any test failure** | Auto-apply `debugging-wizard` — systematic diagnosis before fixing |
+| **Phase 3 DoD check** | Prompt: *"Run test-master review for coverage gaps?"* |
+| **Phase 4 seam check** | Auto-invoke `code-reviewer` checklist before merge |
+| **Phase 4 — SQL/Snowflake work** | Auto-apply `sql-pro` + `database-optimizer` |
+| **Any Dockerfile / compose change** | Auto-apply `devops-engineer` standards |
+| **Any new ADR** | Auto-apply `architecture-designer` template |
+| **Pre-WP7 integration** | Prompt: *"Run /grill-me on the integration plan?"* + `secure-code-guardian` review |
 
-### How to create a new skill
+---
 
-After completing a WP, if its implementation pattern is reusable:
+### 8c. Project-specific skill scaffolds
+
+These are implementation patterns specific to this codebase. Create them as WPs are completed — they encode decisions already made so future WPs don't re-litigate them.
+
+**`skills/fastapi-mock-service/`** ← create after WP2
+Pattern for WP2, WP3: FastAPI app structure, Pydantic models, uvicorn entrypoint, health endpoint, `.env` loading, logging setup.
+
+**`skills/mqtt-subscriber/`** ← create after WP2
+Pattern for WP2 and WP5: paho-mqtt subscriber, topic filter, message handler, error handling on malformed payloads.
+
+**`skills/snowflake-ingestion/`** ← create after WP5
+Pattern for WP5 Bronze ingestion: `snowflake-connector-python` setup, staging area write, Snowpipe trigger, error handling.
+
+**`skills/streamlit-page/`** ← create after WP6
+Pattern for WP6 and WP7: page structure, Snowflake query function, Plotly chart builder, sidebar filter, auto-refresh.
+
+### How to create a new project skill
+
+After completing a WP, if its pattern is reusable:
 1. Extract the scaffold to `skills/{pattern-name}/`
-2. Write `SKILL.md` explaining: what the skill covers, how to use it, what to customise per WP
+2. Write `SKILL.md` explaining: what it covers, how to use it, what to customise per WP
 3. Include a minimal working example
 4. Reference the skill in the relevant WP briefs
 

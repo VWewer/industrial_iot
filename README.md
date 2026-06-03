@@ -76,7 +76,7 @@ Full workflow definitions, preconditions, step-by-step data flows, and the order
 
 | WP | Name | Produces | Depends on | Status |
 |---|---|---|---|---|
-| WP1 | Sensor simulator | MQTT stream | — | NOT STARTED |
+| WP1 | Sensor simulator | MQTT stream | — | Phase 3 complete — 42/42 tests |
 | WP2 | SIMATIC mock | REST process state API | WP1 | NOT STARTED |
 | WP3 | Mendix mock | OData-style REST API + operator UI | WP2, WP4 | NOT STARTED |
 | WP4 | SAP mock | OData endpoints (orders, materials, GR) | — | NOT STARTED |
@@ -190,4 +190,14 @@ cd wp7-unified-cockpit && streamlit run src/app.py
 
 Built using Claude Code with a structured agent-per-workpackage approach. Each WP brief (`WP-BRIEF.md`) serves as the agent prompt document. Interface contracts are agreed before implementation begins. Seam validation between WPs is built into the delivery process.
 
-See `AI-DEV.md` for the full methodology and `SDLC.md` for the delivery process.
+**Global skills active in every session** (`~/.claude/skills/`):
+
+| Purpose | Skill |
+|---|---|
+| Python, FastAPI, API design | `python-pro`, `fastapi-expert`, `api-designer` |
+| SQL + Snowflake | `sql-pro`, `database-optimizer` |
+| Testing + code review | `test-master`, `code-reviewer`, `debugging-wizard` |
+| Ops + security | `devops-engineer`, `monitoring-expert`, `secure-code-guardian` |
+| Architecture + stress-testing | `architecture-designer`, `/grill-me` (the-fool) |
+
+The agent prompts you to use skills at key SDLC gates and applies several automatically. See `AI-DEV.md §8` for the full skill workflow map and `SDLC.md` for phase-level skill triggers.
