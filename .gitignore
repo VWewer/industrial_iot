@@ -55,6 +55,13 @@ snowflake_credentials.json
 *.pem
 *.key
 
+# Streamlit secrets
+.streamlit/secrets.toml
+
+# Linting cache
+.ruff_cache/
+.mypy_cache/
+
 # Private / archive
 01_private/
 00_archive/
