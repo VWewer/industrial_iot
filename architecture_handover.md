@@ -16,7 +16,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 | Work package | P1 Design | P2 Build | P3 Test | Gate | P4 Seam | Notes |
 |---|---|---|---|---|---|---|
-| WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ⏳ when WP3 ready | 43/43 tests passing |
+| WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 43/43 tests, 18/18 C5-C8 validators |
 | WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 42/42 tests, 81% cov, C1 6/6 |
 | WP2 — SIMATIC mock | ⬜ after WP1 P3 | — | — | | — | Needs WP1 MQTT stream |
 | WP3 — Mendix mock | 🔵 start now | — | — | | — | WP4 already available |
@@ -39,7 +39,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 | Milestone | Condition | Status |
 |---|---|---|
 | M0 — Infra ready | Contracts v1.1 · docker-compose · scripts · WP4 P3 | ✅ done |
-| M1 — First signal | WP1 P4 + WP4 P4 complete | ⏳ WP1 done, WP4 P4 pending WP3 |
+| M1 — First signal | WP1 P4 + WP4 P4 complete | ✅ done (2026-06-04) |
 | M2 — Full pipeline | WP2 + WP3 + WP5 P4 complete | ⬜ |
 | M3 — Demo ready | WP6 + WP7 P4 · all 4 workflows end-to-end | ⬜ |
 

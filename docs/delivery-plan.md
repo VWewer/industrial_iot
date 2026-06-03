@@ -7,11 +7,11 @@
 
 ## Where we are right now
 
-> Last updated: 2026-06-03
+> Last updated: 2026-06-04
 
 ```
 M0  CONTRACTS + DOMAIN MODEL       [DONE]
-M1  FOUNDATION RUNNING             [IN PROGRESS -- WP1 done, WP4 P4 blocked on WP3]
+M1  FOUNDATION RUNNING             [DONE -- WP1 P4 + WP4 P4 complete (2026-06-04)]
 M2  MID-STACK RUNNING              [NOT STARTED]
 M3  DATA LAYER COMPLETE            [NOT STARTED]
 M4  DASHBOARD LIVE                 [NOT STARTED]
@@ -24,18 +24,17 @@ M6  AGENT LAYER (stretch)          [NOT STARTED]
 | WP | Name | Phase | Status | Blocker |
 |---|---|---|---|---|
 | WP1 | Sensor sim | P4 | COMPLETE | -- |
-| WP4 | SAP mock | P3 | COMPLETE -- P4 pending | Needs WP3 to consume C5 |
-| WP2 | SIMATIC mock | -- | NOT STARTED | Unblocked (WP1 done) |
-| WP3 | Mendix mock | -- | NOT STARTED | Unblocked (WP4 done) |
-| WP5 | Snowflake layer | -- | NOT STARTED | Needs M2 (WP1+WP3+WP4 P4) |
-| WP6 | SiS dashboard | -- | NOT STARTED | Needs M3 |
+| WP4 | SAP mock | P4 | COMPLETE | -- |
+| WP2 | SIMATIC mock | -- | NOT STARTED | Unblocked -- start now |
+| WP3 | Mendix mock | -- | NOT STARTED | Unblocked -- start now |
+| WP5 | Snowflake layer | -- | NOT STARTED | Unblocked (M1 done) -- needs Snowflake account |
+| WP6 | SiS dashboard | -- | NOT STARTED | Needs WP5 P4 |
 | WP7 | Unified cockpit | -- | NOT STARTED | Needs M4 |
 | WP8 | Agent layer | -- | STRETCH | Needs M5 |
 
-**What unblocks M1 (the current bottleneck):**
-WP4 Phase 4 requires WP3 (Mendix mock) to exist so it can receive a `POST /odata/v1/OperationConfirmations` call (Contract C5) and validate the full confirmation flow. Start WP3 to unblock M1.
+**M1 is complete.** WP1 and WP4 both passed Phase 4 seam checks. WP2, WP3, and WP5 are now all unblocked.
 
-**Recommended next:** start WP2 and WP3 in parallel. Both are unblocked.
+**Recommended next:** start WP2 and WP3 in parallel. WP5 can also begin (C1 schema stable, WP4 available) -- needs Snowflake credentials.
 
 ---
 
@@ -71,10 +70,10 @@ M0 ----------------------------------------------------------------
          |   (MQTT)    |         |  (OData)    |
          +------+------+         +------+------+
                 |                       |
-M1 -------------+---[ IN PROGRESS ]-----+---------------------------
-|  FOUNDATION RUNNING                        TARGET: Week 1-2
-|  WP1 Phase 4 DONE
-|  WP4 Phase 4 pending -- needs WP3 to consume C5
+M1 -------------+------[ DONE ]---------+---------------------------
+|  FOUNDATION RUNNING                        COMPLETED: 2026-06-04
+|  WP1 Phase 4 DONE (18 C1 payloads validated vs contract)
+|  WP4 Phase 4 DONE (18/18 C5/C6/C7/C8 checks passed)
 -------------------------------------------------------------------
 
          +-------------+         +-------------+

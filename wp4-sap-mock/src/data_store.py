@@ -4,9 +4,9 @@ wp4-sap-mock/src/data_store.py
 In-memory data store for WP4.
 Loads seed data on startup, manages state transitions, generates document numbers.
 
-State machine (DOMAIN-MODEL.md §2):
-  CREATED → RELEASED → IN_PROGRESS → CONFIRMED → CLOSED
-  Any state → ABORTED (except CONFIRMED/CLOSED)
+State machine (DOMAIN-MODEL.md Sec.2):
+  CREATED -> RELEASED -> IN_PROGRESS -> CONFIRMED -> CLOSED
+  Any state -> ABORTED (except CONFIRMED/CLOSED)
 """
 
 from __future__ import annotations
@@ -32,6 +32,7 @@ from .models import (
     OperationConfirmationRequest,
     OrderStatus,
     ProductionOrder,
+    _fmt_dt,
 )
 
 logger = logging.getLogger(__name__)
@@ -79,7 +80,7 @@ class DataStore:
         self._conf_sequence: int = 900
         self._gr_sequence: int = 3900
 
-    # ─── Seed loading ────────────────────────────────────────────────────────
+    # --- Seed loading --------------------------------------------------------
 
     def load_seed_data(self) -> None:
         """Load seed orders and materials from JSON files in data/."""
@@ -136,7 +137,7 @@ class DataStore:
             self._orders[order.order_id] = order
         logger.debug("Loaded %d orders", len(self._orders))
 
-    # ─── Orders ──────────────────────────────────────────────────────────────
+    # --- Orders --------------------------------------------------------------
 
     def get_order(self, order_id: str) -> ProductionOrder:
         with self._lock:
@@ -176,7 +177,7 @@ class DataStore:
     def confirm_order(self, req: OperationConfirmationRequest) -> dict:
         """
         Process an OperationConfirmation (C5).
-        Transitions order IN_PROGRESS → CONFIRMED, assigns confirmation number.
+        Transitions order IN_PROGRESS -> CONFIRMED, assigns confirmation number.
         """
         with self._lock:
             order = self.get_order(req.order_id)
@@ -206,10 +207,10 @@ class DataStore:
                 "order_id": order.order_id,
                 "sap_confirmation_number": conf_number,
                 "status": order.status.value,
-                "posted_at": posted_at.isoformat(),
+                "posted_at": _fmt_dt(posted_at),
             }
 
-    # ─── Materials ───────────────────────────────────────────────────────────
+    # --- Materials -----------------------------------------------------------
 
     def get_material(self, material_id: str) -> MaterialMaster:
         with self._lock:
@@ -222,7 +223,7 @@ class DataStore:
         with self._lock:
             return list(self._materials.values())
 
-    # ─── Goods movements ─────────────────────────────────────────────────────
+    # --- Goods movements -----------------------------------------------------
 
     def post_goods_movement(self, payload: dict) -> GoodsMovement:
         """Create a goods movement document (C8) and link it to the order."""

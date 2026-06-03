@@ -712,6 +712,41 @@ filterwarnings =
 
 ---
 
+### KI-007 -- Timestamp format: `.isoformat()` emits `+00:00`, not `Z`
+
+**Status:** Resolved (2026-06-04, WP4 Phase 4)
+
+**Symptom:** WP4 API responses had timestamps like `"2026-06-03T06:00:00+00:00"` instead of `"2026-06-03T06:00:00Z"`. Both are valid ISO 8601 UTC, but the project standard (P-08) requires `Z` suffix.
+
+**Root cause:** Python's `datetime.isoformat()` for UTC-aware datetimes produces `+00:00` not `Z`. This is a Python stdlib behaviour -- not a bug, but not our convention.
+
+**Fix:** Added `_fmt_dt(dt)` helper in `models.py`:
+```python
+def _fmt_dt(dt: datetime | None) -> str | None:
+    if dt is None:
+        return None
+    return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+```
+All `to_dict()` methods and inline datetime formatting now use `_fmt_dt()` instead of `.isoformat()`.
+
+**Rule going forward:** Never call `.isoformat()` on a datetime in a JSON response. Always use the `_fmt_dt()` helper or equivalent `strftime(...) + "Z"` pattern. Applies to all WPs.
+
+---
+
+### KI-008 -- Box-drawing characters in FastAPI file headers
+
+**Status:** Resolved (2026-06-04, WP4 Phase 4)
+
+**Symptom:** WP4 `api.py` and `data_store.py` used `-- Section ---` style section dividers with Unicode box-drawing character U+2500 (`-`). These cause non-ASCII violations (P-12).
+
+**Root cause:** AI-generated code pattern for visual section separation in long files.
+
+**Fix:** Replace with ASCII `---` section comments: `# --- Section name ---`.
+
+**Rule going forward:** Use ASCII dashes only for section dividers in Python source.
+
+---
+
 ## 15. Three-Level Consistency Check
 
 **The pattern:** This is an application of "Architectural Fitness Functions" (Neal Ford et al., *Building Evolutionary Architectures*). The idea: define the properties the architecture must maintain, then check them at different scopes and cadences. Not everything is checked every time -- checks are tiered by cost and by when a violation would be catchable.

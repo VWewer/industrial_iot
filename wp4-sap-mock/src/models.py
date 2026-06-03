@@ -2,7 +2,7 @@
 wp4-sap-mock/src/models.py
 
 Dataclasses for all WP4 domain objects.
-Field names and types are authoritative from DOMAIN-MODEL.md §1.1, §1.2, §1.6.
+Field names and types are authoritative from DOMAIN-MODEL.md Sec.1.1, Sec.1.2, Sec.1.6.
 """
 
 from __future__ import annotations
@@ -11,6 +11,13 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from enum import Enum
 from typing import Optional
+
+
+def _fmt_dt(dt: datetime | None) -> str | None:
+    """Format a UTC datetime as ISO 8601 with Z suffix. Returns None for None input."""
+    if dt is None:
+        return None
+    return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 class OrderStatus(str, Enum):
@@ -33,10 +40,10 @@ class InsulationClass(str, Enum):
 class ProductionOrder:
     """
     System of record: SAP. Join key across the entire stack.
-    DOMAIN-MODEL.md §1.1
+    DOMAIN-MODEL.md Sec.1.1
     """
     order_id: str                                  # PK, format: ORD-{YYYY}-{5 digits}
-    material_id: str                               # FK → MaterialMaster
+    material_id: str                               # FK -> MaterialMaster
     plant: str                                     # enum: regensburg | kirchheim
     oven_id: str                                   # format: oven-{02d}
     planned_start: datetime
@@ -57,17 +64,17 @@ class ProductionOrder:
             "material_id": self.material_id,
             "plant": self.plant,
             "oven_id": self.oven_id,
-            "planned_start": self.planned_start.isoformat(),
-            "planned_end": self.planned_end.isoformat(),
+            "planned_start": _fmt_dt(self.planned_start),
+            "planned_end": _fmt_dt(self.planned_end),
             "standard_cycle_minutes": self.standard_cycle_minutes,
             "status": self.status.value,
             "operator_id": self.operator_id,
-            "actual_start": self.actual_start.isoformat() if self.actual_start else None,
-            "actual_end": self.actual_end.isoformat() if self.actual_end else None,
+            "actual_start": _fmt_dt(self.actual_start),
+            "actual_end": _fmt_dt(self.actual_end),
             "sap_confirmation_number": self.sap_confirmation_number,
             "goods_movement_posted": self.goods_movement_posted,
-            "created_at": self.created_at.isoformat(),
-            "updated_at": self.updated_at.isoformat(),
+            "created_at": _fmt_dt(self.created_at),
+            "updated_at": _fmt_dt(self.updated_at),
         }
 
 
@@ -75,7 +82,7 @@ class ProductionOrder:
 class MaterialMaster:
     """
     System of record: SAP. Read by Mendix and Snowflake Gold layer.
-    DOMAIN-MODEL.md §1.2
+    DOMAIN-MODEL.md Sec.1.2
     """
     material_id: str                               # PK, format: MAT-{4 digits}
     material_description: str                      # max 100 chars
@@ -99,7 +106,7 @@ class MaterialMaster:
             "target_temperature_degC": self.target_temperature_degC,
             "target_vacuum_mbar": self.target_vacuum_mbar,
             "weight_kg": self.weight_kg,
-            "updated_at": self.updated_at.isoformat(),
+            "updated_at": _fmt_dt(self.updated_at),
         }
 
 
@@ -129,7 +136,7 @@ class GoodsMovement:
             "unit": self.unit,
             "posting_date": self.posting_date,
             "storage_location": self.storage_location,
-            "posted_at": self.posted_at.isoformat(),
+            "posted_at": _fmt_dt(self.posted_at),
             "status": "posted",
         }
 
@@ -138,7 +145,7 @@ class GoodsMovement:
 class OperationConfirmationRequest:
     """
     Inbound confirmation payload from WP3 (Mendix mock).
-    Contract C5 request body. DOMAIN-MODEL.md §1.6.
+    Contract C5 request body. DOMAIN-MODEL.md Sec.1.6.
     """
     order_id: str
     operation_id: str                              # format: {order_id}-OPR-010
