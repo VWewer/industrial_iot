@@ -1,6 +1,7 @@
 # AI-DEV.md — AI-Assisted Development Methodology
 
-> **Status:** v1.0 — June 2026  
+> **Status:** v1.1 — June 2026  
+> **Changes from v1.0:** Added Section 12 (End-of-Dev-Cycle Workflow), Section 13 (Debug and RCA Procedure), Section 14 (Known Issues and Learnings). Updated Session Close Protocol to mandate the full end-of-cycle sequence.  
 > **Purpose:** Defines how AI agents (Claude Code, Claude chat) are used to implement this project. Covers session structure, prompt engineering for WP briefs, context handover discipline, and patterns that make agent sessions faster and more autonomous. Read alongside `SDLC.md` — this document covers the AI-specific layer; SDLC covers the delivery process.
 
 ---
@@ -18,6 +19,9 @@
 9. [Seed Data and Fixtures](#9-seed-data-and-fixtures)
 10. [What Agents Do Well vs Badly](#10-what-agents-do-well-vs-badly)
 11. [Prompt Patterns That Work](#11-prompt-patterns-that-work)
+12. [End-of-Dev-Cycle Workflow](#12-end-of-dev-cycle-workflow)
+13. [Debug and RCA Procedure](#13-debug-and-rca-procedure)
+14. [Known Issues and Learnings](#14-known-issues-and-learnings)
 
 ---
 
@@ -180,28 +184,31 @@ Stop it. Ask it to complete the session open protocol first. An agent that start
 
 ## 5. Session Close Protocol
 
-**Every agent session ends with this sequence. No exceptions.**
+**Every agent session ends with the full End-of-Dev-Cycle Workflow (Section 12). No exceptions.**
 
 ### Agent responsibilities at session close
 
-1. Update `WP-BRIEF.md` → `Session handover notes` with:
+1. Run the complete end-of-cycle workflow from Section 12.
+
+2. Update `WP-BRIEF.md` → `Session handover notes` with:
    - Date and session number
    - What was completed this session (specific files, functions, tests)
    - What is in progress (partially complete, needs continuation)
    - Blockers (unresolved questions, missing context, contract gaps)
    - Exact next action for the next session (first thing to do, not a summary)
 
-2. Run `pytest tests/` and confirm pass/fail status. If failing, note which tests and why.
+3. Run `pytest tests/` and confirm 0 warnings, all passing. If failing, apply the RCA procedure (Section 13) before declaring the session closed.
 
-3. Confirm no secrets or `.env` files are staged for commit.
+4. Confirm no secrets or `.env` files are staged for commit.
 
-4. Confirm all new files follow the folder structure in the WP brief.
+5. Confirm all new files follow the folder structure in the WP brief.
+
+6. Update `architecture_handover.md` delivery tracker (Section 0a) to reflect current phase status.
 
 ### Human responsibilities at session close
 
 1. Review the session handover notes before closing.
-2. Commit all changes: `git add . && git commit -m "WP{n}: {description of session output}"`
-3. If a contract was changed, confirm it was updated in `contracts/interface-contracts.md` AND in all affected WP briefs.
+2. If a contract was changed, confirm it was updated in `contracts/interface-contracts.md` AND in all affected WP briefs.
 
 ---
 
@@ -454,11 +461,249 @@ Report mismatches. Do not fix them yet.
 
 ```
 We are closing this session.
-Update WP-BRIEF.md → Session handover notes with:
+Update WP-BRIEF.md -> Session handover notes with:
 1. Everything completed this session (file names, function names, test count)
 2. What is in progress
 3. Any blockers or open questions
 4. The exact first action for the next session
 
-Then run pytest tests/ and report pass/fail.
+Then run the end-of-cycle workflow (AI-DEV.md Section 12) and report the result.
 ```
+
+---
+
+## 12. End-of-Dev-Cycle Workflow
+
+**This sequence runs at the end of every phase (P2, P3, P4) and at every session close. It is mandatory — not optional. The session is not done until all steps are green.**
+
+```
+[1] Run tests
+      |
+      +-- FAIL --> [Debug: Section 13 RCA procedure] --> fix --> back to [1]
+      |
+      OK
+      |
+[2] Zero warnings
+      |
+      +-- WARN --> diagnose root cause --> fix or suppress with justification --> back to [1]
+      |
+      OK
+      |
+[3] Update documentation
+      |  - WP-BRIEF.md session handover notes
+      |  - WP README.md (if running instructions changed)
+      |  - architecture_handover.md delivery tracker (Section 0a)
+      |  - AI-DEV.md Section 14 (if a new issue or pattern was discovered)
+      |
+[4] Stage and review
+      |  git status -- confirm no .env / secrets staged
+      |  git diff --stat -- sanity-check what changed
+      |
+[5] Commit
+      |  Format: wp{n}: <imperative verb> <what>
+      |  Body: what changed, why, test result
+      |
+[6] Push to WP branch
+      |  git push origin wp{n}/{branch}
+      |
+[7] If Phase 4 complete: merge to main
+```
+
+### Step 3 documentation checklist
+
+For every session close, tick off before committing:
+
+- [ ] `WP-BRIEF.md` session handover section updated (date, what done, next action)
+- [ ] `architecture_handover.md` §0a delivery tracker updated
+- [ ] WP `README.md` reflects current running instructions (ports, env vars, OS quirks)
+- [ ] Any new issue or recurring pattern added to Section 14 of this file
+- [ ] No Docker-only instructions left if the service also runs natively
+- [ ] Sample output in README matches actual live output (not invented)
+
+### Best practices enforced at every commit
+
+The agent checks these before every commit. If any fail, fix before committing.
+
+| Check | Rule |
+|---|---|
+| Timestamps | ISO 8601 UTC with millisecond precision: `YYYY-MM-DDTHH:MM:SS.mmmZ` |
+| Field names | snake_case throughout (no camelCase, no kebab-case in JSON payloads) |
+| Enum values | lowercase strings in MQTT/REST payloads; UPPERCASE only in SAP-originated status fields |
+| Numeric precision | sensor values rounded to 3 d.p. (`round(value, 3)`) |
+| Character set | ASCII-only in all source files, config files, and JSON payloads; no smart quotes, em-dashes, or non-ASCII symbols |
+| Port conflicts | Never hardcode port 8000 on Windows without noting the exclusion risk; use env var override |
+| pytest warnings | `pytest tests/ -v` must exit with 0 warnings before any commit |
+| No secrets staged | `.env` files always in `.gitignore`; never staged |
+| Commit message | `wp{n}: imperative verb what` -- body explains why and cites test result |
+
+---
+
+## 13. Debug and RCA Procedure
+
+**Apply this procedure every time a test fails or a seam check finds a mismatch. Never fix a bug without first documenting it.**
+
+### Step 1 — Reproduce
+
+Run the failing test in isolation and capture the full output:
+
+```bash
+pytest tests/test_foo.py::TestBar::test_baz -v --tb=long 2>&1 | tee /tmp/fail.txt
+```
+
+Confirm the failure is deterministic (not a flaky timing issue). If flaky, note that explicitly.
+
+### Step 2 — Document the symptom
+
+Before touching any code, write down:
+
+```
+Symptom: <exact error message or assertion failure>
+Test:     <test file and test name>
+Observed: <what the code actually did>
+Expected: <what it should have done>
+Scope:    <is this isolated to one function, or does it affect multiple tests?>
+```
+
+### Step 3 — Root cause analysis
+
+Work backwards from the symptom. For each hypothesis, state it explicitly and test it:
+
+```
+Hypothesis 1: <what might cause this>
+  Evidence for: <observation>
+  Evidence against: <observation>
+  Test: <how to confirm or rule out>
+
+Hypothesis 2: ...
+```
+
+**Do not fix until you have identified the root cause.** A fix applied to a symptom without understanding the cause will recur or produce a different failure.
+
+### Step 4 — Fix
+
+Fix only the root cause. Do not refactor surrounding code during a bug fix. Do not add error handling for scenarios that are not part of the root cause.
+
+### Step 5 — Verify
+
+Re-run the full test suite (not just the failing test) to confirm no regressions:
+
+```bash
+pytest tests/ -v
+```
+
+All tests must pass, zero warnings.
+
+### Step 6 — Document in Section 14
+
+Add the issue, root cause, and fix pattern to Section 14 (Known Issues and Learnings) so future sessions don't repeat the diagnosis.
+
+### Common root cause categories
+
+| Category | Signal | First thing to check |
+|---|---|---|
+| Schema mismatch | Validator fails on field format | Compare field in contract vs field produced by code |
+| Port conflict | `[WinError 10013]` on bind | `netstat -ano | Select-String ":PORT"` -- use env var override |
+| Missing pytest config | `PytestUnknownMarkWarning` | Add marker to `pytest.ini` markers section |
+| Library deprecation warning | `DeprecationWarning` from third-party | Read warning source; suppress with `filterwarnings` if not caused by our code |
+| Timestamp format mismatch | Regex match fails | Confirm whether producer includes milliseconds; adjust regex to `(\.\d+)?` |
+| Thread/async timing | Test passes in isolation, fails in suite | Isolate with `pytest -p no:randomly` or add `time.sleep` only as last resort |
+
+---
+
+## 14. Known Issues and Learnings
+
+This section accumulates confirmed bugs, recurring patterns, and environment-specific gotchas discovered during development. Update it whenever a new issue is found and fixed. Never delete entries -- mark them resolved instead.
+
+---
+
+### KI-001 -- Timestamp format: milliseconds vs seconds
+
+**Status:** Resolved (2026-06-03, WP1 Phase 4)
+
+**Symptom:** `contracts/validators/validate_c1_mqtt.py` rejected valid timestamps from the WP1 publisher with `timestamp_opc: must be ISO 8601 UTC string`.
+
+**Root cause:** The validator's `ISO_RE` regex was `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$` (no milliseconds). The C1 contract example explicitly shows `"2026-06-03T08:32:14.521Z"` (milliseconds), and `_utc_now()` in `publisher.py` always emits millisecond precision.
+
+**Fix:** Updated regex to `^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$`.
+
+**Rule going forward:** All timestamp fields are ISO 8601 UTC with millisecond precision (`YYYY-MM-DDTHH:MM:SS.mmmZ`). Validators must accept the optional fractional seconds group `(\.\d+)?`. Do not write validators with second-only precision unless the contract explicitly prohibits milliseconds.
+
+---
+
+### KI-002 -- Windows port 8000 excluded from dynamic port range
+
+**Status:** Documented (2026-06-03, WP1 Phase 4)
+
+**Symptom:** `[WinError 10013] an attempt was made to access a socket in a way forbidden by its access permissions` when WP1 tries to bind on `0.0.0.0:8000`.
+
+**Root cause:** Windows reserves certain TCP port ranges (viewable via `netsh int ipv4 show excludedportrange protocol=tcp`). Port 8000 is included in the excluded range on this machine (PID 4 / System holds it).
+
+**Fix:** Set `CONTROL_API_PORT=8080` (or any free port) before starting any WP on this machine. All WP ports are driven by env vars -- never assume port 8000 is available on Windows.
+
+**Rule going forward:** Never hardcode `8000` as a default in documentation examples. Always show the env var override. Document the Windows exclusion risk in every WP README.
+
+---
+
+### KI-003 -- pytest.mark.integration not registered
+
+**Status:** Resolved (2026-06-03, WP1 debug)
+
+**Symptom:** `PytestUnknownMarkWarning: Unknown pytest.mark.integration` every test run.
+
+**Root cause:** No `pytest.ini` existed in `wp1-sensor-sim/`. Pytest cannot validate custom marks without a config file that declares them.
+
+**Fix:** Created `wp1-sensor-sim/pytest.ini` with:
+```ini
+markers =
+    integration: marks tests that require a running MQTT broker
+```
+
+**Rule going forward:** Every WP that uses a custom pytest mark must declare it in `pytest.ini`. Create `pytest.ini` at WP root during Phase 2 setup, before writing the first test that uses a custom mark.
+
+---
+
+### KI-004 -- StarletteDeprecationWarning from FastAPI TestClient
+
+**Status:** Suppressed (2026-06-03, WP1 debug)
+
+**Symptom:** `StarletteDeprecationWarning: Using httpx with starlette.testclient is deprecated; install httpx2 instead` on every test run that imports `TestClient`.
+
+**Root cause:** FastAPI >= 0.136 bundles Starlette >= 0.46, which emits this warning when the `httpx` (v1) transport is detected in TestClient. Our test code (`from fastapi.testclient import TestClient`) is correct -- the warning is internal to Starlette/FastAPI and not caused by our code.
+
+**Fix:** Added to `pytest.ini`:
+```ini
+filterwarnings =
+    ignore::starlette.exceptions.StarletteDeprecationWarning
+```
+
+**Rule going forward:** Library-level deprecation warnings that are not caused by our code must be suppressed with `filterwarnings` in `pytest.ini`, with a comment explaining why. Do not silently ignore warnings caused by our own code -- those must be fixed.
+
+---
+
+### KI-005 -- Mosquitto installed as Windows Service (no Docker)
+
+**Status:** Documented (2026-06-03)
+
+**Symptom:** `docker-compose up mosquitto` fails because Docker Desktop is not installed. `mosquitto.exe` runs as a System-level Windows Service (Session 0) that cannot be killed without admin rights.
+
+**Workaround:** Install Mosquitto natively via `winget install EclipseFoundation.Mosquitto`. It runs as a Windows Service on port 1883 automatically, including on reboot. No manual start needed. Use `mosquitto-local.conf` (in `mosquitto/`) for a minimal config without Docker volume paths.
+
+**Rule going forward:** All WP READMEs must include a "Starting Mosquitto" section with both Docker and Windows-native instructions. Do not assume Docker is available on the dev machine.
+
+---
+
+### KI-006 -- Non-ASCII characters in Python source files
+
+**Status:** Resolved (2026-06-03, WP1 debug)
+
+**Symptom:** Python source files (`control_api.py`, `main.py`, `models.py`, `simulator.py`) contained non-ASCII characters: em-dash (U+2014 `--`), arrow (U+2192 `->`), degree sign (U+00B0 `deg`). Detected by `Select-String -Pattern '[^\x00-\x7F]'`.
+
+**Root cause:** AI agents (and editors) commonly use typographic characters (em-dashes, Unicode arrows) in docstrings and comments. While Python 3 accepts UTF-8 source files, non-ASCII in source code causes subtle issues: some terminals, grep tools, and CI log parsers mishandle them; log lines containing `->` vs `->`are harder to grep; and it is inconsistent with the project standard.
+
+**Fix:** Replaced all non-ASCII in `.py` docstrings and comments:
+- `--` (em-dash) -> `--`
+- `->` (Unicode arrow) -> `->`
+- `+-X degC` -> `+/-X degC`
+- Degree sign in comments -> `deg`
+
+**Rule going forward:** Python source files must be ASCII-only (docstrings, comments, string literals, log messages). Markdown documentation files may use UTF-8 (Unicode arrows in architecture diagrams, emoji in status tables are acceptable). Run the ASCII check from Section 12 best practices table before every commit. Agents must not introduce typographic characters.

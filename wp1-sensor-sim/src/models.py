@@ -28,11 +28,11 @@ SENSOR_UNIT: dict[SensorType, str] = {
 
 @dataclass
 class SensorReading:
-    """C1 contract payload — one published MQTT message."""
+    """C1 contract payload -- one published MQTT message."""
 
     reading_id: str
-    timestamp_opc: str       # ISO 8601 UTC — machine clock
-    timestamp_mqtt: str      # ISO 8601 UTC — publish time
+    timestamp_opc: str       # ISO 8601 UTC -- machine clock
+    timestamp_mqtt: str      # ISO 8601 UTC -- publish time
     plant: str
     oven_id: str
     sensor_type: str         # SensorType enum value

@@ -1,4 +1,4 @@
-"""Entry point for WP1 — starts the MQTT publisher and control API together."""
+"""Entry point for WP1 -- starts the MQTT publisher and control API together."""
 from __future__ import annotations
 
 import logging

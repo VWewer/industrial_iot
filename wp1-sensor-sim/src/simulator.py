@@ -15,9 +15,9 @@ log = logging.getLogger(__name__)
 
 # Gaussian noise standard deviations per sensor type
 _NOISE_STDDEV: dict[SensorType, float] = {
-    SensorType.TEMPERATURE: 0.5,   # ±0.5 °C jitter
-    SensorType.VACUUM: 0.05,       # ±0.05 mbar jitter
-    SensorType.MOISTURE: 10.0,     # ±10 ppm jitter
+    SensorType.TEMPERATURE: 0.5,   # +/-0.5 degC jitter
+    SensorType.VACUUM: 0.05,       # +/-0.05 mbar jitter
+    SensorType.MOISTURE: 10.0,     # +/-10 ppm jitter
 }
 
 # Ambient / atmospheric baseline values
@@ -141,13 +141,13 @@ class CycleSimulator:
 
             if current_state == CycleState.COMPLETE:
                 log.info(
-                    "Cycle complete — moisture threshold met",
+                    "Cycle complete -- moisture threshold met",
                     extra={"order_id": self.active_order_id},
                 )
                 break
 
     def _advance_state(self) -> None:
-        """Check whether state transitions are due — must be called under lock."""
+        """Check whether state transitions are due -- must be called under lock."""
         config = self._config
         if config is None:
             return
@@ -155,14 +155,14 @@ class CycleSimulator:
         if self._state == CycleState.WARMING:
             if self._simulated_elapsed_min >= config.warming_duration_minutes:
                 self._state = CycleState.DRYING
-                log.info("State transition: WARMING → DRYING", extra={"order_id": config.order_id})
+                log.info("State transition: WARMING -> DRYING", extra={"order_id": config.order_id})
 
         elif self._state == CycleState.DRYING:
             moisture = self._last_values[SensorType.MOISTURE]
             if moisture <= config.target_moisture_ppm:
                 self._state = CycleState.COMPLETE
                 log.info(
-                    "State transition: DRYING → COMPLETE",
+                    "State transition: DRYING -> COMPLETE",
                     extra={"order_id": config.order_id, "moisture_ppm": moisture},
                 )
 
@@ -207,7 +207,7 @@ class CycleSimulator:
                 target_ppm=config.target_moisture_ppm,
                 standard_cycle_minutes=config.standard_cycle_minutes,
             )
-            # Clamp — moisture cannot go below zero
+            # Clamp: moisture cannot go below zero
             moisture = max(moisture, 0.0)
         else:
             temperature = _jitter(_AMBIENT_TEMPERATURE, _NOISE_STDDEV[SensorType.TEMPERATURE])

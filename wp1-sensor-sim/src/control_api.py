@@ -1,4 +1,4 @@
-"""FastAPI control endpoints for WP1 — start, stop, status."""
+"""FastAPI control endpoints for WP1 -- start, stop, status."""
 from __future__ import annotations
 
 import logging
@@ -51,7 +51,7 @@ class StartRequest(BaseModel):
 
 @app.post("/control/start", status_code=200)
 def start_cycle(body: StartRequest) -> dict:
-    """Start a new drying cycle. Transitions simulator from IDLE → WARMING."""
+    """Start a new drying cycle. Transitions simulator from IDLE -> WARMING."""
     _require_simulator()
     config = CycleConfig(
         order_id=body.order_id,
