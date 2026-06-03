@@ -22,6 +22,7 @@
 12. [End-of-Dev-Cycle Workflow](#12-end-of-dev-cycle-workflow)
 13. [Debug and RCA Procedure](#13-debug-and-rca-procedure)
 14. [Known Issues and Learnings](#14-known-issues-and-learnings)
+15. [Three-Level Consistency Check](#15-three-level-consistency-check)
 
 ---
 
@@ -515,6 +516,7 @@ For every session close, tick off before committing:
 
 - [ ] `WP-BRIEF.md` session handover section updated (date, what done, next action)
 - [ ] `architecture_handover.md` §0a delivery tracker updated
+- [ ] `docs/delivery-plan.md` "Where we are right now" table updated (WP status, milestone progress)
 - [ ] WP `README.md` reflects current running instructions (ports, env vars, OS quirks)
 - [ ] Any new issue or recurring pattern added to Section 14 of this file
 - [ ] No Docker-only instructions left if the service also runs natively
@@ -707,3 +709,87 @@ filterwarnings =
 - Degree sign in comments -> `deg`
 
 **Rule going forward:** Python source files must be ASCII-only (docstrings, comments, string literals, log messages). Markdown documentation files may use UTF-8 (Unicode arrows in architecture diagrams, emoji in status tables are acceptable). Run the ASCII check from Section 12 best practices table before every commit. Agents must not introduce typographic characters.
+
+---
+
+## 15. Three-Level Consistency Check
+
+**The pattern:** This is an application of "Architectural Fitness Functions" (Neal Ford et al., *Building Evolutionary Architectures*). The idea: define the properties the architecture must maintain, then check them at different scopes and cadences. Not everything is checked every time -- checks are tiered by cost and by when a violation would be catchable.
+
+---
+
+### Level 1 -- Commit gate (every commit, ~5s)
+
+Automated. Already enforced by Section 12 end-of-cycle workflow.
+
+| Check | How |
+|---|---|
+| All tests pass | `pytest tests/ -v` -- must exit 0 |
+| Zero warnings | pytest output must show `0 warnings` |
+| Python source ASCII-only | `Get-Content src\*.py \| Select-String '[^\x00-\x7F]'` -- must return nothing |
+| No secrets staged | `git status` -- no `.env` files |
+
+**When it fails:** block the commit. Apply Section 13 RCA procedure.
+
+---
+
+### Level 2 -- Contract boundary (every time a WP touches a contract it produces or consumes)
+
+Run when: implementing or changing a producer or consumer of any C1-C12 contract.
+
+| Check | How |
+|---|---|
+| Producer output valid | Run the relevant `contracts/validators/validate_c{n}_*.py` against a sample output |
+| Field names match contract | Compare Pydantic model fields against `contracts/interface-contracts.md` -- no aliases, no extras |
+| Enum values match contract | Confirm sensor_type, status, quality etc. exactly match the contract enum |
+| Timestamps include ms | Confirm ISO 8601 UTC with millisecond precision in all timestamp fields |
+
+**When it fails:** do not proceed to Phase 4. Fix the divergence first, update the contract if the contract was wrong (see Section 7).
+
+For WP1 producers: `python contracts/validators/run_phase4_check.py <captured_file>`
+For WP4 producers: run `scripts/run_validators.sh` (or equivalent)
+
+---
+
+### Level 3 -- Harmony check (at Phase 1 kickoff and Phase 3 DoD, not every commit)
+
+Read `checks/project-patterns.md` and tick off the 12-item checklist against the new WP. Takes ~10 minutes. This is the "does the new WP look and feel like the settled WPs?" check.
+
+**When to run:**
+- **Phase 1 kickoff** -- before writing any code. Catch structural decisions before they're baked in.
+- **Phase 3 DoD** -- as part of the Definition of Done review, before declaring Phase 3 complete.
+
+**What it checks (summary -- full details in `checks/project-patterns.md`):**
+
+| # | Property | Why it matters |
+|---|---|---|
+| P-01 | Module structure matches template | Prevents WPs from drifting to incompatible layouts |
+| P-02 | main.py is wiring only | Keeps entry points simple; business logic testable in isolation |
+| P-03 | All config from env vars | Portability -- same code runs in Docker, native, CI |
+| P-04 | Structured logging with extra={} | Log grep-ability across all services |
+| P-05 | Named custom exceptions, correct HTTP codes | Predictable error handling for consumers |
+| P-06 | /health returns 200 flat JSON | docker-compose healthcheck and WP7 cockpit depend on this |
+| P-07 | Pydantic v2 @field_validator | Consistency; v1 pattern causes silent failures on upgrade |
+| P-08 | Timestamps ISO 8601 UTC with ms | Validators and WP5 Bronze ingestion all parse this format |
+| P-09 | Flat JSON responses, no envelope | WP7 and WP5 consume these directly -- wrappers break parsing |
+| P-10 | snake_case fields, lowercase enums | Contract-mandated; camelCase will fail validators |
+| P-11 | pytest.ini present, 0 warnings | Clean test baseline before merge |
+| P-12 | Python source ASCII-only | grep-ability, portability, tool compatibility |
+
+**Reference WPs (settled as of 2026-06-03):**
+- `wp1-sensor-sim/src/` -- MQTT publisher + control API pattern
+- `wp4-sap-mock/src/` -- FastAPI mock service pattern
+
+**When it fails:** note the divergence in the session handover. Either fix it before Phase 3 closes, or raise an ADR if there is a good reason to diverge from the pattern.
+
+---
+
+### When each level runs
+
+| Level | Phase 1 | Phase 2 | Phase 3 | Phase 4 |
+|---|---|---|---|---|
+| L1 Commit gate | on every commit | on every commit | on every commit | on every commit |
+| L2 Contract boundary | -- | when implementing a producer/consumer | final check before gate | if contract changed |
+| L3 Harmony check | YES -- before coding | -- | YES -- part of DoD | -- |
+
+**The key rule:** L3 at Phase 1 costs 10 minutes and prevents structural divergence. L3 skipped at Phase 1 costs hours of refactoring at Phase 4 when the seam check finds the mismatch.

@@ -66,15 +66,17 @@ Phase 0 is complete when ALL of the following are true:
 ### What happens
 1. Read the WP brief (`WP-BRIEF.md`) in full
 2. Read `CONTRIBUTING.md`, `SDLC.md`, `AI-DEV.md`, `DOMAIN-MODEL.md`
-3. Read relevant contracts — identify which this WP produces or consumes
+3. Read relevant contracts -- identify which this WP produces or consumes
 4. Read upstream WP briefs for any WP this one depends on
-5. Surface ambiguities — resolve before writing code (see AI-DEV.md §4)
-6. Confirm exact deliverables for this session
+5. **Run Level 3 harmony check** (AI-DEV.md Section 15) against `checks/project-patterns.md` -- confirm the planned structure matches all 12 patterns before writing code
+6. Surface ambiguities -- resolve before writing code (see AI-DEV.md §4)
+7. Confirm exact deliverables for this session
 
-> **Skill prompt — Phase 1:** The agent will ask: *"Want to /grill-me on this design before we start coding?"*  
+> **Skill prompt -- Phase 1:** The agent will ask: *"Want to /grill-me on this design before we start coding?"*
 > Use `/grill-me` to stress-test scope, contracts, and edge cases before any implementation begins. Especially valuable for WP3, WP5, and WP7.
 
 ### Exit criteria (move to Phase 2)
+- Level 3 harmony check completed (all 12 patterns reviewed)
 - All ambiguities in WP-BRIEF.md Open Items are resolved
 - Agent has confirmed scope and deliverables for the session
 - No outstanding contract questions
@@ -134,12 +136,14 @@ If implementation reveals a contract needs to change:
 - [ ] `README.md` complete: purpose, how to run, required env vars, sample output
 - [ ] WP-specific DoD criteria in `WP-BRIEF.md` all checked
 - [ ] No secrets, credentials, or `.env` files committed
+- [ ] **Level 3 harmony check re-run** against `checks/project-patterns.md` -- all 12 patterns confirmed
+- [ ] `pytest tests/ -v` exits with 0 warnings (not just 0 failures)
 
 ### WP-specific DoD criteria
 Defined in each `WP-BRIEF.md`. These are in addition to the standard DoD above.
 
 ### Exit criteria (move to Phase 4)
-All DoD checkboxes checked. No exceptions — partial DoD is not done.
+All DoD checkboxes checked. No exceptions -- partial DoD is not done.
 
 ---
 
