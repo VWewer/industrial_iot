@@ -2,6 +2,9 @@
 
 ## Status: STRETCH GOAL — not started
 
+> **Phase 1 gate (mandatory before writing code):**
+> Run the Level 3 harmony check: read `checks/project-patterns.md` and tick off all 12 patterns against your planned structure. Takes ~10 minutes. See `SDLC.md` Phase 1 step 5 and `AI-DEV.md` Section 15.
+
 ## Role in the architecture
 WP8 adds AI agents that run inside the live system — not as build tools, but as runtime components. Two agents are scoped:
 

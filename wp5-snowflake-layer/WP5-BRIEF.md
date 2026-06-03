@@ -2,7 +2,10 @@
 
 ## Status: NOT STARTED
 
-> **v1.1 — June 2026:** Updated from DuckDB to real Snowflake (ADR-005). Snowpipe for sensor stream ingestion. DuckDB removed from scope.
+> **v1.1 -- June 2026:** Updated from DuckDB to real Snowflake (ADR-005). Snowpipe for sensor stream ingestion. DuckDB removed from scope.
+>
+> **Phase 1 gate (mandatory before writing code):**
+> Run the Level 3 harmony check: read `checks/project-patterns.md` and tick off all 12 patterns against your planned structure. Takes ~10 minutes. See `SDLC.md` Phase 1 step 5 and `AI-DEV.md` Section 15.
 
 ---
 

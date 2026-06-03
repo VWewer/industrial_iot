@@ -2,6 +2,9 @@
 
 ## Status: NOT STARTED
 
+> **Phase 1 gate (mandatory before writing code):**
+> Run the Level 3 harmony check: read `checks/project-patterns.md` and tick off all 12 patterns against your planned structure. Takes ~10 minutes. See `SDLC.md` Phase 1 step 5 and `AI-DEV.md` Section 15.
+
 ## Role in the architecture
 WP3 simulates the Mendix application layer. In the real system, Mendix is the operator-facing web application and the SAP integration hub — it reads production orders from SAP, presents them to operators, receives confirmations, and writes them back to SAP.
 
