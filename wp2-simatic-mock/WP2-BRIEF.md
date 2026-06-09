@@ -97,8 +97,10 @@ wp2-simatic-mock/
 - [ ] Integration test: WP1 publishes → WP2 `/process-state` reflects latest reading within 10s
 - [ ] Sample responses documented in README under "Sample output"
 
-## Open items
-- [ ] Clarify whether WP2 should push a webhook to WP5 on cycle completion, or WP5 polls
+## Architecture decisions (resolved 2026-06-09)
+- **WP2 -> WP5**: WP5 polls WP2 historian (C3) directly. No push webhook from WP2. MES events (C10) are sent by WP3 only.
 
 ## Session handover notes
-> *To be filled by the agent at the end of each session.*
+Phase 1+2 complete (2026-06-09). 41/41 unit tests passing, 0 warnings, ASCII clean.
+Branch: `wp2/simatic-mock`. Next: Phase 3 code review, then Phase 4 seam check (requires Mosquitto + WP1 running).
+Integration test: `pytest tests/ -v` with Mosquitto on localhost:1883 and WP1 running.
