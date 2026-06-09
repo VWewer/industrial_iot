@@ -9,6 +9,8 @@ from __future__ import annotations
 
 import logging
 import os
+from contextlib import asynccontextmanager
+from typing import AsyncIterator
 
 import uvicorn
 from fastapi import FastAPI
@@ -18,12 +20,23 @@ from .data_store import DataStore
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(name)s — %(message)s",
+    format="%(asctime)s [%(levelname)s] %(name)s -- %(message)s",
 )
 logger = logging.getLogger(__name__)
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
+    store = DataStore()
+    store.load_seed_data()
+    api_module.store = store
+    logger.info("WP4 SAP mock started -- seed data loaded")
+    yield
+
+
 app = FastAPI(
-    title="WP4 — SAP S/4HANA Mock",
+    lifespan=lifespan,
+    title="WP4 -- SAP S/4HANA Mock",
     description=(
         "Simulates SAP S/4HANA OData interface for the Industrial IoT demo. "
         "Implements contracts C5 (OperationConfirmations), C6 (ProductionOrders), "
@@ -31,15 +44,6 @@ app = FastAPI(
     ),
     version="1.0.0",
 )
-
-
-@app.on_event("startup")
-def startup_event() -> None:
-    store = DataStore()
-    store.load_seed_data()
-    api_module.store = store
-    logger.info("WP4 SAP mock started — seed data loaded")
-
 
 app.include_router(api_module.router)
 

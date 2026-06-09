@@ -2,7 +2,10 @@
 
 ## Status: NOT STARTED
 
-> **v1.1 — June 2026:** Updated from DuckDB to real Snowflake (ADR-005). Snowpipe for sensor stream ingestion. DuckDB removed from scope.
+> **v1.1 -- June 2026:** Updated from DuckDB to real Snowflake (ADR-005). Snowpipe for sensor stream ingestion. DuckDB removed from scope.
+>
+> **Phase 1 gate (mandatory before writing code):**
+> Run the Level 3 harmony check: read `checks/project-patterns.md` and tick off all 12 patterns against your planned structure. Takes ~10 minutes. See `SDLC.md` Phase 1 step 5 and `AI-DEV.md` Section 15.
 
 ---
 
@@ -128,6 +131,13 @@ Full schemas: `DOMAIN-MODEL.md` Sections 1.1 and 1.2.
 - `GET /gold/efficiency` — returns `v_cycle_efficiency` as JSON list
 - `GET /health` — returns service status + Snowflake connection status
 
+**8. Snowflake schema ERD (Mermaid)**
+- One Mermaid `erDiagram` block in `docs/snowflake-erd.md`
+- Shows all Bronze, Silver, and Gold tables with their key fields
+- Relationship lines: Bronze -> Silver (one-to-one lineage), Silver tables -> Gold (join on order_id)
+- Annotate join key `order_id` on all relationships
+- Deliverable: diagram renders correctly on GitHub
+
 ### Out of scope
 - dbt (transforms are plain SQL via Snowflake Python connector)
 - Kafka (MQTT subscriber sufficient for demo throughput)
@@ -237,6 +247,7 @@ wp5-snowflake-layer/
 - [ ] Seed data: 20 historical cycles visible in Gold on first run
 - [ ] Query API returns correct Gold data for `/cycles`, `/cycles/{id}`, `/efficiency`
 - [ ] Integration test: simulate a cycle end-to-end → verify Gold row appears within 90s
+- [ ] Snowflake schema ERD (`docs/snowflake-erd.md`) — Mermaid erDiagram, all Bronze/Silver/Gold tables, join key annotated, renders on GitHub
 
 ## Open items
 

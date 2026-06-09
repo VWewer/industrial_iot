@@ -2,6 +2,9 @@
 
 ## Status: NOT STARTED
 
+> **Phase 1 gate (mandatory before writing code):**
+> Run the Level 3 harmony check: read `checks/project-patterns.md` and tick off all 12 patterns against your planned structure. Takes ~10 minutes. See `SDLC.md` Phase 1 step 5 and `AI-DEV.md` Section 15.
+
 ## Role in the architecture
 WP2 simulates the SIMATIC middleware layer. It subscribes to the MQTT sensor stream from WP1, maintains an in-memory historian (time-series buffer), stamps readings with the active production order ID, and exposes two REST endpoints for downstream consumers (WP3, WP5, WP7).
 

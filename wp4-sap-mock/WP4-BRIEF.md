@@ -1,6 +1,6 @@
 # WP4 — SAP Mock
 
-## Status: PHASE 3 COMPLETE — ready for seam validation (Phase 4)
+## Status: PHASE 4 COMPLETE
 
 ## Role in the architecture
 WP4 simulates SAP S/4HANA's OData interface. It is the system of record for production orders, material master data, and goods movements. In the real architecture, Mendix is the only layer that talks to SAP. WP4 enforces that boundary — WP2 and WP1 never call WP4.
@@ -79,33 +79,25 @@ ABORTED   ABORTED     ABORTED
 - [x] Batch export endpoint returns filterable list for WP5 pull (C11)
 - [x] Sample responses documented in README
 - [x] 43/43 tests passing (test_data_store.py + test_api.py)
-- [ ] Seam validation with WP3 (Phase 4) — pending WP3 implementation
-- [ ] Seam validation with WP5 (Phase 4) — pending WP5 implementation
+- [x] Producer-side seam validation (Phase 4) — 18/18 PASS (2026-06-03)
+- [ ] Consumer-side seam validation with WP3 — pending WP3 implementation
+- [ ] Consumer-side seam validation with WP5 — pending WP5 implementation
 
 ## Open items
 - [ ] Confirm WP5 pull interval for demo (currently 60s default, configurable via SAP_PULL_INTERVAL_S)
-- [ ] `on_event` deprecation warnings in FastAPI — cosmetic only, migrate to `lifespan` context manager before WP7 integration if time permits
+- [x] `on_event` deprecation -- migrated to `lifespan` context manager (2026-06-03)
 
 ## Session handover notes
 
-**Session date:** June 2026
+**Session 1 (June 2026):** Full WP4 implementation. All contracts C5-C8 + C11. 43/43 tests. Contracts v1.1 alignment (8 field corrections). Dockerfile created.
 
-**What was completed this session:**
-- Full WP4 implementation from scratch — all files per folder structure above
-- All four contracts (C5, C6, C7, C8) implemented and tested
-- Seed data: 4 orders (CREATED/RELEASED/CONFIRMED/ABORTED) + 4 materials aligned to DOMAIN-MODEL.md §8
-- 43 tests written and passing (unit + API layer)
-- Dockerfile created — service starts with `docker-compose up wp4`
+**Session 2 (2026-06-03/04):** Phase 4 producer seam check.
+- Fixed P-08 (timestamps): all `to_dict()` now use `_fmt_dt()` helper, outputs `Z` suffix not `+00:00`
+- Fixed P-12 (ASCII): removed box-drawing chars, Unicode arrows, em-dashes from all 4 source files
+- Fixed P-11 (pytest.ini): created `pytest.ini` with filterwarnings
+- Migrated `@app.on_event("startup")` to `lifespan` context manager
+- Created validators: `validate_c5_confirmation_response.py`, `validate_c6_production_order.py`, `validate_c7_material_master.py`, `validate_c8_goods_movement.py`
+- Phase 4 result: 18/18 PASS (4 orders x C6, 4 materials x C7, C5 response, C8 response)
+- 43/43 tests still passing, 0 warnings
 
-**Contracts fixed upstream (interface-contracts.md v1.1):**
-- C5 endpoint corrected to `POST /odata/v1/OperationConfirmations` (was `/Confirm` action)
-- C5 request body rewritten to match DOMAIN-MODEL §1.6 SAPConfirmation schema
-- C6 response expanded to full ProductionOrder schema (was missing 8 fields)
-- C7 field names corrected: `material_description`, `target_temperature_degC`, `target_vacuum_mbar`; added `max_cycle_minutes`, `weight_kg`, `updated_at`
-- C12 field names corrected: `cycle_start_time`, `cycle_end_time`, `spec_met`, added `oven_id`, `goods_movement_posted`
-- Sensor type enum corrected across C1/C2/C3: `moisture` (was `moisture-offgas`), removed `heater-power`
-- All material IDs and order IDs updated to DOMAIN-MODEL format (`MAT-0001`, `ORD-2026-*`)
-
-**Next action for WP4:** Phase 4 seam validation when WP3 (Mendix mock) is ready to call C5, C6, C7, C8.
-
-**Next WP to implement:** WP1 (Sensor Simulator) — no upstream dependencies, MQTT schema now stable in contracts v1.1.
+**Next action for WP4:** Consumer-side seam validation when WP3 and WP5 are ready. No blocking issues.

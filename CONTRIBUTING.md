@@ -86,6 +86,22 @@ def publish_reading(reading, topic):
 
 ---
 
+## Consistency and harmony checks
+
+Before writing code for any WP, run the **Level 3 harmony check** against `checks/project-patterns.md`. This takes ~10 minutes and confirms your planned structure matches the 12 established patterns extracted from the settled reference WPs (WP1, WP4).
+
+The three-level consistency system:
+
+| Level | What | When |
+|---|---|---|
+| L1 | pytest + linting (automated) | Every commit |
+| L2 | Contract boundary check: does output match consumed contract exactly? | Phase 4 seam check |
+| L3 | Harmony check: does new WP structure match project-wide patterns? | Phase 1 kickoff + Phase 3 DoD re-run |
+
+See `AI-DEV.md` Section 15 for the full procedure and `checks/README.md` for the checks directory layout.
+
+---
+
 ## Interface discipline
 
 The `/contracts` folder is the source of truth for all inter-WP interfaces. Before implementing any producer or consumer:

@@ -16,8 +16,8 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 | Work package | P1 Design | P2 Build | P3 Test | Gate | P4 Seam | Notes |
 |---|---|---|---|---|---|---|
-| WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ⏳ when WP3 ready | 43/43 tests passing |
-| WP1 — Sensor sim | 🔵 start now | — | — | | — | No blockers |
+| WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 43/43 tests, 18/18 C5-C8 validators |
+| WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 42/42 tests, 81% cov, C1 6/6 |
 | WP2 — SIMATIC mock | ⬜ after WP1 P3 | — | — | | — | Needs WP1 MQTT stream |
 | WP3 — Mendix mock | 🔵 start now | — | — | | — | WP4 already available |
 | WP5 — Snowflake | ⬜ after WP1 P3 | — | — | | — | Needs WP1 + WP4 |
@@ -39,7 +39,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 | Milestone | Condition | Status |
 |---|---|---|
 | M0 — Infra ready | Contracts v1.1 · docker-compose · scripts · WP4 P3 | ✅ done |
-| M1 — First signal | WP1 P4 + WP4 P4 complete | ⬜ |
+| M1 — First signal | WP1 P4 + WP4 P4 complete | ✅ done (2026-06-04) |
 | M2 — Full pipeline | WP2 + WP3 + WP5 P4 complete | ⬜ |
 | M3 — Demo ready | WP6 + WP7 P4 · all 4 workflows end-to-end | ⬜ |
 
@@ -47,24 +47,13 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 ## 0b. Git workflow status
 
-> ⚠️ **Not yet established.** No commits have been pushed to a remote repository. All work to date exists only on the local filesystem. This must be resolved before WP1 kicks off.
+**✅ Established — 2026-06-03**
 
-**What needs to happen (one-time setup):**
+- Remote: `https://github.com/VWewer/industrial_iot`
+- Default branch: `main` (protected — only merge after Phase 4)
+- Current active branch: `wp1/sensor-sim-base` (Phase 4 complete — ready to merge to main)
 
-```bash
-# 1. Initialise repo if not already done
-git init
-git add .
-git commit -m "chore: initial project structure, contracts v1.1, WP4 Phase 3 complete"
-
-# 2. Create remote (GitHub / GitLab — your choice) and push
-git remote add origin https://github.com/YOUR_USERNAME/industrial-iot-demo.git
-git push -u origin main
-
-# 3. Protect main — set branch protection rule: require PR + passing tests before merge
-```
-
-**Ongoing convention (already documented in Section 9 below):**
+**Ongoing convention:**
 
 - `main` is always demo-ready. Only merge after Phase 4 seam check passes.
 - All WP work on `wp{n}/{short-description}` branches.
@@ -79,7 +68,27 @@ e.g. "wp1: implement MQTT publisher with 3 sensor types"
      "contracts: align C5 endpoint to DOMAIN-MODEL §1.6"
 ```
 
-**Status:** Remote not created. No pushes. Resolve before WP1 session.
+---
+
+## 0c. Skills reference
+
+Global skills installed in `~/.claude/skills/` — available in every session.
+
+| Skill | When it activates |
+|---|---|
+| `python-pro` | Writing any Python module — auto-applied |
+| `fastapi-expert` | Any FastAPI WP (WP1–WP4) — auto-applied |
+| `api-designer` | Contract questions, new endpoints — auto-applied |
+| `sql-pro` | WP5 DDL, Gold layer SQL, Snowflake queries — auto-applied |
+| `database-optimizer` | WP5/WP6 query tuning — on request |
+| `test-master` | Phase 3 DoD — agent prompts: *"Run test-master review?"* |
+| `code-reviewer` | Phase 4 seam check — agent prompts: *"Run /review before merge?"* |
+| `devops-engineer` | Dockerfile / docker-compose changes — auto-applied |
+| `monitoring-expert` | Logging review — Phase 3 |
+| `debugging-wizard` | Any test failure — auto-applied before fixing |
+| `architecture-designer` | New ADR, design decisions — on request |
+| `secure-code-guardian` | API endpoints, input handling — Phase 4 |
+| `the-fool` (`/grill-me`) | Phase 1 kickoff, pre-WP7 — agent prompts to use |
 
 ---
 
@@ -460,29 +469,31 @@ cd wp4-sap-mock && pytest tests/ -v
 
 ## 12. Next session — recommended starting point
 
-**WP4 is Phase 3 complete.** M1 dependency on WP4 is satisfied.
+**M1 is complete (2026-06-04).** WP1 Phase 4 + WP4 Phase 4 both passed. WP2, WP3, and WP5 are all unblocked.
 
-**Recommended next: WP1 (Sensor Simulator)**
+**Recommended next: WP2 and WP3 in parallel (both have no blockers)**
 
-- No upstream dependencies
-- MQTT schema now stable in contracts v1.1 (3 sensor types: temperature, vacuum, moisture)
-- Sensor curve shapes and compression model fully specified in DOMAIN-MODEL.md §5
-- Mosquitto runs via `docker-compose up mosquitto`
+WP2 (SIMATIC mock):
+- Needs WP1 MQTT stream -- now available (Mosquitto running on port 1883 as Windows Service)
+- Produces C2 (process state REST), C3 (historian query)
+- Port 8001
 
-**Session start template for WP1:**
+WP3 (Mendix mock):
+- Needs WP4 -- now available on port 8003
+- Produces C4, C5 (SAP confirmation), C10 (MES webhook to WP5)
+- Port 8002
+
+WP5 (Snowflake layer) can also begin -- C1 and WP4 contracts stable. Blocked only on Snowflake credentials.
+
+**Session start template (WP2 or WP3):**
 ```
-Hand the agent:
-  CONTRIBUTING.md
-  SDLC.md
-  AI-DEV.md
-  DOMAIN-MODEL.md (Sections 1.3 SensorReading, 5 Sensor Time-Series Model, 7 Demo Timing)
-  wp1-sensor-sim/WP1-BRIEF.md
-  contracts/interface-contracts.md (section C1)
-
-State: Phase 1 kickoff. No previous session.
-Note: MQTT broker available at localhost:1883 via docker-compose up mosquitto
+"We are continuing the industrial_iot project.
+Working directory: C:\Users\vw199\projects\industrial_iot
+Read architecture_handover.md first (sections 0a, 0b, 0c),
+then wp{2 or 3}-*/WP{2 or 3}-BRIEF.md.
+Current phase: WP{n} Phase 1 kickoff."
 ```
 
-**After WP1 reaches Phase 3:** kick off WP2 (needs WP1 MQTT stream) and WP5 in parallel (C1 schema is stable, Snowflake credentials needed). WP3 can start once WP4 is available (already satisfied).
+**Outstanding merge:** `wp1/sensor-sim-base` branch is Phase 4 complete and ready to merge to `main`. Do this before or at the start of the next session.
 
-**Milestone target:** M1 (WP1 + WP4 Phase 4 complete) → enables WP2 + WP3 + WP5 in parallel.
+**Milestone target:** M2 (WP2 + WP3 Phase 4 complete) → unblocks WP5 full integration.

@@ -5,14 +5,14 @@ FastAPI router for WP4 SAP mock.
 Implements contracts C5, C6, C7, C8 and batch export endpoint for WP5.
 
 Endpoint summary:
-  GET  /health
-  GET  /odata/v1/ProductionOrders                              → list (C6, C11)
-  GET  /odata/v1/ProductionOrders('{order_id}')               → single order (C6)
-  PATCH /odata/v1/ProductionOrders('{order_id}')              → update status
-  POST /odata/v1/OperationConfirmations                        → confirmation (C5)
-  GET  /odata/v1/Materials('{material_id}')                   → material master (C7)
-  POST /odata/v1/GoodsMovements                               → post GR (C8)
-  GET  /odata/v1/GoodsMovements                               → list movements (C11)
+  GET   /health
+  GET   /odata/v1/ProductionOrders                              -- list (C6, C11)
+  GET   /odata/v1/ProductionOrders('{order_id}')               -- single order (C6)
+  PATCH /odata/v1/ProductionOrders('{order_id}')               -- update status
+  POST  /odata/v1/OperationConfirmations                        -- confirmation (C5)
+  GET   /odata/v1/Materials('{material_id}')                   -- material master (C7)
+  POST  /odata/v1/GoodsMovements                               -- post GR (C8)
+  GET   /odata/v1/GoodsMovements                               -- list movements (C11)
 """
 
 from __future__ import annotations
@@ -43,7 +43,7 @@ def get_store() -> DataStore:
     return store
 
 
-# ─── Health ──────────────────────────────────────────────────────────────────
+# --- Health ------------------------------------------------------------------
 
 @router.get("/health")
 def health():
@@ -55,7 +55,7 @@ def health():
     }
 
 
-# ─── Production Orders (C6) ──────────────────────────────────────────────────
+# --- Production Orders (C6) --------------------------------------------------
 
 @router.get("/odata/v1/ProductionOrders")
 def list_orders(
@@ -108,7 +108,7 @@ def patch_order_status(order_id: str, body: OrderStatusPatch):
     return order.to_dict()
 
 
-# ─── Operation Confirmations (C5) ────────────────────────────────────────────
+# --- Operation Confirmations (C5) --------------------------------------------
 
 class ConfirmationRequestBody(BaseModel):
     order_id: str
@@ -149,14 +149,14 @@ def post_operation_confirmation(body: ConfirmationRequestBody):
         raise HTTPException(status_code=409, detail=str(e))
 
     logger.info(
-        "Order %s confirmed — SAP number: %s",
+        "Order %s confirmed -- SAP number: %s",
         body.order_id,
         result["sap_confirmation_number"],
     )
     return result
 
 
-# ─── Material Master (C7) ────────────────────────────────────────────────────
+# --- Material Master (C7) ----------------------------------------------------
 
 @router.get("/odata/v1/Materials('{material_id}')")
 def get_material(material_id: str):
@@ -178,7 +178,7 @@ def list_materials():
     }
 
 
-# ─── Goods Movements (C8) ────────────────────────────────────────────────────
+# --- Goods Movements (C8) ----------------------------------------------------
 
 class GoodsMovementBody(BaseModel):
     order_id: str

@@ -3,6 +3,9 @@
 ## Status: NOT STARTED — blocked on WP2–WP6
 
 > **v1.1 — June 2026:** 4-panel layout defined (SAP + Mendix + Machine + Analytics). 6 workflows mapped to panels. SiS integration approach clarified. No user authentication (ADR-007).
+>
+> **Phase 1 gate (mandatory before writing code):**
+> Run the Level 3 harmony check: read `checks/project-patterns.md` and tick off all 12 patterns against your planned structure. Takes ~10 minutes. See `SDLC.md` Phase 1 step 5 and `AI-DEV.md` Section 15.
 
 ---
 

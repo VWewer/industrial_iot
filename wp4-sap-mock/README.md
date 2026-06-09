@@ -1,4 +1,4 @@
-# WP4 — SAP Mock
+# WP4 -- SAP Mock
 
 Simulates SAP S/4HANA's OData interface for the Industrial IoT demo. System of record for production orders, material master data, and goods movements.
 
@@ -31,8 +31,15 @@ docker-compose up wp4
 
 ```bash
 cd wp4-sap-mock
-pytest tests/ -v
+..\.venv\Scripts\pytest.exe tests/ -v
 ```
+
+## Required environment variables
+
+| Variable | Default | Description |
+|---|---|---|
+| `SAP_API_PORT` | `8003` | Port the service listens on |
+| `PLANT_ID` | `regensburg` | Plant identifier |
 
 ## API docs
 
@@ -41,6 +48,8 @@ OpenAPI docs available at `http://localhost:8003/docs` when running.
 ---
 
 ## Sample output
+
+All timestamps are ISO 8601 UTC with `Z` suffix. Phase 4 validated 2026-06-03.
 
 ### GET /health
 ```json
@@ -59,8 +68,8 @@ OpenAPI docs available at `http://localhost:8003/docs` when running.
   "material_id": "MAT-0001",
   "plant": "regensburg",
   "oven_id": "oven-01",
-  "planned_start": "2026-06-03T06:00:00+00:00",
-  "planned_end": "2026-06-03T14:00:00+00:00",
+  "planned_start": "2026-06-03T06:00:00Z",
+  "planned_end": "2026-06-03T14:00:00Z",
   "standard_cycle_minutes": 480,
   "status": "RELEASED",
   "operator_id": null,
@@ -68,8 +77,8 @@ OpenAPI docs available at `http://localhost:8003/docs` when running.
   "actual_end": null,
   "sap_confirmation_number": null,
   "goods_movement_posted": false,
-  "created_at": "2026-06-02T14:30:00+00:00",
-  "updated_at": "2026-06-02T14:30:00+00:00"
+  "created_at": "2026-06-02T14:30:00Z",
+  "updated_at": "2026-06-02T14:30:00Z"
 }
 ```
 
@@ -85,7 +94,7 @@ OpenAPI docs available at `http://localhost:8003/docs` when running.
   "target_temperature_degC": 130.0,
   "target_vacuum_mbar": 5.0,
   "weight_kg": 8500.0,
-  "updated_at": "2026-06-01T00:00:00+00:00"
+  "updated_at": "2026-06-01T00:00:00Z"
 }
 ```
 
@@ -111,7 +120,7 @@ Response:
   "order_id": "ORD-2026-00042",
   "sap_confirmation_number": "CONF-2026-00901",
   "status": "CONFIRMED",
-  "posted_at": "2026-06-03T14:00:03+00:00"
+  "posted_at": "2026-06-03T14:00:03Z"
 }
 ```
 
@@ -141,10 +150,29 @@ Response:
   "unit": "EA",
   "posting_date": "2026-06-03",
   "storage_location": "WH-01",
-  "posted_at": "2026-06-03T14:00:05+00:00",
+  "posted_at": "2026-06-03T14:00:05Z",
   "status": "posted"
 }
 ```
+
+---
+
+## Phase 4 seam validation
+
+**Date:** 2026-06-03
+**Method:** `contracts/validators/run_wp4_phase4_check.py` (in-process TestClient)
+**Result: 18/18 PASS**
+
+| Contract | Checks | Result |
+|---|---|---|
+| C6 ProductionOrders (4 single + 4 list) | 8 | PASS |
+| C7 Materials (4 single + 4 list) | 8 | PASS |
+| C5 OperationConfirmations (response) | 1 | PASS |
+| C8 GoodsMovements (response) | 1 | PASS |
+
+Validators: `contracts/validators/validate_c5_confirmation_response.py`,
+`validate_c6_production_order.py`, `validate_c7_material_master.py`,
+`validate_c8_goods_movement.py`
 
 ---
 
@@ -160,7 +188,8 @@ Response:
 ## State machine
 
 ```
-CREATED → RELEASED → IN_PROGRESS → CONFIRMED → CLOSED
-   ↓          ↓           ↓
-ABORTED   ABORTED     ABORTED
+CREATED -> RELEASED -> IN_PROGRESS -> CONFIRMED -> CLOSED
+   |           |             |
+   v           v             v
+ABORTED    ABORTED       ABORTED
 ```
