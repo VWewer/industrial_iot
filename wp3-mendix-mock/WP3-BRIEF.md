@@ -107,9 +107,13 @@ wp3-mendix-mock/
 - [ ] MES event webhook fires on order start and confirmation
 - [ ] Integration test: full workflow start → in-progress → confirmed → closed
 
-## Open items
-- [ ] Decide: operator UI as Jinja2 HTML (simpler) or Streamlit page (more visual)
-- [ ] Clarify: does WP3 call WP1 control API to trigger cycle start, or does operator do it via WP1 directly?
+## Architecture decisions (resolved 2026-06-09)
+- **Operator UI**: Jinja2 HTML served by FastAPI. Chosen over Streamlit for zero extra deps and simpler deployment.
+- **Cycle start**: WP3 calls WP1 `POST /control/start` when operator clicks Start. WP1 failures are non-fatal (logged as warnings).
+- **WP2 -> WP5 push**: WP5 polls WP2 historian (C3) directly. No push webhook from WP2 to WP5. C10 webhook is WP3 -> WP5 only.
+- **WP1 port**: `WP1_CONTROL_API_URL=http://localhost:8080` (not 8000 -- Windows excludes port 8000).
 
 ## Session handover notes
-> *To be filled by the agent at the end of each session.*
+Phase 1+2 complete (2026-06-09). 42/42 unit tests passing, 0 warnings, ASCII clean.
+Branch: `wp3/mendix-mock`. Next: Phase 3 code review, then Phase 4 seam check (requires WP4 live on port 8003).
+Integration test: `pytest tests/ -v` with WP4 running at localhost:8003.
