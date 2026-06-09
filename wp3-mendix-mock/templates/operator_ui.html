@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WP3 Mendix Mock -- Operator Console</title>
+  <style>
+    body { font-family: monospace; max-width: 960px; margin: 2rem auto; padding: 0 1rem; background: #f5f5f5; }
+    h1, h2 { border-bottom: 2px solid #333; padding-bottom: 0.25rem; }
+    table { border-collapse: collapse; width: 100%; margin-bottom: 1.5rem; }
+    th, td { border: 1px solid #ccc; padding: 0.4rem 0.8rem; text-align: left; }
+    th { background: #333; color: #fff; }
+    tr:nth-child(even) { background: #eee; }
+    .status-released   { color: #0077cc; font-weight: bold; }
+    .status-in-progress { color: #cc7700; font-weight: bold; }
+    .status-confirmed  { color: #007700; font-weight: bold; }
+    .status-closed     { color: #777; }
+    input, button { padding: 0.3rem 0.7rem; font-family: monospace; margin: 0.2rem; }
+    button { cursor: pointer; background: #333; color: #fff; border: none; border-radius: 3px; }
+    button:hover { background: #555; }
+    #live-panel { background: #fff; border: 1px solid #ccc; padding: 1rem; margin-top: 1rem; min-height: 4rem; }
+    .sensor-row { display: flex; gap: 2rem; margin-top: 0.5rem; }
+    .sensor-val { font-size: 1.2rem; font-weight: bold; }
+    #msg { color: #c00; margin: 0.5rem 0; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Operator Console -- Oven {{ oven_id }}</h1>
+  <p id="msg"></p>
+
+  <h2>Orders</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th><th>Material</th><th>Status</th><th>Operator</th><th>Actions</th>
+      </tr>
+    </thead>
+    <tbody id="orders-tbody">
+    {% for o in orders %}
+      <tr id="row-{{ o.order_id }}">
+        <td>{{ o.order_id }}</td>
+        <td>{{ o.material_id }}</td>
+        <td class="status-{{ o.status }}">{{ o.status }}</td>
+        <td>{{ o.operator_id or '-' }}</td>
+        <td>
+          {% if o.status == 'released' %}
+            <input id="op-{{ o.order_id }}" type="text" placeholder="operator id" size="10">
+            <button onclick="startOrder('{{ o.order_id }}')">Start cycle</button>
+          {% elif o.status == 'in-progress' %}
+            <input id="moisture-{{ o.order_id }}" type="number" step="0.1" placeholder="final moisture ppm" size="16">
+            <label><input type="checkbox" id="qc-{{ o.order_id }}"> Quality OK</label>
+            <button onclick="confirmOrder('{{ o.order_id }}')">Confirm completion</button>
+          {% elif o.status == 'confirmed' %}
+            <em>Awaiting SAP close...</em>
+          {% else %}
+            <em>Closed</em>
+          {% endif %}
+        </td>
+      </tr>
+    {% else %}
+      <tr><td colspan="5">No orders. Refresh to load from SAP.</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <button onclick="loadOrders()">Refresh orders from SAP</button>
+
+  <h2>Live Sensor Readings -- {{ oven_id }}</h2>
+  <div id="live-panel">
+    <span id="live-status">Polling...</span>
+    <div class="sensor-row">
+      <div>Temperature <span class="sensor-val" id="temp">--</span> degC</div>
+      <div>Vacuum <span class="sensor-val" id="vacuum">--</span> mbar</div>
+      <div>Moisture <span class="sensor-val" id="moisture">--</span> ppm</div>
+      <div>Elapsed <span class="sensor-val" id="elapsed">--</span> min</div>
+    </div>
+    <div>Oven status: <strong id="oven-status">--</strong></div>
+    <div>Active order: <strong id="active-order">--</strong></div>
+  </div>
+
+<script>
+  const OVEN_ID = "{{ oven_id }}";
+  const SIMATIC_URL = "/simatic-proxy/" + OVEN_ID;
+
+  function showMsg(text, isError = false) {
+    const el = document.getElementById("msg");
+    el.textContent = text;
+    el.style.color = isError ? "#c00" : "#007700";
+  }
+
+  async function startOrder(orderId) {
+    const opInput = document.getElementById("op-" + orderId);
+    const operatorId = (opInput ? opInput.value.trim() : "") || "OP-001";
+    const resp = await fetch("/orders/" + orderId + "/start", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({operator_id: operatorId})
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+      showMsg("Order " + orderId + " started. Status: " + data.status);
+      loadOrders();
+    } else {
+      showMsg("Start failed: " + (data.detail || JSON.stringify(data)), true);
+    }
+  }
+
+  async function confirmOrder(orderId) {
+    const moistureInput = document.getElementById("moisture-" + orderId);
+    const qcInput = document.getElementById("qc-" + orderId);
+    const finalMoisture = parseFloat(moistureInput ? moistureInput.value : "0");
+    const qcPassed = qcInput ? qcInput.checked : false;
+    if (isNaN(finalMoisture) || finalMoisture < 0) {
+      showMsg("Enter a valid final moisture ppm value", true);
+      return;
+    }
+    const resp = await fetch("/orders/" + orderId + "/confirm", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({quality_check_passed: qcPassed, final_moisture_ppm: finalMoisture})
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+      showMsg("Order " + orderId + " confirmed. SAP conf: " + (data.sap_confirmation_number || "n/a"));
+      loadOrders();
+    } else {
+      showMsg("Confirm failed: " + (data.detail || JSON.stringify(data)), true);
+    }
+  }
+
+  async function loadOrders() {
+    const resp = await fetch("/orders");
+    if (!resp.ok) return;
+    const orders = await resp.json();
+    const tbody = document.getElementById("orders-tbody");
+    tbody.innerHTML = orders.map(o => {
+      let actions = "";
+      if (o.status === "released") {
+        actions = '<input id="op-' + o.order_id + '" type="text" placeholder="operator id" size="10">'
+          + '<button onclick="startOrder(\'' + o.order_id + '\')">Start cycle</button>';
+      } else if (o.status === "in-progress") {
+        actions = '<input id="moisture-' + o.order_id + '" type="number" step="0.1" placeholder="final moisture ppm" size="16">'
+          + '<label><input type="checkbox" id="qc-' + o.order_id + '"> Quality OK</label>'
+          + '<button onclick="confirmOrder(\'' + o.order_id + '\')">Confirm completion</button>';
+      } else if (o.status === "confirmed") {
+        actions = "<em>Awaiting SAP close...</em>";
+      } else {
+        actions = "<em>Closed</em>";
+      }
+      return '<tr id="row-' + o.order_id + '">'
+        + '<td>' + o.order_id + '</td>'
+        + '<td>' + o.material_id + '</td>'
+        + '<td class="status-' + o.status + '">' + o.status + '</td>'
+        + '<td>' + (o.operator_id || '-') + '</td>'
+        + '<td>' + actions + '</td>'
+        + '</tr>';
+    }).join("") || '<tr><td colspan="5">No orders.</td></tr>';
+  }
+
+  async function pollSensorReadings() {
+    try {
+      const resp = await fetch("/simatic-proxy/" + OVEN_ID);
+      if (resp.ok) {
+        const d = await resp.json();
+        document.getElementById("temp").textContent = d.temperature_degC !== null ? d.temperature_degC.toFixed(1) : "--";
+        document.getElementById("vacuum").textContent = d.vacuum_mbar !== null ? d.vacuum_mbar.toFixed(2) : "--";
+        document.getElementById("moisture").textContent = d.moisture_ppm !== null ? d.moisture_ppm.toFixed(0) : "--";
+        document.getElementById("elapsed").textContent = d.cycle_elapsed_minutes !== null ? d.cycle_elapsed_minutes.toFixed(1) : "--";
+        document.getElementById("oven-status").textContent = d.status;
+        document.getElementById("active-order").textContent = d.order_id || "--";
+        document.getElementById("live-status").textContent = "Last update: " + d.timestamp;
+      }
+    } catch (e) {
+      document.getElementById("live-status").textContent = "WP2 SIMATIC not reachable";
+    }
+  }
+
+  setInterval(pollSensorReadings, 5000);
+  pollSensorReadings();
+</script>
+</body>
+</html>
