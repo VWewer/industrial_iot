@@ -469,29 +469,31 @@ cd wp4-sap-mock && pytest tests/ -v
 
 ## 12. Next session — recommended starting point
 
-**WP4 is Phase 3 complete.** M1 dependency on WP4 is satisfied.
+**M1 is complete (2026-06-04).** WP1 Phase 4 + WP4 Phase 4 both passed. WP2, WP3, and WP5 are all unblocked.
 
-**Recommended next: WP1 (Sensor Simulator)**
+**Recommended next: WP2 and WP3 in parallel (both have no blockers)**
 
-- No upstream dependencies
-- MQTT schema now stable in contracts v1.1 (3 sensor types: temperature, vacuum, moisture)
-- Sensor curve shapes and compression model fully specified in DOMAIN-MODEL.md §5
-- Mosquitto runs via `docker-compose up mosquitto`
+WP2 (SIMATIC mock):
+- Needs WP1 MQTT stream -- now available (Mosquitto running on port 1883 as Windows Service)
+- Produces C2 (process state REST), C3 (historian query)
+- Port 8001
 
-**Session start template for WP1:**
+WP3 (Mendix mock):
+- Needs WP4 -- now available on port 8003
+- Produces C4, C5 (SAP confirmation), C10 (MES webhook to WP5)
+- Port 8002
+
+WP5 (Snowflake layer) can also begin -- C1 and WP4 contracts stable. Blocked only on Snowflake credentials.
+
+**Session start template (WP2 or WP3):**
 ```
-Hand the agent:
-  CONTRIBUTING.md
-  SDLC.md
-  AI-DEV.md
-  DOMAIN-MODEL.md (Sections 1.3 SensorReading, 5 Sensor Time-Series Model, 7 Demo Timing)
-  wp1-sensor-sim/WP1-BRIEF.md
-  contracts/interface-contracts.md (section C1)
-
-State: Phase 1 kickoff. No previous session.
-Note: MQTT broker available at localhost:1883 via docker-compose up mosquitto
+"We are continuing the industrial_iot project.
+Working directory: C:\Users\vw199\projects\industrial_iot
+Read architecture_handover.md first (sections 0a, 0b, 0c),
+then wp{2 or 3}-*/WP{2 or 3}-BRIEF.md.
+Current phase: WP{n} Phase 1 kickoff."
 ```
 
-**After WP1 reaches Phase 3:** kick off WP2 (needs WP1 MQTT stream) and WP5 in parallel (C1 schema is stable, Snowflake credentials needed). WP3 can start once WP4 is available (already satisfied).
+**Outstanding merge:** `wp1/sensor-sim-base` branch is Phase 4 complete and ready to merge to `main`. Do this before or at the start of the next session.
 
-**Milestone target:** M1 (WP1 + WP4 Phase 4 complete) → enables WP2 + WP3 + WP5 in parallel.
+**Milestone target:** M2 (WP2 + WP3 Phase 4 complete) → unblocks WP5 full integration.
