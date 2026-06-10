@@ -100,7 +100,17 @@ wp2-simatic-mock/
 ## Architecture decisions (resolved 2026-06-09)
 - **WP2 -> WP5**: WP5 polls WP2 historian (C3) directly. No push webhook from WP2. MES events (C10) are sent by WP3 only.
 
+## Code review findings (2026-06-10) -- fix before Phase 3 gate
+
+| Priority | File | Line | Issue |
+|---|---|---|---|
+| LOW | `src/historian.py` | 15 | `_utc_now()` defined but never called -- dead function, remove |
+| LOW | `src/api.py` | 11 | `OvenNotFoundError` imported but never raised -- dead import, remove |
+| MED | `src/api.py` | ~95 | `/historian` adds `oven_id` query param (default `oven-01`) not listed in C3 contract -- silent wrong-oven results if callers omit it; document or remove |
+
+All three are cleanup/contract-alignment level. No correctness bugs confirmed in WP2.
+
 ## Session handover notes
-Phase 1+2 complete (2026-06-09). 41/41 unit tests passing, 0 warnings, ASCII clean.
-Branch: `wp2/simatic-mock`. Next: Phase 3 code review, then Phase 4 seam check (requires Mosquitto + WP1 running).
-Integration test: `pytest tests/ -v` with Mosquitto on localhost:1883 and WP1 running.
+Phase 1+2 complete (2026-06-09). Code review done (2026-06-10). 41/41 unit tests passing, 0 warnings, ASCII clean.
+Branch: `wp2/simatic-mock`. **Next: apply 3 code review fixes above, re-run tests, then Phase 4 seam check.**
+Phase 4: run `pytest tests/ -v` (all tests including integration) with Mosquitto on localhost:1883 and WP1 running.

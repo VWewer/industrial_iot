@@ -18,8 +18,8 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 |---|---|---|---|---|---|---|
 | WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 43/43 tests, 18/18 C5-C8 validators |
 | WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 42/42 tests, 81% cov, C1 6/6 |
-| WP2 — SIMATIC mock | ⬜ after WP1 P3 | — | — | | — | Needs WP1 MQTT stream |
-| WP3 — Mendix mock | 🔵 start now | — | — | | — | WP4 already available |
+| WP2 — SIMATIC mock | ✅ done | ✅ done | 🔵 P3 in progress | | — | 41/41 tests · code review done · 3 fixes pending |
+| WP3 — Mendix mock | ✅ done | ✅ done | 🔵 P3 in progress | | — | 42/42 tests · code review done · 6 fixes pending |
 | WP5 — Snowflake | ⬜ after WP1 P3 | — | — | | — | Needs WP1 + WP4 |
 | WP6 — Dashboard | ⬜ after WP5 P3 | — | — | | — | Streamlit in Snowflake |
 | WP7 — Cockpit | ⬜ after M2 | — | — | | — | Needs WP2–WP6 |
@@ -51,7 +51,8 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 - Remote: `https://github.com/VWewer/industrial_iot`
 - Default branch: `main` (protected — only merge after Phase 4)
-- Current active branch: `wp1/sensor-sim-base` (Phase 4 complete — ready to merge to main)
+- Current active branches: `wp2/simatic-mock` (P3 fixes pending), `wp3/mendix-mock` (P3 fixes pending)
+- `main` is up to date: WP1 + WP4 merged (M1 complete, 2026-06-04)
 
 **Ongoing convention:**
 
@@ -469,31 +470,34 @@ cd wp4-sap-mock && pytest tests/ -v
 
 ## 12. Next session — recommended starting point
 
-**M1 is complete (2026-06-04).** WP1 Phase 4 + WP4 Phase 4 both passed. WP2, WP3, and WP5 are all unblocked.
+**WP2 and WP3 are Phase 1+2 complete (2026-06-09).** Code review done (2026-06-10). Fixes required before Phase 3 gate closes.
 
-**Recommended next: WP2 and WP3 in parallel (both have no blockers)**
+**Recommended next: apply code review fixes on WP2 and WP3, then run Phase 4 seam checks**
 
-WP2 (SIMATIC mock):
-- Needs WP1 MQTT stream -- now available (Mosquitto running on port 1883 as Windows Service)
-- Produces C2 (process state REST), C3 (historian query)
-- Port 8001
+**WP2 fixes required (3 items):**
+- Historian `_utc_now()` dead function -- remove (historian.py:15)
+- `OvenNotFoundError` dead import -- remove (api.py:11)
+- `/historian` endpoint adds `oven_id` param not in C3 contract -- document the deviation or remove param (api.py:~95)
 
-WP3 (Mendix mock):
-- Needs WP4 -- now available on port 8003
-- Produces C4, C5 (SAP confirmation), C10 (MES webhook to WP5)
-- Port 8002
+**WP3 fixes required (7 items -- ranked):**
+- HIGH: TOCTOU race in `_transition()` -- status check + write outside lock (order_service.py:117)
+- HIGH: `svc.close()` called unconditionally when goods movement fails -- order permanently closed with no retry (api.py:235)
+- MED: `cycle_started` C10 event fires even when WP1 start_cycle() fails (api.py:155)
+- MED: `order.target_moisture_ppm` mutated outside lock after `svc.start()` returns (api.py:142)
+- MED: bare `except Exception` in `simatic_proxy()` swallows init bugs (api.py:291)
+- LOW: `_VALID_TRANSITIONS` dict defined but never used (order_service.py:13)
+- LOW: duplicate SAP fetch in `list_orders` and `operator_ui` (api.py:268 and ~299)
 
-WP5 (Snowflake layer) can also begin -- C1 and WP4 contracts stable. Blocked only on Snowflake credentials.
+**After fixes:** run Phase 4 seam checks:
+- WP2: needs Mosquitto on port 1883 + WP1 running (`pytest tests/ -v` from wp2-simatic-mock/)
+- WP3: needs WP4 on port 8003 (`pytest tests/ -v` from wp3-mendix-mock/)
 
-**Session start template (WP2 or WP3):**
+**Session start template:**
 ```
 "We are continuing the industrial_iot project.
 Working directory: C:\Users\vw199\projects\industrial_iot
-Read architecture_handover.md first (sections 0a, 0b, 0c),
-then wp{2 or 3}-*/WP{2 or 3}-BRIEF.md.
-Current phase: WP{n} Phase 1 kickoff."
+Read architecture_handover.md first (sections 0a, 0b, 0c), then the relevant WP{n}-BRIEF.md.
+Current phase: WP2 and WP3 Phase 3 -- apply code review fixes, then Phase 4."
 ```
-
-**Outstanding merge:** `wp1/sensor-sim-base` branch is Phase 4 complete and ready to merge to `main`. Do this before or at the start of the next session.
 
 **Milestone target:** M2 (WP2 + WP3 Phase 4 complete) → unblocks WP5 full integration.

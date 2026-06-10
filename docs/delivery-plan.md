@@ -7,12 +7,12 @@
 
 ## Where we are right now
 
-> Last updated: 2026-06-04
+> Last updated: 2026-06-10
 
 ```
 M0  CONTRACTS + DOMAIN MODEL       [DONE]
 M1  FOUNDATION RUNNING             [DONE -- WP1 P4 + WP4 P4 complete (2026-06-04)]
-M2  MID-STACK RUNNING              [NOT STARTED]
+M2  MID-STACK RUNNING              [IN PROGRESS -- WP2 + WP3 P3 code review done, fixes pending]
 M3  DATA LAYER COMPLETE            [NOT STARTED]
 M4  DASHBOARD LIVE                 [NOT STARTED]
 M5  INTEGRATION + PORTFOLIO READY  [NOT STARTED]
@@ -25,16 +25,16 @@ M6  AGENT LAYER (stretch)          [NOT STARTED]
 |---|---|---|---|---|
 | WP1 | Sensor sim | P4 | COMPLETE | -- |
 | WP4 | SAP mock | P4 | COMPLETE | -- |
-| WP2 | SIMATIC mock | -- | NOT STARTED | Unblocked -- start now |
-| WP3 | Mendix mock | -- | NOT STARTED | Unblocked -- start now |
+| WP2 | SIMATIC mock | P3 | IN REVIEW | 3 code review fixes pending, then P4 seam check |
+| WP3 | Mendix mock | P3 | IN REVIEW | 7 code review fixes pending (2 HIGH), then P4 seam check |
 | WP5 | Snowflake layer | -- | NOT STARTED | Unblocked (M1 done) -- needs Snowflake account |
 | WP6 | SiS dashboard | -- | NOT STARTED | Needs WP5 P4 |
 | WP7 | Unified cockpit | -- | NOT STARTED | Needs M4 |
 | WP8 | Agent layer | -- | STRETCH | Needs M5 |
 
-**M1 is complete.** WP1 and WP4 both passed Phase 4 seam checks. WP2, WP3, and WP5 are now all unblocked.
+**M1 is complete.** WP2 and WP3 scaffolded (2026-06-09), code review done (2026-06-10).
 
-**Recommended next:** start WP2 and WP3 in parallel. WP5 can also begin (C1 schema stable, WP4 available) -- needs Snowflake credentials.
+**Recommended next:** apply code review fixes on WP3 (2 HIGH priority), then WP2 fixes, then Phase 4 seam checks for both. See `architecture_handover.md §12` for the full fix list.
 
 ---
 
