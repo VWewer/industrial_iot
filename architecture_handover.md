@@ -18,9 +18,9 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 |---|---|---|---|---|---|---|
 | WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 43/43 tests, 18/18 C5-C8 validators |
 | WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 42/42 tests, 81% cov, C1 6/6 |
-| WP2 — SIMATIC mock | ⬜ after WP1 P3 | — | — | | — | Needs WP1 MQTT stream |
-| WP3 — Mendix mock | 🔵 start now | — | — | | — | WP4 already available |
-| WP5 — Snowflake | ⬜ after WP1 P3 | — | — | | — | Needs WP1 + WP4 |
+| WP2 — SIMATIC mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 44/44 tests · C2/C3 5/5 validators |
+| WP3 — Mendix mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 46/46 tests · C4/C10 4/4 validators |
+| WP5 — Snowflake | ⬜ after M2 | — | — | | — | Needs WP1 + WP4 -- unblocked 2026-06-10 |
 | WP6 — Dashboard | ⬜ after WP5 P3 | — | — | | — | Streamlit in Snowflake |
 | WP7 — Cockpit | ⬜ after M2 | — | — | | — | Needs WP2–WP6 |
 | WP8 — Agents | stretch | stretch | stretch | | stretch | Stretch goal |
@@ -40,7 +40,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 |---|---|---|
 | M0 — Infra ready | Contracts v1.1 · docker-compose · scripts · WP4 P3 | ✅ done |
 | M1 — First signal | WP1 P4 + WP4 P4 complete | ✅ done (2026-06-04) |
-| M2 — Full pipeline | WP2 + WP3 + WP5 P4 complete | ⬜ |
+| M2 — Full pipeline | WP2 + WP3 + WP5 P4 complete | 🔵 WP2+WP3 done, WP5 unblocked |
 | M3 — Demo ready | WP6 + WP7 P4 · all 4 workflows end-to-end | ⬜ |
 
 ---
@@ -51,7 +51,8 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 - Remote: `https://github.com/VWewer/industrial_iot`
 - Default branch: `main` (protected — only merge after Phase 4)
-- Current active branch: `wp1/sensor-sim-base` (Phase 4 complete — ready to merge to main)
+- Current active branches: `wp2/simatic-mock` (P4 complete -- ready to merge), `wp3/mendix-mock` (P4 complete -- ready to merge)
+- `main` is up to date: WP1 + WP4 merged (M1 complete, 2026-06-04)
 
 **Ongoing convention:**
 
@@ -469,31 +470,27 @@ cd wp4-sap-mock && pytest tests/ -v
 
 ## 12. Next session — recommended starting point
 
-**M1 is complete (2026-06-04).** WP1 Phase 4 + WP4 Phase 4 both passed. WP2, WP3, and WP5 are all unblocked.
+**WP2 and WP3 Phase 4 COMPLETE (2026-06-10).** Both branches ready to merge to main.
 
-**Recommended next: WP2 and WP3 in parallel (both have no blockers)**
+**Recommended next: merge WP2 + WP3 to main, then start WP5 (Snowflake data layer)**
 
-WP2 (SIMATIC mock):
-- Needs WP1 MQTT stream -- now available (Mosquitto running on port 1883 as Windows Service)
-- Produces C2 (process state REST), C3 (historian query)
-- Port 8001
+**Merge checklist:**
+- WP2: `git checkout main && git merge wp2/simatic-mock` -- 44/44 tests, C2/C3 5/5 validators
+- WP3: `git checkout main && git merge wp3/mendix-mock` -- 46/46 tests, C4/C10 4/4 validators
+- After both merges: M2 milestone complete → WP5 can begin full integration
 
-WP3 (Mendix mock):
-- Needs WP4 -- now available on port 8003
-- Produces C4, C5 (SAP confirmation), C10 (MES webhook to WP5)
-- Port 8002
+**WP5 kickoff:**
+- Needs Snowflake credentials (account available per ADR-005)
+- Reads C1 (MQTT via Mosquitto), C3 (WP2 historian), C10 (WP3 MES events), C11 (WP4 OData)
+- Produces C12 (Gold layer `gold_cycle_summary`)
+- See `wp5-snowflake-layer/WP5-BRIEF.md`
 
-WP5 (Snowflake layer) can also begin -- C1 and WP4 contracts stable. Blocked only on Snowflake credentials.
-
-**Session start template (WP2 or WP3):**
+**Session start template:**
 ```
 "We are continuing the industrial_iot project.
 Working directory: C:\Users\vw199\projects\industrial_iot
-Read architecture_handover.md first (sections 0a, 0b, 0c),
-then wp{2 or 3}-*/WP{2 or 3}-BRIEF.md.
-Current phase: WP{n} Phase 1 kickoff."
+Read architecture_handover.md first (sections 0a, 0b, 0c), then wp5-snowflake-layer/WP5-BRIEF.md.
+Current phase: merge WP2+WP3 to main, then WP5 Phase 1 kickoff."
 ```
 
-**Outstanding merge:** `wp1/sensor-sim-base` branch is Phase 4 complete and ready to merge to `main`. Do this before or at the start of the next session.
-
-**Milestone target:** M2 (WP2 + WP3 Phase 4 complete) → unblocks WP5 full integration.
+**Milestone target:** M2 complete after WP2+WP3 merge → start WP5 → M2 fully closed when WP5 P4 done.

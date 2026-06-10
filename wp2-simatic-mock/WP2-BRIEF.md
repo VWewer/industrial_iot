@@ -97,8 +97,52 @@ wp2-simatic-mock/
 - [ ] Integration test: WP1 publishes → WP2 `/process-state` reflects latest reading within 10s
 - [ ] Sample responses documented in README under "Sample output"
 
-## Open items
-- [ ] Clarify whether WP2 should push a webhook to WP5 on cycle completion, or WP5 polls
+## Architecture decisions (resolved 2026-06-09)
+- **WP2 -> WP5**: WP5 polls WP2 historian (C3) directly. No push webhook from WP2. MES events (C10) are sent by WP3 only.
+
+## Code review findings (2026-06-10) -- fix before Phase 3 gate
+
+Severity classification follows AI-DEV.md Section 16.
+
+---
+
+### MED -- `/historian` `oven_id` param not in C3 contract (`src/api.py:95`)
+
+**Severity:** MED (Med impact, Low likelihood in single-oven demo -- but contract risk)
+
+**Root cause:**
+```python
+@app.get("/historian")
+def historian_query(
+    order_id: str = Query(...),
+    oven_id: str = Query("oven-01"),   # not in C3 contract schema
+    ...
+```
+The C3 contract lists `order_id`, `sensor_type`, `from`, `to`, `limit` as query parameters. `oven_id` is not listed. Any caller that follows the contract spec and omits `oven_id` silently receives data for the hardcoded default `oven-01` only. In a multi-oven deployment this would return wrong data without any error signal.
+
+**Fix applied:** Removed `oven_id` from the query parameters. The endpoint now reads `_oven_id` from the module-level global set by `init_app()`, which is populated from the `OVEN_ID` env var. Contract-clean. `init_app()` signature updated to accept `oven_id: str = "oven-01"`.
+
+---
+
+### LOW -- `_utc_now()` dead function (`src/historian.py:15`)
+
+**Severity:** LOW (no runtime effect)
+
+**Root cause:** `_utc_now()` is defined in `historian.py` but the `Historian` class never calls it. The same helper is defined and used in `api.py`. The historian uses `datetime.now(timezone.utc)` directly in `add()` for cycle start tracking, not via the helper.
+
+**Fix applied:** Deleted the dead function from `historian.py`.
+
+---
+
+### LOW -- `OvenNotFoundError` dead import (`src/api.py:11`)
+
+**Severity:** LOW (no runtime effect)
+
+**Root cause:** `from .exceptions import OvenNotFoundError` is present but `OvenNotFoundError` is never raised. The C2 endpoint intentionally returns idle state for unknown ovens rather than raising (comment on line 67: "Return idle state even for unknown ovens (no data yet)"). The import is a leftover from an earlier design that was changed.
+
+**Fix applied:** Removed the dead import.
 
 ## Session handover notes
-> *To be filled by the agent at the end of each session.*
+Phase 1+2 complete (2026-06-09). Code review done (2026-06-10). 41/41 unit tests passing, 0 warnings, ASCII clean.
+Branch: `wp2/simatic-mock`. **Next: apply 3 code review fixes above, re-run tests, then Phase 4 seam check.**
+Phase 4: run `pytest tests/ -v` (all tests including integration) with Mosquitto on localhost:1883 and WP1 running.

@@ -23,6 +23,7 @@
 13. [Debug and RCA Procedure](#13-debug-and-rca-procedure)
 14. [Known Issues and Learnings](#14-known-issues-and-learnings)
 15. [Three-Level Consistency Check](#15-three-level-consistency-check)
+16. [Code Review Severity Classification](#16-code-review-severity-classification)
 
 ---
 
@@ -733,6 +734,76 @@ All `to_dict()` methods and inline datetime formatting now use `_fmt_dt()` inste
 
 ---
 
+### KI-009 -- TOCTOU: check-then-act on shared state must be atomic
+
+**Status:** Pattern documented (2026-06-10, WP3 code review)
+
+**Symptom:** Concurrent `POST /orders/{id}/start` requests both succeed and start the same order twice. Two `cycle_started` C10 events fire. WP1 gets called twice.
+
+**Root cause:** The check (`order.status == expected`) and the write (`order.status = new`) happened in separate lock acquisitions. The lock was released between the check and the write, leaving a window where a second thread could pass the check before the first thread's write was visible.
+
+```python
+# BAD -- two lock acquisitions, race window between them
+def _transition(self, order_id, expected_from, to):
+    order = self.get(order_id)          # acquires lock, releases lock
+    if order.status != expected_from:   # outside lock -- stale read possible
+        raise ...
+    order.status = to                   # outside lock -- second writer wins
+```
+
+**Fix:** Hold the lock across the entire check+write sequence in a single `with self._lock` block.
+
+```python
+# GOOD -- single lock acquisition covers both check and write
+def _transition(self, order_id, expected_from, to):
+    with self._lock:
+        order = self._orders.get(order_id)
+        if order is None: raise OrderNotFoundError(...)
+        if order.status != expected_from: raise InvalidStateTransitionError(...)
+        order.status = to
+        return order
+```
+
+**Rule going forward:** Any check-then-act on shared mutable state must happen inside a single lock acquisition. Calling a locked method and then acting on its return value outside the lock does NOT protect the action. If post-transition field assignments must also be atomic (e.g. `target_moisture_ppm`), inline the entire sequence in one `with self._lock` block rather than chaining locked calls.
+
+---
+
+### KI-010 -- Bare `except Exception` hides initialisation bugs
+
+**Status:** Pattern documented (2026-06-10, WP3 code review)
+
+**Symptom:** `GET /simatic-proxy/oven-01` returns HTTP 502 "SIMATIC unavailable: 'NoneType' object has no attribute 'get_process_state'" when `init_app()` was never called. A misconfiguration looks identical to a genuine downstream failure.
+
+**Root cause:** The handler caught `Exception` broadly, so an `AttributeError` from calling a method on a `None` dependency was silently converted to a 502.
+
+```python
+# BAD -- swallows AttributeError, masks NoneType init bugs as 502
+def simatic_proxy(oven_id):
+    try:
+        return _simatic_client.get_process_state(oven_id)  # _simatic_client may be None
+    except Exception as exc:
+        raise HTTPException(502, detail=f"SIMATIC unavailable: {exc}")
+```
+
+**Fix:** Guard uninitialised dependencies with a dedicated helper (consistent with every other dependency in the codebase). Narrow the except to the specific client error type.
+
+```python
+def _simatic() -> SimaticClient:
+    if _simatic_client is None:
+        raise RuntimeError("SimaticClient not initialised -- call init_app() first")
+    return _simatic_client
+
+def simatic_proxy(oven_id):
+    try:
+        return _simatic().get_process_state(oven_id)
+    except SimaticClientError as exc:
+        raise HTTPException(502, detail=f"SIMATIC unavailable: {exc}")
+```
+
+**Rule going forward:** Every injected dependency (`_historian`, `_sap_client`, `_simatic_client`, etc.) must have a guard function that raises `RuntimeError` on `None`. Never wrap a call to an optional dependency in a broad `except Exception` -- the caller cannot distinguish a config error from a genuine transport failure.
+
+---
+
 ### KI-008 -- Box-drawing characters in FastAPI file headers
 
 **Status:** Resolved (2026-06-04, WP4 Phase 4)
@@ -828,3 +899,60 @@ Read `checks/project-patterns.md` and tick off the 12-item checklist against the
 | L3 Harmony check | YES -- before coding | -- | YES -- part of DoD | -- |
 
 **The key rule:** L3 at Phase 1 costs 10 minutes and prevents structural divergence. L3 skipped at Phase 1 costs hours of refactoring at Phase 4 when the seam check finds the mismatch.
+
+---
+
+## 16. Code Review Severity Classification
+
+Every code review finding is assigned a severity: HIGH, MED, or LOW. This section defines the rules so that any reviewer (human or agent) applies the same classification.
+
+### The two axes
+
+Severity is the product of two independent assessments:
+
+| Axis | Question |
+|---|---|
+| **Impact** | How bad is the outcome when the bug fires? |
+| **Likelihood** | How easily can the bug be triggered in this project's normal operating conditions? |
+
+### Impact scale
+
+| Level | Meaning |
+|---|---|
+| High impact | Produces **permanent wrong state** that cannot be recovered without manual intervention, OR **silently corrupts data** in a downstream consumer (WP5, WP6), OR causes **security exposure** |
+| Med impact | Produces **incorrect behaviour under a specific condition** (wrong result, hidden error, event fired when it should not be) -- recoverable or isolated |
+| Low impact | **No behavioural effect** at runtime. Dead code, dead import, contract deviation that is benign in the current deployment scope |
+
+### Likelihood scale
+
+| Level | Meaning |
+|---|---|
+| High likelihood | Fires under **normal concurrent use** or on every code path through the affected function |
+| Med likelihood | Requires a **specific condition**: a race between two concurrent requests, a particular error response from a dependency, or an uninitialised state that only occurs during startup |
+| Low likelihood | Practically **unreachable** in the demo stack (e.g., a code path that only fires in multi-oven deployments when this is a single-oven demo) |
+
+### Severity matrix
+
+|  | High likelihood | Med likelihood | Low likelihood |
+|---|---|---|---|
+| **High impact** | HIGH | HIGH | MED |
+| **Med impact** | MED | MED | LOW |
+| **Low impact** | LOW | LOW | LOW |
+
+### Applied examples (from WP2/WP3 review, 2026-06-10)
+
+| Finding | Impact | Likelihood | Severity |
+|---|---|---|---|
+| TOCTOU in `_transition()` -- order started twice, two C10 events | High (permanent duplicate) | Med (concurrent start requests) | **HIGH** |
+| `svc.close()` unconditional on GM failure -- order stuck closed forever | High (permanent wrong state) | Med (GM call fails) | **HIGH** |
+| Ghost `cycle_started` event when WP1 fails | Med (WP5 expects data that never arrives) | Med (WP1 not running) | **MED** |
+| `target_moisture_ppm` set outside lock -- spec threshold not enforced | Med (wrong `spec_met` on confirm) | Med (narrow race) | **MED** |
+| Bare `except Exception` hides init bugs | Med (502 instead of 500, wrong diagnosis) | Med (init misconfiguration) | **MED** |
+| `/historian` `oven_id` param not in C3 contract | Med (wrong-oven data if param omitted) | Low (single-oven demo, callers always get oven-01) | **MED** (contract risk) |
+| `_VALID_TRANSITIONS` dead code | Low (no runtime effect) | n/a | **LOW** |
+| Dead `_utc_now()` / dead import | Low (no runtime effect) | n/a | **LOW** |
+| Duplicate SAP fetch per UI refresh | Low (extra network call, same result) | High (every page load) | **LOW** |
+
+### Fix priority order
+
+Fix in severity order: all HIGH before any MED, all MED before any LOW. Within the same severity level, fix correctness bugs before cleanup. A LOW finding is never a blocker for a phase gate; a HIGH or MED finding always is.
