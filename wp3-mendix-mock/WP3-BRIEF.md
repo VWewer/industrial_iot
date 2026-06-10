@@ -113,7 +113,19 @@ wp3-mendix-mock/
 - **WP2 -> WP5 push**: WP5 polls WP2 historian (C3) directly. No push webhook from WP2 to WP5. C10 webhook is WP3 -> WP5 only.
 - **WP1 port**: `WP1_CONTROL_API_URL=http://localhost:8080` (not 8000 -- Windows excludes port 8000).
 
+## Code review findings (2026-06-10) -- fix before Phase 3 gate
+
+| Priority | File | Line | Issue |
+|---|---|---|---|
+| HIGH | `src/order_service.py` | 117 | TOCTOU race: `_transition()` checks and writes `order.status` outside the lock -- concurrent starts both pass and order is started twice |
+| HIGH | `src/api.py` | 235 | `svc.close()` called unconditionally when goods movement (C8) fails -- order permanently closed with empty document, no retry path |
+| MED | `src/api.py` | 155 | `cycle_started` C10 event fires even when WP1 `start_cycle()` failed -- WP5 expects sensor data that never arrives |
+| MED | `src/api.py` | 142 | `order.target_moisture_ppm` mutated outside lock after `svc.start()` returns -- narrow race with concurrent confirm |
+| MED | `src/api.py` | 291 | bare `except Exception` in `simatic_proxy()` swallows `AttributeError` from uninitialised `_simatic_client` |
+| LOW | `src/order_service.py` | 13 | `_VALID_TRANSITIONS` dict defined but never referenced in `_transition()` -- dead code |
+| LOW | `src/api.py` | 268 | `list_orders()` and `operator_ui()` both independently fetch RELEASED orders from SAP -- double network call per UI refresh |
+
 ## Session handover notes
-Phase 1+2 complete (2026-06-09). 42/42 unit tests passing, 0 warnings, ASCII clean.
-Branch: `wp3/mendix-mock`. Next: Phase 3 code review, then Phase 4 seam check (requires WP4 live on port 8003).
-Integration test: `pytest tests/ -v` with WP4 running at localhost:8003.
+Phase 1+2 complete (2026-06-09). Code review done (2026-06-10). 42/42 unit tests passing, 0 warnings, ASCII clean.
+Branch: `wp3/mendix-mock`. **Next: apply code review fixes above (HIGH first), re-run tests (expect 42/42+), then Phase 4 seam check.**
+Phase 4: run `pytest tests/ -v` (all tests including integration) with WP4 running at localhost:8003.
