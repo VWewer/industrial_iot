@@ -107,9 +107,85 @@ wp3-mendix-mock/
 - [ ] MES event webhook fires on order start and confirmation
 - [ ] Integration test: full workflow start → in-progress → confirmed → closed
 
-## Open items
-- [ ] Decide: operator UI as Jinja2 HTML (simpler) or Streamlit page (more visual)
-- [ ] Clarify: does WP3 call WP1 control API to trigger cycle start, or does operator do it via WP1 directly?
+## Architecture decisions (resolved 2026-06-09)
+- **Operator UI**: Jinja2 HTML served by FastAPI. Chosen over Streamlit for zero extra deps and simpler deployment.
+- **Cycle start**: WP3 calls WP1 `POST /control/start` when operator clicks Start. WP1 failures are non-fatal (logged as warnings).
+- **WP2 -> WP5 push**: WP5 polls WP2 historian (C3) directly. No push webhook from WP2 to WP5. C10 webhook is WP3 -> WP5 only.
+- **WP1 port**: `WP1_CONTROL_API_URL=http://localhost:8080` (not 8000 -- Windows excludes port 8000).
+
+## Code review findings (2026-06-10) -- fix before Phase 3 gate
+
+Severity classification follows AI-DEV.md Section 16.
+
+---
+
+### HIGH -- TOCTOU race in `_transition()` (`src/order_service.py:117`)
+
+**Severity:** HIGH (High impact + Med likelihood: concurrent starts both succeed, order starts twice)
+
+**Root cause:** `get()` acquires and releases `_lock` for the dict lookup only. `_transition()` then checks and writes `order.status` **outside** the lock. Two concurrent `POST /orders/{id}/start` requests both call `_transition("released", "in-progress")`. Thread A reads the order (still "released") and the lock is released. Thread B reads the same object (still "released") and the lock is released. Both pass the check. Both write "in-progress". Order is started twice, WP1 called twice, two `cycle_started` C10 events fire.
+
+**Fix applied:** `_transition()` now holds `_lock` for the entire read-check-write sequence. `start()` is rewritten to inline its own locked block (so `target_moisture_ppm` assignment is also atomic -- see MED fix below). `_transition()` continues to serve `confirm()` and `close()`.
+
+---
+
+### HIGH -- Unconditional `svc.close()` when goods movement fails (`src/api.py:235`)
+
+**Severity:** HIGH (High impact: permanent unrecoverable wrong state)
+
+**Root cause:** GM failure was swallowed as a warning and execution fell through to `svc.close()` unconditionally. The order transitioned `confirmed -> closed` with `goods_movement_document=""`. The transition is one-way -- the operator cannot retry and the order is permanently closed without a goods receipt record.
+
+**Fix applied:** `svc.close()` moved inside the GM `try` block -- only runs on success. GM failure raises HTTP 502. `confirm_order()` gains idempotency for the retry case: if the order is already `confirmed` (prior GM failure), `svc.confirm()` is skipped and only the SAP writes + close are retried.
+
+---
+
+### MED -- Ghost `cycle_started` C10 event when WP1 fails (`src/api.py:155`)
+
+**Severity:** MED (Med impact: WP5 expects MQTT data that never arrives; Med likelihood: WP1 not running)
+
+**Root cause:** The C10 `cycle_started` event fired unconditionally after the WP1 call, regardless of whether WP1 succeeded. WP5 receives a start event but no sensor readings follow.
+
+**Fix applied:** `wp1_ok` flag tracks WP1 response. C10 fires only if `wp1_ok=True`. WP1 failure remains non-fatal for the order transition (architecture decision 2026-06-09).
+
+---
+
+### MED -- `target_moisture_ppm` assigned outside lock (`src/api.py:142`)
+
+**Severity:** MED (Med impact: moisture spec threshold bypassed on confirm; Med likelihood: narrow race)
+
+**Root cause:** `svc.start()` released `_lock` after the status transition. The API layer assigned `order.target_moisture_ppm` on the returned object after the lock was gone. A concurrent `confirm_order()` could read `target_moisture_ppm` as `None`, causing `spec_met` to equal `quality_check_passed` regardless of the actual moisture reading.
+
+**Fix applied:** `target_moisture_ppm` passed as a parameter to `svc.start()` and assigned inside the locked block atomically with the status transition.
+
+---
+
+### MED -- Bare `except Exception` in `simatic_proxy()` (`src/api.py:291`)
+
+**Severity:** MED (Med impact: config error masked as 502; Med likelihood: init misconfiguration)
+
+**Root cause:** `_simatic_client` is `None` until `init_app()` is called. Bare `except Exception` converted `AttributeError` (None.get_process_state) into a misleading HTTP 502. See also AI-DEV.md KI-010.
+
+**Fix applied:** Added `_simatic()` guard function (consistent with `_svc()` pattern). Except narrowed to `SimaticClientError`.
+
+---
+
+### LOW -- `_VALID_TRANSITIONS` dead code (`src/order_service.py:13`)
+
+**Severity:** LOW (no runtime effect)
+
+**Root cause:** Dict defined but `_transition()` never consulted it. Each caller passed explicit `expected_from`/`to` values.
+
+**Fix applied:** Deleted the dict.
+
+---
+
+### LOW -- Duplicate SAP fetch in `list_orders()` and `operator_ui()` (`src/api.py:268/299`)
+
+**Severity:** LOW (no correctness impact, extra network call per page load)
+
+**Root cause:** Both endpoints independently called `get_orders(status="RELEASED")` and upserted results. Every browser page load triggered two identical SAP calls.
+
+**Fix applied:** Extracted to `_sync_released_orders()` private helper called from both handlers.
 
 ## Code review findings (2026-06-10) -- fix before Phase 3 gate
 
