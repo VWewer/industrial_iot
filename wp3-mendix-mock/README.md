@@ -40,10 +40,10 @@ cd wp3-mendix-mock
 
 ## Sample output
 
-`GET /orders/ORD-2026-00001/state`
+**C4 -- `GET /orders/ORD-2026-00042/state` (in-progress)**
 ```json
 {
-  "order_id": "ORD-2026-00001",
+  "order_id": "ORD-2026-00042",
   "status": "in-progress",
   "operator_id": "OP-007",
   "cycle_confirmed_at": null,
@@ -51,14 +51,59 @@ cd wp3-mendix-mock
 }
 ```
 
-`POST /orders/ORD-2026-00001/confirm`
+**C4 -- `GET /orders/ORD-2026-00042/state` (closed)**
 ```json
 {
-  "order_id": "ORD-2026-00001",
+  "order_id": "ORD-2026-00042",
   "status": "closed",
-  "sap_confirmation_number": "CONF-2026-00891"
+  "operator_id": "OP-007",
+  "cycle_confirmed_at": "2026-06-10T15:31:12.441Z",
+  "quality_check_passed": true
 }
 ```
+
+**C5 -- `POST /orders/ORD-2026-00042/confirm` response**
+```json
+{
+  "order_id": "ORD-2026-00042",
+  "status": "closed",
+  "sap_confirmation_number": "CONF-2026-00901"
+}
+```
+
+**C10 -- `cycle_started` event (WP5 webhook)**
+```json
+{
+  "event_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+  "event_type": "cycle_started",
+  "order_id": "ORD-2026-00042",
+  "oven_id": "oven-01",
+  "operator_id": "OP-007",
+  "timestamp": "2026-06-10T15:31:08.214Z",
+  "payload": {
+    "setpoint_temperature_degC": 130.0,
+    "setpoint_vacuum_mbar": 5.0
+  }
+}
+```
+
+**C10 -- `cycle_confirmed` event (WP5 webhook)**
+```json
+{
+  "event_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "event_type": "cycle_confirmed",
+  "order_id": "ORD-2026-00042",
+  "oven_id": "oven-01",
+  "operator_id": "OP-007",
+  "timestamp": "2026-06-10T15:31:12.441Z",
+  "payload": {
+    "sap_confirmation_number": "CONF-2026-00901",
+    "goods_movement_document": "GR-2026-00901"
+  }
+}
+```
+
+Phase 4 seam check: `5/5 C2/C3 checks` (WP2) and `4/4 C4/C10 checks` (WP3) passed 2026-06-10.
 
 ## Architecture decisions
 

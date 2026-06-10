@@ -33,7 +33,7 @@ UUID_RE = re.compile(
 )
 OVEN_RE = re.compile(r"^oven-\d{2}$")
 ORDER_RE = re.compile(r"^ORD-\d{4}-\d{5}$")
-ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$")
+ISO_RE = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?Z$")
 
 # Required payload fields per event_type
 PAYLOAD_SCHEMA: dict[str, dict[str, type]] = {

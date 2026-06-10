@@ -25,7 +25,7 @@ SIMATIC_URL = "http://localhost:8001"
 WP1_URL = "http://localhost:8080"
 WP5_URL = "http://localhost:8005/events"
 
-ORDER_ID = "ORD-2026-00001"
+ORDER_ID = "ORD-2026-00042"  # RELEASED in WP4 seed data
 
 
 def _sap_available() -> bool:
