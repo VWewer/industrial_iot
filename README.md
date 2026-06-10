@@ -165,18 +165,21 @@ cd industrial_iot
 python -m venv .venv
 .venv\Scripts\activate          # Windows
 # source .venv/bin/activate     # macOS/Linux
-pip install -r wp{n}-{name}/requirements.txt   # per WP
+pip install -r wp{n}-{name}/requirements.txt   # install per WP as needed
 
-# 2. Configure environment
+# 2. Root config (ports + shared settings) -- works as-is for WP1-WP4 and WP7
 cp .env.example .env
-# WP1-WP4 and WP7 work with default values -- no changes needed.
-# WP5 requires real Snowflake credentials -- fill them in .env.
+
+# 3. WP5 only -- Snowflake credentials
+cp wp5-snowflake-layer/.env.example wp5-snowflake-layer/.env
+# Edit wp5-snowflake-layer/.env and fill in your SNOWFLAKE_* values
 ```
 
-**Snowflake credentials (WP5 only):**
-Edit `.env` and replace the `SNOWFLAKE_*` placeholder values with your account credentials.
-If credentials are missing, WP5 will exit at startup with a clear error listing what is missing.
-All other WPs run without Snowflake credentials.
+**Two-file config layout:**
+- **Root `.env`** — ports and shared infrastructure only. No credentials. All WPs except WP5 need nothing else.
+- **`wp5-snowflake-layer/.env`** — WP5-specific config including Snowflake credentials. Only needed if you are running WP5.
+
+If WP5 is missing any `SNOWFLAKE_*` variable it will exit immediately with a clear error listing exactly what is missing — no cryptic connector errors.
 
 **Service ports** (defined in `.env.example` -- canonical source):
 
