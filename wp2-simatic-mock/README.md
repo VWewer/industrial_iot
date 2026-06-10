@@ -61,13 +61,32 @@ cd wp2-simatic-mock
   "count": 3,
   "readings": [
     {
-      "reading_id": "a1b2c3d4-...",
-      "timestamp_opc": "2026-06-09T07:00:00.000Z",
+      "reading_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "timestamp_opc": "2026-06-10T08:00:00.000Z",
       "sensor_type": "temperature",
-      "value": 95.1,
+      "value": 80.0,
+      "unit": "degC",
+      "quality": "Good"
+    },
+    {
+      "reading_id": "b2c3d4e5-f6a7-8901-bcde-f01234567891",
+      "timestamp_opc": "2026-06-10T08:00:30.000Z",
+      "sensor_type": "temperature",
+      "value": 95.0,
+      "unit": "degC",
+      "quality": "Good"
+    },
+    {
+      "reading_id": "c3d4e5f6-a7b8-9012-cdef-012345678902",
+      "timestamp_opc": "2026-06-10T08:01:00.000Z",
+      "sensor_type": "temperature",
+      "value": 110.0,
       "unit": "degC",
       "quality": "Good"
     }
   ]
 }
 ```
+
+Phase 4 seam check: `5/5 C2/C3 contract checks` passed 2026-06-10.
+Run: `.venv/Scripts/python contracts/validators/run_wp2_phase4_check.py`

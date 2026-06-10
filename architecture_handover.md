@@ -18,9 +18,9 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 |---|---|---|---|---|---|---|
 | WP4 — SAP mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 43/43 tests, 18/18 C5-C8 validators |
 | WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 42/42 tests, 81% cov, C1 6/6 |
-| WP2 — SIMATIC mock | ✅ done | ✅ done | 🔵 P3 in progress | | — | 41/41 tests · code review done · 3 fixes pending |
-| WP3 — Mendix mock | ✅ done | ✅ done | 🔵 P3 in progress | | — | 42/42 tests · code review done · 6 fixes pending |
-| WP5 — Snowflake | ⬜ after WP1 P3 | — | — | | — | Needs WP1 + WP4 |
+| WP2 — SIMATIC mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 44/44 tests · C2/C3 5/5 validators |
+| WP3 — Mendix mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 46/46 tests · C4/C10 4/4 validators |
+| WP5 — Snowflake | ⬜ after M2 | — | — | | — | Needs WP1 + WP4 -- unblocked 2026-06-10 |
 | WP6 — Dashboard | ⬜ after WP5 P3 | — | — | | — | Streamlit in Snowflake |
 | WP7 — Cockpit | ⬜ after M2 | — | — | | — | Needs WP2–WP6 |
 | WP8 — Agents | stretch | stretch | stretch | | stretch | Stretch goal |
@@ -40,7 +40,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 |---|---|---|
 | M0 — Infra ready | Contracts v1.1 · docker-compose · scripts · WP4 P3 | ✅ done |
 | M1 — First signal | WP1 P4 + WP4 P4 complete | ✅ done (2026-06-04) |
-| M2 — Full pipeline | WP2 + WP3 + WP5 P4 complete | ⬜ |
+| M2 — Full pipeline | WP2 + WP3 + WP5 P4 complete | 🔵 WP2+WP3 done, WP5 unblocked |
 | M3 — Demo ready | WP6 + WP7 P4 · all 4 workflows end-to-end | ⬜ |
 
 ---
@@ -51,7 +51,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 
 - Remote: `https://github.com/VWewer/industrial_iot`
 - Default branch: `main` (protected — only merge after Phase 4)
-- Current active branches: `wp2/simatic-mock` (P3 fixes pending), `wp3/mendix-mock` (P3 fixes pending)
+- Current active branches: `wp2/simatic-mock` (P4 complete -- ready to merge), `wp3/mendix-mock` (P4 complete -- ready to merge)
 - `main` is up to date: WP1 + WP4 merged (M1 complete, 2026-06-04)
 
 **Ongoing convention:**
@@ -470,34 +470,27 @@ cd wp4-sap-mock && pytest tests/ -v
 
 ## 12. Next session — recommended starting point
 
-**WP2 and WP3 are Phase 1+2 complete (2026-06-09).** Code review done (2026-06-10). Fixes required before Phase 3 gate closes.
+**WP2 and WP3 Phase 4 COMPLETE (2026-06-10).** Both branches ready to merge to main.
 
-**Recommended next: apply code review fixes on WP2 and WP3, then run Phase 4 seam checks**
+**Recommended next: merge WP2 + WP3 to main, then start WP5 (Snowflake data layer)**
 
-**WP2 fixes required (3 items):**
-- Historian `_utc_now()` dead function -- remove (historian.py:15)
-- `OvenNotFoundError` dead import -- remove (api.py:11)
-- `/historian` endpoint adds `oven_id` param not in C3 contract -- document the deviation or remove param (api.py:~95)
+**Merge checklist:**
+- WP2: `git checkout main && git merge wp2/simatic-mock` -- 44/44 tests, C2/C3 5/5 validators
+- WP3: `git checkout main && git merge wp3/mendix-mock` -- 46/46 tests, C4/C10 4/4 validators
+- After both merges: M2 milestone complete → WP5 can begin full integration
 
-**WP3 fixes required (7 items -- ranked):**
-- HIGH: TOCTOU race in `_transition()` -- status check + write outside lock (order_service.py:117)
-- HIGH: `svc.close()` called unconditionally when goods movement fails -- order permanently closed with no retry (api.py:235)
-- MED: `cycle_started` C10 event fires even when WP1 start_cycle() fails (api.py:155)
-- MED: `order.target_moisture_ppm` mutated outside lock after `svc.start()` returns (api.py:142)
-- MED: bare `except Exception` in `simatic_proxy()` swallows init bugs (api.py:291)
-- LOW: `_VALID_TRANSITIONS` dict defined but never used (order_service.py:13)
-- LOW: duplicate SAP fetch in `list_orders` and `operator_ui` (api.py:268 and ~299)
-
-**After fixes:** run Phase 4 seam checks:
-- WP2: needs Mosquitto on port 1883 + WP1 running (`pytest tests/ -v` from wp2-simatic-mock/)
-- WP3: needs WP4 on port 8003 (`pytest tests/ -v` from wp3-mendix-mock/)
+**WP5 kickoff:**
+- Needs Snowflake credentials (account available per ADR-005)
+- Reads C1 (MQTT via Mosquitto), C3 (WP2 historian), C10 (WP3 MES events), C11 (WP4 OData)
+- Produces C12 (Gold layer `gold_cycle_summary`)
+- See `wp5-snowflake-layer/WP5-BRIEF.md`
 
 **Session start template:**
 ```
 "We are continuing the industrial_iot project.
 Working directory: C:\Users\vw199\projects\industrial_iot
-Read architecture_handover.md first (sections 0a, 0b, 0c), then the relevant WP{n}-BRIEF.md.
-Current phase: WP2 and WP3 Phase 3 -- apply code review fixes, then Phase 4."
+Read architecture_handover.md first (sections 0a, 0b, 0c), then wp5-snowflake-layer/WP5-BRIEF.md.
+Current phase: merge WP2+WP3 to main, then WP5 Phase 1 kickoff."
 ```
 
-**Milestone target:** M2 (WP2 + WP3 Phase 4 complete) → unblocks WP5 full integration.
+**Milestone target:** M2 complete after WP2+WP3 merge → start WP5 → M2 fully closed when WP5 P4 done.
