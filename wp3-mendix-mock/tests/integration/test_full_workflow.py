@@ -36,10 +36,22 @@ def _sap_available() -> bool:
         return False
 
 
+def _released_order_available() -> bool:
+    """Return True if WP4 has at least one RELEASED order (required for the workflow)."""
+    try:
+        resp = httpx.get(f"{SAP_URL}/odata/v1/ProductionOrders", timeout=2.0)
+        orders = resp.json().get("value", [])
+        return any(o.get("status") == "RELEASED" for o in orders)
+    except Exception:
+        return False
+
+
 @pytest.fixture(scope="module")
 def test_client():
     if not _sap_available():
         pytest.skip("WP4 SAP mock not available at localhost:8003")
+    if not _released_order_available():
+        pytest.skip("No RELEASED order in WP4 -- restart WP4 to reload seed data")
 
     sap = SAPClient(SAP_URL)
     # WP1, WP5 may not be running -- use no-op fallback clients
