@@ -163,9 +163,9 @@ COLOURS = {
 ## Configuration
 
 ```ini
-WP2_API_URL=http://localhost:8002
-WP3_API_URL=http://localhost:8003
-WP4_API_URL=http://localhost:8004
+WP2_API_URL=http://localhost:8001
+WP3_API_URL=http://localhost:8002
+WP4_API_URL=http://localhost:8003
 WP5_API_URL=http://localhost:8005
 MACHINE_PANEL_REFRESH_S=5
 ANALYTICS_REFRESH_S=30

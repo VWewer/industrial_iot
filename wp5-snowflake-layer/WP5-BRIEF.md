@@ -88,11 +88,12 @@ Full schemas: `DOMAIN-MODEL.md` Sections 1.1 and 1.2.
 
 ### Must implement
 
-**1. Bronze ingestion — sensor stream (C1/C9)**
+**1. Bronze ingestion — sensor stream (C1)**
 - MQTT subscriber on `factory/#`
-- On each message: validate payload, write row to `bronze_sensor_readings`
-- Handle `quality = Bad` — write to Bronze regardless (Silver filters)
+- On each message: validate payload, batch-insert row to `bronze_sensor_readings` via Snowflake connector `execute_many()`
+- Handle `quality = Bad` -- write to Bronze regardless (Silver filters)
 - Handle malformed payloads: log error, skip, do not crash
+- Decision (2026-06-10): direct batch insert, not Snowpipe. Snowpipe requires external staging (S3/Azure/GCS) and a PIPE object -- overkill for demo throughput (~1 reading/5s). Batch insert via connector is simpler and equivalent.
 
 **2. Bronze ingestion — MES events (C10)**
 - FastAPI endpoint `POST /events`
@@ -140,6 +141,7 @@ Full schemas: `DOMAIN-MODEL.md` Sections 1.1 and 1.2.
 
 ### Out of scope
 - dbt (transforms are plain SQL via Snowflake Python connector)
+- Snowpipe (direct batch insert used instead -- see Architecture decisions)
 - Kafka (MQTT subscriber sufficient for demo throughput)
 - Snowflake time-travel queries (not needed for demo)
 - Multi-oven support (single oven-01 in scope — ADR-003)
@@ -150,8 +152,7 @@ Full schemas: `DOMAIN-MODEL.md` Sections 1.1 and 1.2.
 
 | Library | Version | Purpose |
 |---|---|---|
-| `snowflake-connector-python` | `3.7.0` | Snowflake connection, SQL execution, staging |
-| `snowflake-ingest` | `2.1.0` | Snowpipe for MQTT Bronze ingestion |
+| `snowflake-connector-python` | `3.7.0` | Snowflake connection, SQL execution, batch insert |
 | `paho-mqtt` | `1.6.1` | MQTT subscriber |
 | `fastapi` | `0.111.0` | MES webhook + query API |
 | `uvicorn` | `0.29.0` | ASGI server |
@@ -179,7 +180,7 @@ MQTT_BROKER_HOST=localhost
 MQTT_BROKER_PORT=1883
 
 # Upstream services
-SAP_API_URL=http://localhost:8004
+SAP_API_URL=http://localhost:8003
 
 # Timing
 SAP_PULL_INTERVAL_S=60
@@ -249,11 +250,18 @@ wp5-snowflake-layer/
 - [ ] Integration test: simulate a cycle end-to-end → verify Gold row appears within 90s
 - [ ] Snowflake schema ERD (`docs/snowflake-erd.md`) — Mermaid erDiagram, all Bronze/Silver/Gold tables, join key annotated, renders on GitHub
 
+## Architecture decisions (locked 2026-06-10)
+
+- **Bronze ingestion method:** Direct batch insert via `snowflake-connector-python`, not Snowpipe. Snowpipe requires external staging infrastructure (S3/Azure/GCS) that adds setup cost for no throughput benefit at demo scale.
+- **Warehouse size:** XS. Demo throughput (~1 reading/5s from WP1, ~2 events/cycle from WP3) is well within XS capacity.
+- **WP7 data access:** WP7 queries Gold via WP5's query API (`GET /gold/...`). WP7 does not hold its own Snowflake credentials. This keeps Snowflake credentials isolated to WP5.
+- **SiS dashboard (WP6):** Streamlit in Snowflake with interactive workflows for end-user data exploration and cycle analysis.
+
 ## Open items
 
-- [ ] Confirm Snowflake staging area name convention for Snowpipe (use `WP5_SENSOR_STAGE` or project-level?)
-- [ ] Confirm Snowflake warehouse size (XS sufficient for demo throughput?)
-- [ ] Decide: WP7 queries Gold via WP5 query API or directly via its own Snowflake connection?
+- [ ] Snowflake credentials: account identifier, user, password/key pair needed before Phase 2 can start
+- [ ] Safety threshold fields (`max_temperature_degC`, `min_vacuum_mbar`) are in Bronze and Silver schema as nullable columns but are not yet in DOMAIN-MODEL.md Section 1.2 or C7 contract. To populate them: extend DOMAIN-MODEL MaterialMaster, update C7 response schema, update WP4 seed data. Tracked for post-M2 sprint.
+- [ ] `routing_id` field in C6 (ProductionOrder): confirm if WP4 returns it; currently omitted from Bronze schema. Low priority.
 
 ## Session handover notes
 

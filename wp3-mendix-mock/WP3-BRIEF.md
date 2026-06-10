@@ -66,7 +66,7 @@ See `contracts/interface-contracts.md → C2, C6, C7, C8`.
 MENDIX_API_PORT=8002
 SAP_API_URL=http://localhost:8003
 SIMATIC_API_URL=http://localhost:8001
-WP1_CONTROL_API_URL=http://localhost:8000
+WP1_CONTROL_API_URL=http://localhost:8080
 WP5_WEBHOOK_URL=http://localhost:8005/events
 PLANT_ID=regensburg
 OVEN_ID=oven-01
