@@ -12,10 +12,6 @@ from .models import SensorReading
 log = logging.getLogger(__name__)
 
 
-def _utc_now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
-
-
 class Historian:
     """Thread-safe circular buffer keyed by (oven_id, sensor_type).
 

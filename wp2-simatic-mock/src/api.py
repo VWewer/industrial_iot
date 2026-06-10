@@ -8,7 +8,6 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Query
 
-from .exceptions import OvenNotFoundError
 from .historian import Historian
 from .models import (
     HistorianReadingItem,
@@ -24,13 +23,20 @@ app = FastAPI(title="WP2 SIMATIC Mock", version="1.0.0")
 _historian: Optional[Historian] = None
 _moisture_threshold: float = 500.0
 _max_cycle_minutes: float = 600.0
+_oven_id: str = "oven-01"
 
 
-def init_app(historian: Historian, moisture_threshold: float, max_cycle_minutes: float) -> None:
-    global _historian, _moisture_threshold, _max_cycle_minutes
+def init_app(
+    historian: Historian,
+    moisture_threshold: float,
+    max_cycle_minutes: float,
+    oven_id: str = "oven-01",
+) -> None:
+    global _historian, _moisture_threshold, _max_cycle_minutes, _oven_id
     _historian = historian
     _moisture_threshold = moisture_threshold
     _max_cycle_minutes = max_cycle_minutes
+    _oven_id = oven_id
 
 
 def _utc_now() -> str:
@@ -92,7 +98,6 @@ def process_state(oven_id: str) -> ProcessStateResponse:
 def historian_query(
     order_id: str = Query(..., description="Production order to filter by"),
     sensor_type: Optional[str] = Query(None, description="temperature | vacuum | moisture"),
-    oven_id: str = Query("oven-01", description="Oven identifier"),
     from_ts: Optional[str] = Query(None, alias="from", description="ISO 8601 start timestamp"),
     to_ts: Optional[str] = Query(None, alias="to", description="ISO 8601 end timestamp"),
     limit: int = Query(1000, ge=1, le=10000),
@@ -100,7 +105,7 @@ def historian_query(
     """C3 -- time-series query over buffered readings."""
     h = _get_historian()
     readings = h.query(
-        oven_id=oven_id,
+        oven_id=_oven_id,
         order_id=order_id,
         sensor_type=sensor_type,
         from_ts=from_ts,
@@ -110,7 +115,7 @@ def historian_query(
 
     log.info(
         "Historian query",
-        extra={"order_id": order_id, "count": len(readings), "oven_id": oven_id},
+        extra={"order_id": order_id, "count": len(readings), "oven_id": _oven_id},
     )
 
     return HistorianResponse(

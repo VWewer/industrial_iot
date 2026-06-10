@@ -29,6 +29,7 @@ def main() -> None:
     max_readings = int(os.getenv("HISTORIAN_MAX_READINGS_PER_CHANNEL", "500"))
     moisture_threshold = float(os.getenv("MOISTURE_THRESHOLD_PPM", "500"))
     max_cycle_minutes = float(os.getenv("MAX_CYCLE_MINUTES", "600"))
+    oven_id = os.getenv("OVEN_ID", "oven-01")
 
     log.info(
         "WP2 starting",
@@ -52,7 +53,7 @@ def main() -> None:
         log.error("Failed to connect to MQTT broker: %s", exc)
         raise SystemExit(1) from exc
 
-    init_app(historian, moisture_threshold, max_cycle_minutes)
+    init_app(historian, moisture_threshold, max_cycle_minutes, oven_id)
 
     api_thread = threading.Thread(
         target=uvicorn.run,
