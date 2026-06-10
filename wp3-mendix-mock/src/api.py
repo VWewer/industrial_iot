@@ -15,6 +15,7 @@ from .exceptions import (
     InvalidStateTransitionError,
     OrderNotFoundError,
     SAPClientError,
+    SimaticClientError,
     WP1ClientError,
     WP5ClientError,
 )
@@ -78,6 +79,22 @@ def _svc() -> OrderService:
     return _order_service
 
 
+def _simatic() -> SimaticClient:
+    if _simatic_client is None:
+        raise RuntimeError("SimaticClient not initialised -- call init_app() first")
+    return _simatic_client
+
+
+def _sync_released_orders() -> None:
+    """Fetch RELEASED orders from SAP and upsert into local store."""
+    try:
+        released = _sap_client.get_orders(status="RELEASED")
+        for sap_order in released:
+            _svc().upsert_from_sap(sap_order)
+    except SAPClientError as exc:
+        log.warning("SAP order list fetch failed", extra={"error": str(exc)})
+
+
 # --- health ---
 
 @app.get("/health")
@@ -135,13 +152,17 @@ def start_order(order_id: str, req: StartRequest) -> dict:
 
     actual_start = _utc_now()
     try:
-        order = svc.start(order_id, req.operator_id, actual_start)
+        order = svc.start(
+            order_id,
+            req.operator_id,
+            actual_start,
+            target_moisture_ppm=float(material.target_moisture_ppm),
+        )
     except InvalidStateTransitionError as exc:
         raise HTTPException(status_code=409, detail=str(exc))
 
-    order.target_moisture_ppm = float(material.target_moisture_ppm)
-
-    # Trigger WP1 simulator cycle
+    # Trigger WP1 simulator cycle -- non-fatal; C10 only fires if WP1 responds
+    wp1_ok = True
     try:
         _wp1_client.start_cycle(
             order_id=order_id,
@@ -150,24 +171,25 @@ def start_order(order_id: str, req: StartRequest) -> dict:
         )
     except WP1ClientError as exc:
         log.warning("WP1 cycle start failed (non-fatal)", extra={"error": str(exc)})
+        wp1_ok = False
 
-    # Fire C10 webhook
-    event = CycleEvent(
-        event_id=str(uuid.uuid4()),
-        event_type="cycle_started",
-        order_id=order_id,
-        oven_id=order.oven_id,
-        operator_id=req.operator_id,
-        timestamp=actual_start,
-        payload={
-            "setpoint_temperature_degC": material.target_temperature_degC,
-            "setpoint_vacuum_mbar": material.target_vacuum_mbar,
-        },
-    )
-    try:
-        _wp5_client.post_event(event)
-    except WP5ClientError as exc:
-        log.warning("WP5 event post failed (non-fatal)", extra={"error": str(exc)})
+    if wp1_ok:
+        event = CycleEvent(
+            event_id=str(uuid.uuid4()),
+            event_type="cycle_started",
+            order_id=order_id,
+            oven_id=order.oven_id,
+            operator_id=req.operator_id,
+            timestamp=actual_start,
+            payload={
+                "setpoint_temperature_degC": material.target_temperature_degC,
+                "setpoint_vacuum_mbar": material.target_vacuum_mbar,
+            },
+        )
+        try:
+            _wp5_client.post_event(event)
+        except WP5ClientError as exc:
+            log.warning("WP5 event post failed (non-fatal)", extra={"error": str(exc)})
 
     log.info("Order started", extra={"order_id": order_id, "operator_id": req.operator_id})
     return {"order_id": order_id, "status": order.status}
@@ -183,17 +205,26 @@ def confirm_order(order_id: str, req: ConfirmRequest) -> dict:
     except OrderNotFoundError:
         raise HTTPException(status_code=404, detail=f"Order '{order_id}' not found")
 
-    actual_end = _utc_now()
-    try:
-        order = svc.confirm(
-            order_id=order_id,
-            quality_check_passed=req.quality_check_passed,
-            final_moisture_ppm=req.final_moisture_ppm,
-            actual_end=actual_end,
-            cycle_confirmed_at=actual_end,
+    # Allow retry if a prior attempt confirmed but goods movement failed
+    if order.status == "in-progress":
+        actual_end = _utc_now()
+        try:
+            order = svc.confirm(
+                order_id=order_id,
+                quality_check_passed=req.quality_check_passed,
+                final_moisture_ppm=req.final_moisture_ppm,
+                actual_end=actual_end,
+                cycle_confirmed_at=actual_end,
+            )
+        except InvalidStateTransitionError as exc:
+            raise HTTPException(status_code=409, detail=str(exc))
+    elif order.status == "confirmed":
+        actual_end = order.actual_end or _utc_now()
+    else:
+        raise HTTPException(
+            status_code=409,
+            detail=f"Order '{order_id}': cannot confirm from status '{order.status}'",
         )
-    except InvalidStateTransitionError as exc:
-        raise HTTPException(status_code=409, detail=str(exc))
 
     spec_met = req.quality_check_passed and (
         order.target_moisture_ppm is None
@@ -219,8 +250,7 @@ def confirm_order(order_id: str, req: ConfirmRequest) -> dict:
     except SAPClientError as exc:
         raise HTTPException(status_code=502, detail=f"SAP confirmation failed: {exc}")
 
-    # C8: post goods movement
-    gm_document: str = ""
+    # C8: goods movement must succeed before order is closed
     try:
         gm_req = GoodsMovementRequest(
             order_id=order_id,
@@ -229,10 +259,9 @@ def confirm_order(order_id: str, req: ConfirmRequest) -> dict:
         )
         gm_resp = _sap_client.post_goods_movement(gm_req)
         gm_document = gm_resp.get("document_number", "")
+        order = svc.close(order_id, sap_conf_number, gm_document)
     except SAPClientError as exc:
-        log.warning("Goods movement post failed (non-fatal)", extra={"error": str(exc)})
-
-    order = svc.close(order_id, sap_conf_number, gm_document)
+        raise HTTPException(status_code=502, detail=f"Goods movement failed: {exc}")
 
     # C10: fire cycle_confirmed event
     event = CycleEvent(
@@ -244,7 +273,7 @@ def confirm_order(order_id: str, req: ConfirmRequest) -> dict:
         timestamp=actual_end,
         payload={
             "sap_confirmation_number": sap_conf_number,
-            "goods_movement_document": gm_document,
+            "goods_movement_document": order.goods_movement_document or "",
         },
     )
     try:
@@ -264,13 +293,7 @@ def confirm_order(order_id: str, req: ConfirmRequest) -> dict:
 @app.get("/orders")
 def list_orders() -> list[dict]:
     """Return all orders in local store, merged with RELEASED orders from SAP."""
-    try:
-        released = _sap_client.get_orders(status="RELEASED")
-        for sap_order in released:
-            _svc().upsert_from_sap(sap_order)
-    except SAPClientError as exc:
-        log.warning("SAP order list fetch failed", extra={"error": str(exc)})
-
+    _sync_released_orders()
     orders = _svc().all_orders()
     return [
         {
@@ -287,20 +310,15 @@ def list_orders() -> list[dict]:
 def simatic_proxy(oven_id: str) -> dict:
     """Proxy WP2 /process-state for the browser UI (avoids cross-origin issues)."""
     try:
-        return _simatic_client.get_process_state(oven_id)
-    except Exception as exc:
+        return _simatic().get_process_state(oven_id)
+    except SimaticClientError as exc:
         raise HTTPException(status_code=502, detail=f"SIMATIC unavailable: {exc}")
 
 
 @app.get("/", response_class=HTMLResponse)
 def operator_ui(request: Request) -> HTMLResponse:
     """Jinja2 operator interface -- decisions: Jinja2 over Streamlit for simplicity."""
-    try:
-        released = _sap_client.get_orders(status="RELEASED")
-        for sap_order in released:
-            _svc().upsert_from_sap(sap_order)
-    except SAPClientError:
-        pass
+    _sync_released_orders()
     orders = _svc().all_orders()
     return templates.TemplateResponse(
         request,

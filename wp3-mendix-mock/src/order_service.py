@@ -10,12 +10,6 @@ from .models import Order
 
 log = logging.getLogger(__name__)
 
-_VALID_TRANSITIONS: dict[str, str] = {
-    "released": "in-progress",
-    "in-progress": "confirmed",
-    "confirmed": "closed",
-}
-
 
 class OrderService:
     """Thread-safe in-memory store for order state, keyed by order_id."""
@@ -64,11 +58,29 @@ class OrderService:
             )
         return order
 
-    def start(self, order_id: str, operator_id: str, actual_start: str) -> Order:
-        """Transition: released -> in-progress."""
-        order = self._transition(order_id, "released", "in-progress")
-        order.operator_id = operator_id
-        order.actual_start = actual_start
+    def start(
+        self,
+        order_id: str,
+        operator_id: str,
+        actual_start: str,
+        target_moisture_ppm: Optional[float] = None,
+    ) -> Order:
+        """Transition: released -> in-progress. All field assignments are atomic with the status change."""
+        with self._lock:
+            order = self._orders.get(order_id)
+            if order is None:
+                raise OrderNotFoundError(f"Order '{order_id}' not found in local store")
+            if order.status != "released":
+                raise InvalidStateTransitionError(
+                    order_id=order_id,
+                    current=order.status,
+                    attempted="in-progress",
+                )
+            order.status = "in-progress"
+            order.operator_id = operator_id
+            order.actual_start = actual_start
+            if target_moisture_ppm is not None:
+                order.target_moisture_ppm = target_moisture_ppm
         log.info(
             "Order started",
             extra={"order_id": order_id, "operator_id": operator_id},
@@ -114,12 +126,16 @@ class OrderService:
     # --- internal ---
 
     def _transition(self, order_id: str, expected_from: str, to: str) -> Order:
-        order = self.get(order_id)
-        if order.status != expected_from:
-            raise InvalidStateTransitionError(
-                order_id=order_id,
-                current=order.status,
-                attempted=to,
-            )
-        order.status = to
-        return order
+        """Atomically check current status and write new status under the lock."""
+        with self._lock:
+            order = self._orders.get(order_id)
+            if order is None:
+                raise OrderNotFoundError(f"Order '{order_id}' not found in local store")
+            if order.status != expected_from:
+                raise InvalidStateTransitionError(
+                    order_id=order_id,
+                    current=order.status,
+                    attempted=to,
+                )
+            order.status = to
+            return order

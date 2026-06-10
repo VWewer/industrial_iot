@@ -204,6 +204,17 @@ class TestConfirmOrder:
         )
         assert resp.status_code == 502
 
+    def test_502_if_goods_movement_fails_and_order_stays_confirmed(self, client, monkeypatch, mock_sap):
+        self._start(client)
+        monkeypatch.setattr(mock_sap, "post_goods_movement", lambda req: (_ for _ in ()).throw(SAPClientError("gm down")))
+        resp = client.post(
+            "/orders/ORD-2026-00001/confirm",
+            json={"quality_check_passed": True, "final_moisture_ppm": 275.0},
+        )
+        assert resp.status_code == 502
+        state = client.get("/orders/ORD-2026-00001/state").json()
+        assert state["status"] == "confirmed"
+
     def test_422_on_negative_moisture(self, client):
         self._start(client)
         resp = client.post(
