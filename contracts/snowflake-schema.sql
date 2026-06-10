@@ -6,7 +6,7 @@
 --   Key changes: cycle_start_time, cycle_end_time, spec_met (renamed), oven_id, material_description,
 --   goods_movement_posted added. delta_minutes, actual_duration_minutes promoted to FLOAT.
 --   max_temperature_degC / min_vacuum_mbar kept as nullable safety-threshold columns (requires C7
---   extension to populate -- not in current DOMAIN-MODEL MaterialMaster; note added below).
+--   extension to populate -- not in current DOMAIN-MODEL MaterialMaster (see open items in WP5-BRIEF.md).
 
 -- -----------------------------------------------------------
 -- BRONZE LAYER -- raw ingestion, no transformation
