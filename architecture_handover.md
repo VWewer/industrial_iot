@@ -34,6 +34,21 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 | P3 Test | Unit + API tests passing · `/health` responds · README sample output written |
 | P4 Seam | Contract validator green · consuming WP confirms schema match end-to-end |
 
+**Canonical port assignments** — single source of truth. All `.env.example` files, briefs, and `docker-compose.yml` must match these exactly. Cross-checked by Level 3 harmony check P-13.
+
+| Service | Native port | Docker port | Env var |
+|---|---|---|---|
+| Mosquitto MQTT broker | 1883 | 1883 | `MQTT_BROKER_PORT` |
+| WP1 control API | **8080** (Windows) | 8000 | `CONTROL_API_PORT` |
+| WP2 SIMATIC mock | 8001 | 8001 | `SIMATIC_API_PORT` |
+| WP3 Mendix mock | 8002 | 8002 | `MENDIX_API_PORT` |
+| WP4 SAP mock | 8003 | 8003 | `SAP_API_PORT` |
+| WP5 Snowflake layer | 8005 | 8005 | `WP5_API_PORT` |
+| WP7 Cockpit | 8501 | 8501 | `COCKPIT_PORT` |
+
+WP6 (Streamlit in Snowflake) runs inside Snowflake -- no local port.
+WP1 uses 8080 natively because port 8000 is excluded by Windows (see AI-DEV.md KI-002). Docker is unaffected.
+
 **Milestones**
 
 | Milestone | Condition | Status |

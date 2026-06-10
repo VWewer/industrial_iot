@@ -20,7 +20,7 @@ SIMATIC (historian + process context)          [WP2]
 Mendix (operator UI + SAP connector)          [WP3]
     ↔ SAP S/4HANA (OData GET / OData POST)    [WP4]
 
-SIMATIC ──→ Snowflake  (MQTT → Snowpipe, micro-batch JSON)
+SIMATIC ──→ Snowflake  (MQTT → batch insert via Snowflake connector)
 Mendix  ──→ Snowflake  (REST webhook, event-driven JSON)
 SAP     ──→ Snowflake  (OData extract, scheduled batch)
 
@@ -156,11 +156,49 @@ Full workflow definitions, preconditions, step-by-step data flows, and the order
 
 ---
 
+## Setup for new contributors
+
+```bash
+# 1. Clone and create virtual environment
+git clone https://github.com/VWewer/industrial_iot
+cd industrial_iot
+python -m venv .venv
+.venv\Scripts\activate          # Windows
+# source .venv/bin/activate     # macOS/Linux
+pip install -r wp{n}-{name}/requirements.txt   # per WP
+
+# 2. Configure environment
+cp .env.example .env
+# WP1-WP4 and WP7 work with default values -- no changes needed.
+# WP5 requires real Snowflake credentials -- fill them in .env.
+```
+
+**Snowflake credentials (WP5 only):**
+Edit `.env` and replace the `SNOWFLAKE_*` placeholder values with your account credentials.
+If credentials are missing, WP5 will exit at startup with a clear error listing what is missing.
+All other WPs run without Snowflake credentials.
+
+**Service ports** (defined in `.env.example` -- canonical source):
+
+| Service | Native port | Docker port |
+|---|---|---|
+| Mosquitto MQTT | 1883 | 1883 |
+| WP1 control API | **8080** (Windows) | 8000 |
+| WP2 SIMATIC mock | 8001 | 8001 |
+| WP3 Mendix mock | 8002 | 8002 |
+| WP4 SAP mock | 8003 | 8003 |
+| WP5 Snowflake layer | 8005 | 8005 |
+| WP7 Cockpit | 8501 | 8501 |
+
+> WP1 uses port 8080 on Windows because port 8000 is excluded by Windows on most machines (see `AI-DEV.md KI-002`). Docker containers don't have this restriction.
+
+---
+
 ## Running the demo
 
 **Infrastructure prerequisites:**
-- Mosquitto MQTT broker (project-level — see `docker-compose.yml`)
-- Snowflake account with credentials in `.env`
+- Mosquitto MQTT broker (runs as a Windows Service if installed via `winget install EclipseFoundation.Mosquitto`, or via `docker-compose up mosquitto`)
+- Snowflake account with credentials in `.env` (required for WP5/WP6 only)
 
 **Start order:**
 ```bash

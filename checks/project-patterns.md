@@ -294,6 +294,31 @@ Markdown docs may use UTF-8 (arrows in architecture diagrams, emoji in status ta
 
 ---
 
+## P-13 -- Service port assignments
+
+All service ports are defined in **`.env.example` at the project root** (machine-readable) and in **`architecture_handover.md` Section 0a ports table** (human-readable). These are the single source of truth. Every `.env.example`, brief, README, and `docker-compose.yml` must cite these values exactly.
+
+**Canonical port table:**
+
+| Service | Port | Env var |
+|---|---|---|
+| Mosquitto MQTT broker | 1883 | `MQTT_BROKER_PORT` |
+| WP1 control API (Windows native) | **8080** | `CONTROL_API_PORT` |
+| WP1 control API (Docker) | 8000 | `CONTROL_API_PORT` |
+| WP2 SIMATIC mock | 8001 | `SIMATIC_API_PORT` |
+| WP3 Mendix mock | 8002 | `MENDIX_API_PORT` |
+| WP4 SAP mock | 8003 | `SAP_API_PORT` |
+| WP5 Snowflake layer | 8005 | `WP5_API_PORT` |
+| WP7 Unified cockpit | 8501 | `COCKPIT_PORT` |
+
+WP6 (Streamlit in Snowflake) runs inside Snowflake -- no local port.
+
+**Check:** When implementing or reviewing a new WP, verify every hardcoded URL and port reference against this table. Any deviation must be an explicit documented exception (e.g., WP1 using 8080 on Windows vs 8000 in Docker -- both are correct, for different environments).
+
+**What caused port drift (2026-06-10):** WP5-BRIEF.md used 8004 for SAP_API_URL, and WP7-BRIEF.md had all WP URLs shifted by +1. These were caught by a manual audit. P-13 makes this a Phase 1 gate check so future WPs are verified before any code is written.
+
+---
+
 ## Summary checklist (Level 3 harmony check)
 
 Run at Phase 1 kickoff and Phase 3 DoD for every new WP. Takes ~10 minutes.
@@ -312,3 +337,4 @@ Run at Phase 1 kickoff and Phase 3 DoD for every new WP. Takes ~10 minutes.
 | P-10 | snake_case fields, lowercase enums | WP1, WP4 |
 | P-11 | pytest.ini present, 0 warnings | WP1 |
 | P-12 | Python source ASCII-only | WP1 |
+| P-13 | All service URLs match canonical port table in .env.example + architecture_handover.md | .env.example (root) |
