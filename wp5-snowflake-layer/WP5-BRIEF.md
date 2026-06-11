@@ -1,6 +1,6 @@
 # WP5 — Snowflake Data Layer
 
-## Status: NOT STARTED
+## Status: Phase 3 COMPLETE -- 34/34 unit + 1/1 integration tests. 20 Gold rows confirmed live.
 
 > **v1.1 -- June 2026:** Updated from DuckDB to real Snowflake (ADR-005). Snowpipe for sensor stream ingestion. DuckDB removed from scope.
 >
@@ -265,4 +265,39 @@ wp5-snowflake-layer/
 
 ## Session handover notes
 
-> *To be filled by the agent at the end of each session.*
+**Session 2026-06-11 -- Phase 2 implementation complete**
+
+All WP5 source files written from scratch. 34/34 unit tests passing, 0 warnings, ASCII clean.
+
+Files created:
+- `src/__init__.py`, `src/exceptions.py`, `src/models.py`, `src/snowflake_client.py`
+- `src/ingestion/{__init__,mqtt_subscriber,mes_webhook,sap_puller}.py`
+- `src/transforms/{__init__,silver,gold}.py`
+- `src/scheduler.py`, `src/query_api.py`, `src/seed_loader.py`, `src/main.py`
+- `sql/init_schema.sql`, `sql/silver_transforms.sql`, `sql/gold_transforms.sql`
+- `tests/{conftest,test_ingestion,test_transforms,test_query_api,test_seed_loader}.py`
+- `tests/integration/test_end_to_end.py`
+- `requirements.txt` (pinned to installed versions), `pytest.ini`, `README.md`
+
+Key implementation decisions made in this session:
+- Snowflake column names returned uppercase by connector -- `snowflake_client.fetchall()` lowercases all keys
+- `paho-mqtt 2.1.0` (already installed) -- callbacks use VERSION1 API (legacy, no breaking change at this usage level)
+- `apscheduler 3.11.2` -- `BackgroundScheduler` + `IntervalTrigger`, compatible with 3.x API
+- Seed loader goes through full Bronze pipeline (materials + orders + synthetic MES events + 3 sensor readings per cycle) -- not a Gold shortcut
+- `src/query_api.py` and `src/ingestion/mes_webhook.py` export routers; `src/main.py` creates the `FastAPI` app with lifespan
+
+**Session 2026-06-11 (continued) -- Phase 3 complete**
+
+Integration test fixed (material master Bronze data was missing from test setup). Live service verified:
+- `/health` returns `snowflake_connected: true`
+- 20 Gold rows after seed load (all 4 material types represented)
+- `/gold/cycles` returns full list, `/gold/efficiency` returns 4 material rows
+- `/gold/cycles/{order_id}` returns cycle detail + 3 sensor readings
+
+Bug fixed in gold_transforms.sql: added `QUALIFY ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY event_time) = 1` to both `ce_start` and `ce_end` subqueries. This prevents Cartesian products when Bronze has duplicate cycle events (e.g., after multiple seed loads without cleanup).
+
+**Next actions:**
+1. P4 seam check: run `contracts/validators/validate_c12_gold_cycle.py` against the live Gold table
+2. Commit + push `wp5/snowflake-layer` branch
+3. Create `validate_c12_gold_cycle.py` if it doesn't exist yet (it was referenced in BRIEF but may not be written)
+4. M2 milestone: WP5 P4 complete → M2 complete → unblocks WP6 and WP7

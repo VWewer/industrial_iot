@@ -20,7 +20,7 @@ Each WP progresses through 4 phases. Gate = Definition of Done must pass before 
 | WP1 — Sensor sim | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 42/42 tests, 81% cov, C1 6/6 |
 | WP2 — SIMATIC mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 44/44 tests · C2/C3 5/5 validators |
 | WP3 — Mendix mock | ✅ done | ✅ done | ✅ done | ✅ | ✅ done | 46/46 tests · C4/C10 4/4 validators |
-| WP5 — Snowflake | ⬜ after M2 | — | — | | — | Needs WP1 + WP4 -- unblocked 2026-06-10 |
+| WP5 — Snowflake | ✅ done | ✅ done | ✅ done | ✅ | — | 34/34 unit + 1/1 integration. 20 Gold rows, /health OK |
 | WP6 — Dashboard | ⬜ after WP5 P3 | — | — | | — | Streamlit in Snowflake |
 | WP7 — Cockpit | ⬜ after M2 | — | — | | — | Needs WP2–WP6 |
 | WP8 — Agents | stretch | stretch | stretch | | stretch | Stretch goal |
